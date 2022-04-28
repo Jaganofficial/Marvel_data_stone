@@ -1,4 +1,4 @@
-package com.example.marveldatastone.model
+package com.example.marveldatastone.model.CharacterModels.CharacteresModel
 
 data class Series(
     val available: Int,

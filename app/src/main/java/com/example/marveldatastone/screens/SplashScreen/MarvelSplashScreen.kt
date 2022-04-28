@@ -5,6 +5,7 @@ import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Surface
@@ -22,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.example.marveldatastone.R
 import com.example.marveldatastone.navigation.MarvelDataNavigation
 import com.example.marveldatastone.navigation.MarvelDataScreens
@@ -31,6 +33,9 @@ import kotlinx.coroutines.delay
 @Composable
 fun MarvelSplashScreen(navController: NavController) {
     //SplashScreen
+
+    AsyncImage(model = "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg", contentDescription = "Image", modifier = Modifier.fillMaxSize().border(5.dp,
+        Color.Black))
 
     val scale1=remember{
         Animatable(0f);

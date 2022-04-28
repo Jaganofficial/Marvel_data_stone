@@ -1,4 +1,4 @@
-package com.example.marveldatastone.model
+package com.example.marveldatastone.model.CharacterModels.ComicsModels
 
 data class ItemXX(
     val name: String,

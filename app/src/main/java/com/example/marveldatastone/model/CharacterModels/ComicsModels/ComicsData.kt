@@ -1,11 +1,11 @@
-package com.example.marveldatastone.model
+package com.example.marveldatastone.model.CharacterModels.ComicsModels
 
-data class MarvelCharacterData(
+data class ComicsData(
     val attributionHTML: String,
     val attributionText: String,
     val code: Int,
     val copyright: String,
-    val data: Data,
+    val `data`: Data,
     val etag: String,
     val status: String
 )
