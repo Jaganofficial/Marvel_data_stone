@@ -54,6 +54,7 @@ fun MarvelSplashScreen(navController: NavController) {
     }
     LaunchedEffect(key1 = true )
     {
+       /*
         scale1.animateTo(targetValue = 1f, animationSpec = tween(700, easing = {
             OvershootInterpolator(2f).getInterpolation(it)
         }))
@@ -74,7 +75,11 @@ fun MarvelSplashScreen(navController: NavController) {
             OvershootInterpolator(2f).getInterpolation(it)
         }))
         delay(1500)
+
+        */
         navController.navigate(MarvelDataScreens.MainScreen.name)
+
+
     }
 
 

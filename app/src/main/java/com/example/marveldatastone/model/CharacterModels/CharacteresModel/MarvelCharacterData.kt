@@ -1,5 +1,6 @@
 package com.example.marveldatastone.model.CharacterModels.CharacteresModel
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
@@ -22,11 +23,17 @@ import com.example.marveldatastone.utils.Character_TypeConverters.*
 data class MarvelCharacterData(
     @PrimaryKey(autoGenerate = true)
     val id:Int,
+    /*
     val attributionHTML: String,
     val attributionText: String,
     val code: Int,
     val copyright: String,
+
+     */
+
+    @ColumnInfo(name="Data")
     val data: Data,
-    val etag: String,
-    val status: String
+
+    //val etag: String,
+    //val status: String
 )
