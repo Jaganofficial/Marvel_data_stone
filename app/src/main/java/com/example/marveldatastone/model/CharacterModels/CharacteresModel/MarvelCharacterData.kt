@@ -10,30 +10,10 @@ import com.example.marveldatastone.utils.Character_TypeConverters.*
 @TypeConverters(
     ComicTypeConverter::class,
     DataTypeConverter::class,
-    EventsTypeConverter::class,
-    IntexListTypeConverter::class,
-    ItemListTypeConverter::class,
-    ItemListXXXTypeConverter::class,
-    ItemXXListTypeConverter::class,
-    ResultTypeConverter::class,
-    SereiesTypeConverter::class,
-    StoriesTypeConverter::class,
-    ThumbnailTypeConverter::class,
-    UrlListtypeConverter::class)
+   )
 data class MarvelCharacterData(
     @PrimaryKey(autoGenerate = true)
     val id:Int,
-    /*
-    val attributionHTML: String,
-    val attributionText: String,
-    val code: Int,
-    val copyright: String,
-
-     */
-
     @ColumnInfo(name="Data")
     val data: Data,
-
-    //val etag: String,
-    //val status: String
 )

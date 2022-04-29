@@ -77,9 +77,9 @@ fun MarvelSplashScreen(navController: NavController) {
         delay(1500)
 
         */
+
+        navController.popBackStack()
         navController.navigate(MarvelDataScreens.MainScreen.name)
-
-
     }
 
 

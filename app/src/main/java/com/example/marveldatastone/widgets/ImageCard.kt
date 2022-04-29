@@ -40,7 +40,7 @@ fun ImageCard(modifier: Modifier, title:String, painter: Painter,desc:String,fon
                     )
                 ))
             Box(modifier = Modifier.fillMaxSize().padding(10.dp), contentAlignment = Alignment.BottomCenter) {
-                Text(text = title, style = TextStyle(color = Color.White, fontWeight = FontWeight.Bold, fontSize = fontsize.sp))
+                Text(text = title, style = TextStyle(color = Color.LightGray, fontWeight = FontWeight.Bold, fontSize = fontsize.sp))
             }
         }
     }
