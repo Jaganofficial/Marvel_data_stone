@@ -1,5 +1,6 @@
 package com.example.marveldatastone.screens.BooksScreen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
@@ -7,16 +8,15 @@ import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,18 +35,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
 import com.example.marveldatastone.R
+import com.example.marveldatastone.data.DataOrException
+import com.example.marveldatastone.model.CharacterModels.ComicsModels.ComicsData
+import com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.TradePaperBookData
+import com.example.marveldatastone.screens.Main.MainViewModel
 import com.example.marveldatastone.widgets.BookCard
+import com.example.marveldatastone.widgets.ImageCard
 import okhttp3.internal.wait
 import kotlin.random.Random
 
-@Preview
+
 @Composable
-fun BooksScreen (){//TODO: navController: NavController add this
+fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
     Surface(modifier = Modifier.fillMaxSize()) {
         var scrollableState= rememberScrollState()
         Column(modifier = Modifier
-            .fillMaxSize().verticalScroll(scrollableState),verticalArrangement = Arrangement.SpaceEvenly) {
+            .fillMaxSize()
+            .verticalScroll(scrollableState),verticalArrangement = Arrangement.SpaceEvenly) {
             Card(modifier = Modifier
                 .fillMaxWidth()
                 .height(350.dp), shape = RoundedCornerShape(bottomEnd = 350.dp, bottomStart = 35.dp)) {
@@ -89,53 +96,324 @@ fun BooksScreen (){//TODO: navController: NavController add this
 
             Column(modifier = Modifier) {
                 Spacer(modifier = Modifier.height(18.dp))
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Trade PaperBack", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onSecondary))
-                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)))
-                }
-                LazyRow()
-                {
-                    items(100)
-                    {
-                        BookCard(Color(
-                            Random.nextInt(170,255),
-                            Random.nextInt(170,255),
-                            Random.nextInt(175,255)
-                        ), painterResource(id = R.drawable.marvel_comics))
-                    }
-                }
+
+
+                //Infinite Novel
 
                 Spacer(modifier = Modifier.height(18.dp))
                 Row(modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Trade PaperBack", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onSecondary))
+                    Text(text = "Infinite Novel", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onSecondary))
                     Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)))
                 }
-                LazyRow()
+                val infiniteNovelData = produceState<DataOrException<TradePaperBookData, Boolean, Exception>>(
+                    initialValue = DataOrException(loading = true)
+                ) {
+                    value = booksViewModel.getInfiniteComic()
+                }.value
+
+                if (infiniteNovelData.loading == true)
                 {
-                    items(100)
+                    val painter= rememberAsyncImagePainter(model = R.color.white)
+                    LazyRow()
                     {
-                        BookCard(Color(77, 194, 71,500), painterResource(id = R.drawable.marvel_comics))
+                        items(100)
+                        {
+                            BookCard(Color(
+                                Random.nextInt(170,255),
+                                Random.nextInt(170,255),
+                                Random.nextInt(175,255)
+                            ), painter = painter,true)
+                        }
+                    }
+                }
+                else {
+                    val list = infiniteNovelData.data!!.data.results
+                    LazyRow()
+                    {
+                        items(list)
+                        {
+
+
+                            //Text Formatting
+                            var title=it.title
+                            var writter="Marvel"
+                            var price="Free"
+                            if(title.length>26)
+                                title=title.subSequence(0,24).toString()+"..."
+                            if(it.creators.items.isNotEmpty())
+                                writter=it.creators.items[0].name
+                            if(writter.length>26)
+                                writter=writter.substring(0,25).toString()+"..."
+
+                            if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
+                                price= "$ "+it.prices[0].price
+
+
+                            var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                            val painter = rememberAsyncImagePainter(model = url)
+                            BookCard(Color(
+                                Random.nextInt(170,255),
+                                Random.nextInt(170,255),
+                                Random.nextInt(175,255)
+                            ), painter,false,price=price, title = title, writter = writter)
+                        }
                     }
                 }
 
+
+                //hardCover
+
                 Spacer(modifier = Modifier.height(18.dp))
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                    Text(text = "HardCover", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onSecondary))
+                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)))
+                }
+                val hardCoverData = produceState<DataOrException<TradePaperBookData, Boolean, Exception>>(
+                    initialValue = DataOrException(loading = true)
+                ) {
+                    value = booksViewModel.getHardCover()
+                }.value
+                if (hardCoverData.loading == true)
+                {
+                    val painter= rememberAsyncImagePainter(model = R.color.white)
+                    LazyRow()
+                    {
+                        items(100)
+                        {
+                            BookCard(Color(
+                                Random.nextInt(170,255),
+                                Random.nextInt(170,255),
+                                Random.nextInt(175,255)
+                            ), painter = painter,true)
+                        }
+                    }
+                }
+                else {
+                    val list = hardCoverData.data!!.data.results
+                    LazyRow()
+                    {
+                        items(list)
+                        {
+                            //Text Formatting
+                            var title=it.title
+                            var writter="Marvel"
+                            var price="Free"
+                            if(title.length>26)
+                                title=title.subSequence(0,24).toString()+"..."
+                            if(it.creators.items.isNotEmpty())
+                                writter=it.creators.items[0].name
+                            if(writter.length>26)
+                                writter=writter.substring(0,25).toString()+"..."
+
+                            if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
+                                price= "$ "+it.prices[0].price
+
+
+                            var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                            val painter = rememberAsyncImagePainter(model = url)
+                            BookCard(Color(
+                                Random.nextInt(170,255),
+                                Random.nextInt(170,255),
+                                Random.nextInt(175,255)
+                            ), painter,false,price=price, title = title, writter = writter)
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(18.dp))
+
+
+                //Trade paperBack
+
                 Row(modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     Text(text = "Trade PaperBack", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onSecondary))
                     Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)))
                 }
-                LazyRow()
+                val tradePaperBookData = produceState<DataOrException<TradePaperBookData, Boolean, Exception>>(
+                    initialValue = DataOrException(loading = true)
+                ) {
+                    value = booksViewModel.getTradePaperBook()
+                }.value
+                if (tradePaperBookData.loading == true)
                 {
-                    items(100)
+                    val painter= rememberAsyncImagePainter(model = R.color.white)
+                    LazyRow()
                     {
-                        BookCard(Color(77, 194, 71,500), painterResource(id = R.drawable.marvel_comics))
+                        items(100)
+                        {
+                            BookCard(Color(
+                                Random.nextInt(170,255),
+                                Random.nextInt(170,255),
+                                Random.nextInt(175,255)
+                            ), painter = painter,true)
+                        }
                     }
                 }
+                else {
+
+                    val list = tradePaperBookData.data!!.data.results
+                    LazyRow()
+                    {
+                        items(list)
+                        {
+                            //Text Formatting
+                            var title=it.title
+                            var writter="Marvel"
+                            var price="Free"
+                            if(title.length>26)
+                                title=title.subSequence(0,24).toString()+"..."
+                            if(it.creators.items.isNotEmpty())
+                                writter=it.creators.items[0].name
+                            if(writter.length>26)
+                                writter=writter.substring(0,25).toString()+"..."
+
+                            if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
+                                price= "$ "+it.prices[0].price
+
+
+                            var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                            val painter = rememberAsyncImagePainter(model = url)
+                            BookCard(Color(
+                                Random.nextInt(170,255),
+                                Random.nextInt(170,255),
+                                Random.nextInt(175,255)
+                            ), painter,false,price=price, title = title, writter = writter)
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(18.dp))
+
+
+
+
+                //Digest
+
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                    Text(text = "Digest", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onSecondary))
+                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)))
+                }
+                val digestData = produceState<DataOrException<TradePaperBookData, Boolean, Exception>>(
+                    initialValue = DataOrException(loading = true)
+                ) {
+                    value = booksViewModel.getDigest()
+                }.value
+                if (digestData.loading == true)
+                {
+                    val painter= rememberAsyncImagePainter(model = R.color.white)
+                    LazyRow()
+                    {
+                        items(100)
+                        {
+                            BookCard(Color(
+                                Random.nextInt(170,255),
+                                Random.nextInt(170,255),
+                                Random.nextInt(175,255)
+                            ), painter = painter,true)
+                        }
+                    }
+                }
+                else {
+                    val list = digestData.data!!.data.results
+                    LazyRow()
+                    {
+                        items(list)
+                        {
+                            //Text Formatting
+                            var title=it.title
+                            var writter="Marvel"
+                            var price="Free"
+                            if(title.length>26)
+                                title=title.subSequence(0,24).toString()+"..."
+                            if(it.creators.items.isNotEmpty())
+                                writter=it.creators.items[0].name
+                            if(writter.length>26)
+                                writter=writter.substring(0,25).toString()+"..."
+
+                            if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
+                                price= "$ "+it.prices[0].price
+
+
+                            var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                            val painter = rememberAsyncImagePainter(model = url)
+                            BookCard(Color(
+                                Random.nextInt(170,255),
+                                Random.nextInt(170,255),
+                                Random.nextInt(175,255)
+                            ), painter,false,price=price, title = title, writter = writter)
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(18.dp))
+
+
+                //Graphic Novel
+
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                    Text(text = "Graphic Novel", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onSecondary))
+                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)))
+                }
+                val graphicNovelData = produceState<DataOrException<TradePaperBookData, Boolean, Exception>>(
+                    initialValue = DataOrException(loading = true)
+                ) {
+                    value = booksViewModel.getGraphicNovel()
+                }.value
+                if (graphicNovelData.loading == true)
+                {
+                    val painter= rememberAsyncImagePainter(model = R.color.white)
+                    LazyRow()
+                    {
+                        items(100)
+                        {
+                            BookCard(Color(
+                                Random.nextInt(170,255),
+                                Random.nextInt(170,255),
+                                Random.nextInt(175,255)
+                            ), painter = painter,true)
+                        }
+                    }
+                }
+                else {
+                    val list = graphicNovelData.data!!.data.results
+                    LazyRow()
+                    {
+                        items(list)
+                        {
+                            //Text Formatting
+                            var title=it.title
+                            var writter="Marvel"
+                            var price="Free"
+                            if(title.length>26)
+                                title=title.subSequence(0,24).toString()+"..."
+                            if(it.creators.items.isNotEmpty())
+                                writter=it.creators.items[0].name
+                            if(writter.length>26)
+                                writter=writter.substring(0,25).toString()+"..."
+
+                            if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
+                                price= "$ "+it.prices[0].price
+
+
+                            var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                            val painter = rememberAsyncImagePainter(model = url)
+                            BookCard(Color(
+                                Random.nextInt(170,255),
+                                Random.nextInt(170,255),
+                                Random.nextInt(175,255)
+                            ), painter,false,price=price, title = title, writter = writter)
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(85.dp))
 
             }
         }

@@ -86,6 +86,7 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel) {
         else {
 
             val list = comicsData.data!!.data.results
+
             LazyRow(modifier = Modifier.fillMaxWidth())
             {
                 items(list)

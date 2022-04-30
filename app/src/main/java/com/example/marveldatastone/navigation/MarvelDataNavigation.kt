@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.marveldatastone.screens.BooksScreen.BooksScreen
+import com.example.marveldatastone.screens.BooksScreen.BooksViewModel
 import com.example.marveldatastone.screens.ComicsSearch
 import com.example.marveldatastone.screens.FavoriteScreen.FavoriteScreen
 import com.example.marveldatastone.screens.Main.MainViewModel
@@ -36,7 +37,8 @@ fun MarvelDataNavigation(navController: NavHostController) {
         //BooksScreen
         composable(MarvelDataScreens.BooksScreen.name)
         {
-            BooksScreen()//navController = navController
+            val booksViewModel= hiltViewModel<BooksViewModel>()
+            BooksScreen(navController = navController,booksViewModel)
         }
 
         //FavoriteScreen

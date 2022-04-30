@@ -4,6 +4,7 @@ import com.example.marveldatastone.data.Characters.CharacterDao
 import com.example.marveldatastone.data.DataOrException
 import com.example.marveldatastone.model.CharacterModels.CharacteresModel.MarvelCharacterData
 import com.example.marveldatastone.model.CharacterModels.ComicsModels.ComicsData
+import com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.TradePaperBookData
 import com.example.marveldatastone.network.MarvelAPI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
@@ -44,6 +45,67 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI,privat
     fun getCharacterFromDB(): Flow<List<MarvelCharacterData>>
     {
         return characterDao.getCharacterDatafromDB().flowOn(Dispatchers.IO).conflate()
+    }
+
+
+    suspend fun getTradePaperBook(): DataOrException<TradePaperBookData,Boolean,Exception>
+    {
+        val response = try {
+            api.getTradePaperBook()
+        }
+        catch (e:Exception)
+        {
+            return DataOrException(e=e)
+        }
+        return DataOrException(data = response)
+    }
+
+    suspend fun getHardCover(): DataOrException<TradePaperBookData,Boolean,Exception>
+    {
+        val response = try {
+            api.getHardCover()
+        }
+        catch (e:Exception)
+        {
+            return DataOrException(e=e)
+        }
+        return DataOrException(data = response)
+    }
+
+    suspend fun getDigest(): DataOrException<TradePaperBookData,Boolean,Exception>
+    {
+        val response = try {
+            api.getDigest()
+        }
+        catch (e:Exception)
+        {
+            return DataOrException(e=e)
+        }
+        return DataOrException(data = response)
+    }
+
+    suspend fun getGraphicNovel(): DataOrException<TradePaperBookData,Boolean,Exception>
+    {
+        val response = try {
+            api.getGraphicNovel()
+        }
+        catch (e:Exception)
+        {
+            return DataOrException(e=e)
+        }
+        return DataOrException(data = response)
+    }
+
+    suspend fun getInfiniteComic(): DataOrException<TradePaperBookData,Boolean,Exception>
+    {
+        val response = try {
+            api.getInfiniteComic()
+        }
+        catch (e:Exception)
+        {
+            return DataOrException(e=e)
+        }
+        return DataOrException(data = response)
     }
 
 }
