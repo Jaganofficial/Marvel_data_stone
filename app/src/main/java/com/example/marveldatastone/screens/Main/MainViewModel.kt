@@ -22,24 +22,22 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val repository: MarvelDataRepository) :
     ViewModel() {
 
-    private val _characterList= MutableStateFlow<List<MarvelCharacterData>>(emptyList())
-    val characterList = _characterList.asStateFlow()
+
+    private val _comicsList= MutableStateFlow<List<ComicsData>>(emptyList())
+    val comicsList = _comicsList.asStateFlow()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getCharacterFromDB().distinctUntilChanged().collect(){
+            repository.getComicsFromDB().distinctUntilChanged().collect(){
                 if(it.isNullOrEmpty())
                     Log.d("MainScreenViewModel", "Empty DB")
                 else
-                    _characterList.value=it
+                    _comicsList.value=it
             }
         }
     }
 
-    //Get the Character Data from repository
-        suspend fun getCharacterData():DataOrException<MarvelCharacterData,Boolean,Exception> {
-        return repository.getCharacter()
-    }
+
 
     //Get the Comics Data from repository
     suspend fun getComics(): DataOrException<ComicsData,Boolean,Exception>{

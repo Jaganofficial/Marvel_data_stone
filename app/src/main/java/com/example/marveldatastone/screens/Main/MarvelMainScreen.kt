@@ -57,36 +57,17 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel) {
 
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
 
+
         SearchBar(modifier = Modifier.clickable {
             navController.navigate(MarvelDataScreens.ComicsSearchScreen.name)
         })
 
-        //Comics
-        val comicsData = produceState<DataOrException<ComicsData, Boolean, Exception>>(
-            initialValue = DataOrException(loading = true)
-        ) {
-            value = mainViewModel.getComics()
-            Log.d("FromMarvelMainScreen", "characterList: ${mainViewModel.characterList.value}")
-        }.value
 
+        if(mainViewModel.comicsList.value.isNotEmpty())
+        {
 
-        if (comicsData.loading == true)
-            Surface(modifier = Modifier.fillMaxWidth()) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.Transparent),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    CircularProgressIndicator()
-                }
-            }
-
-        else {
-
-            val list = comicsData.data!!.data.results
-
+            Log.d("MAIN1", "ShowData: From DB")
+            val list = mainViewModel.comicsList.value[0].data.results
             LazyRow(modifier = Modifier.fillMaxWidth())
             {
                 items(list)
@@ -99,6 +80,48 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel) {
                 }
             }
         }
+        else
+        {
+            //Comics
+            val comicsData = produceState<DataOrException<ComicsData, Boolean, Exception>>(
+                initialValue = DataOrException(loading = true)
+            ) {
+                value = mainViewModel.getComics()
+            }.value
+
+
+            if (comicsData.loading == true)
+                Surface(modifier = Modifier.fillMaxWidth()) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.Transparent),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
+
+            else {
+
+                val list = comicsData.data!!.data.results
+
+                LazyRow(modifier = Modifier.fillMaxWidth())
+                {
+                    items(list)
+                    {
+                        var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                        val painter = rememberAsyncImagePainter(model = url)
+                        ImageCard(modifier = Modifier
+                            .height(440.dp)
+                            .width(280.dp), title = it.title , painter = painter , desc ="Image" , fontsize = 22)
+                    }
+                }
+            }
+        }
+
+
         /*
         if(mainViewModel.characterList.value.isNullOrEmpty())
         {

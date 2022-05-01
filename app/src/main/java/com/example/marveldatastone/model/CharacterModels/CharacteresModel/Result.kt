@@ -1,8 +1,6 @@
 package com.example.marveldatastone.model.CharacterModels.CharacteresModel
 
-import androidx.room.Entity
 
-@Entity(tableName = "Marvel_Character_Data")
 data class Result(
     val comics: Comics,
     val description: String,
