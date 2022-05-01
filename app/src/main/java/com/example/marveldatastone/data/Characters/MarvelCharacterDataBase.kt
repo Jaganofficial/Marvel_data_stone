@@ -11,7 +11,7 @@ import com.example.marveldatastone.model.CharacterModels.HardCover.HardCoverData
 import com.example.marveldatastone.model.CharacterModels.InfiniteNovel.InfiniteNovelData
 import com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.TradePaperBookData
 
-@Database(entities = [MarvelCharacterData::class,ComicsData::class,DigestData::class,GraphicNovelData::class,HardCoverData::class,InfiniteNovelData::class,TradePaperBookData::class], version = 2, exportSchema = false)
+@Database(entities = [MarvelCharacterData::class,ComicsData::class, DigestData::class, GraphicNovelData::class, HardCoverData::class, InfiniteNovelData::class,TradePaperBookData::class], version = 3, exportSchema = false)
 abstract class MarvelCharacterDataBase : RoomDatabase() {
     abstract fun marvelCharactereDao() : CharacterDao
     abstract fun marvelComicsDao(): Comics_Dao

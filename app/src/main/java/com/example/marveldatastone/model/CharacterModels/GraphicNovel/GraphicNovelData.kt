@@ -4,14 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.Data
-import com.example.marveldatastone.utils.Character_TypeConverters.*
 
+import com.example.marveldatastone.utils.Character_TypeConverters.GraphicNovelDataTypeConverter
 
 @Entity(tableName = "Graphic_Novel_Data")
 @TypeConverters(
-    ComicTypeConverter::class,
-    DatafromTradePaperBookTypeConverter::class
+    GraphicNovelDataTypeConverter::class
 )
 
 data class GraphicNovelData(

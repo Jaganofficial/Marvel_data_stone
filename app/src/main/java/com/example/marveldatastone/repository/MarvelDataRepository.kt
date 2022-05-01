@@ -6,6 +6,10 @@ import com.example.marveldatastone.data.ComicsDao.*
 import com.example.marveldatastone.data.DataOrException
 import com.example.marveldatastone.model.CharacterModels.CharacteresModel.MarvelCharacterData
 import com.example.marveldatastone.model.CharacterModels.ComicsModels.ComicsData
+import com.example.marveldatastone.model.CharacterModels.Digest.DigestData
+import com.example.marveldatastone.model.CharacterModels.GraphicNovel.GraphicNovelData
+import com.example.marveldatastone.model.CharacterModels.HardCover.HardCoverData
+import com.example.marveldatastone.model.CharacterModels.InfiniteNovel.InfiniteNovelData
 import com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.TradePaperBookData
 import com.example.marveldatastone.network.MarvelAPI
 import kotlinx.coroutines.Dispatchers
@@ -64,7 +68,7 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
     }
 
     //get Infinite Comic from api
-    suspend fun getInfiniteComic(): DataOrException<TradePaperBookData,Boolean,Exception>
+    suspend fun getInfiniteComic(): DataOrException<InfiniteNovelData,Boolean,Exception>
     {
         val response = try {
             api.getInfiniteComic()
@@ -80,7 +84,7 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
 
 
     //get HardCover from api
-    suspend fun getHardCover(): DataOrException<TradePaperBookData,Boolean,Exception>
+    suspend fun getHardCover(): DataOrException<HardCoverData,Boolean,Exception>
     {
         val response = try {
             api.getHardCover()
@@ -96,7 +100,7 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
     }
 
     // get Digest from api
-    suspend fun getDigest(): DataOrException<TradePaperBookData,Boolean,Exception>
+    suspend fun getDigest(): DataOrException<DigestData,Boolean,Exception>
     {
         val response = try {
             api.getDigest()
@@ -111,7 +115,7 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
     }
 
     //get GraphicNovel from api
-    suspend fun getGraphicNovel(): DataOrException<TradePaperBookData,Boolean,Exception>
+    suspend fun getGraphicNovel(): DataOrException<GraphicNovelData,Boolean,Exception>
     {
         val response = try {
             api.getGraphicNovel()
@@ -154,7 +158,7 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
         tradePaperBackDao.deleteAllTradePaperBack()
     }
 
-    fun getHardCoverfromDB(): Flow<List<TradePaperBookData>>
+    fun getHardCoverfromDB(): Flow<List<HardCoverData>>
     {
         return hardCoverDao.getHardCoverDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
@@ -164,17 +168,17 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
         hardCoverDao.deleteAllHardCover()
     }
 
-    fun getDigestfromDB(): Flow<List<TradePaperBookData>>
+    fun getDigestfromDB(): Flow<List<DigestData>>
     {
         return digestDao.getDigestDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
 
-    fun getGraphicNovelfromDB(): Flow<List<TradePaperBookData>>
+    fun getGraphicNovelfromDB(): Flow<List<GraphicNovelData>>
     {
         return graphicNovelDao.getGraphicNovelDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
 
-    fun getInfiniteComicfromDB(): Flow<List<TradePaperBookData>>
+    fun getInfiniteComicfromDB(): Flow<List<InfiniteNovelData>>
     {
         return infiniteNovelDao.getInfiniteNovelDatafromDB().flowOn(Dispatchers.IO).conflate()
     }

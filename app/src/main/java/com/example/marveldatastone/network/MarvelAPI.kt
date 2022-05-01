@@ -2,6 +2,10 @@ package com.example.marveldatastone.network
 
 import com.example.marveldatastone.model.CharacterModels.CharacteresModel.MarvelCharacterData
 import com.example.marveldatastone.model.CharacterModels.ComicsModels.ComicsData
+import com.example.marveldatastone.model.CharacterModels.Digest.DigestData
+import com.example.marveldatastone.model.CharacterModels.GraphicNovel.GraphicNovelData
+import com.example.marveldatastone.model.CharacterModels.HardCover.HardCoverData
+import com.example.marveldatastone.model.CharacterModels.InfiniteNovel.InfiniteNovelData
 import com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.TradePaperBookData
 import com.example.marveldatastone.utils.Constents
 import retrofit2.http.GET
@@ -48,7 +52,7 @@ interface MarvelAPI {
         @Query("ts")ts:String="1",
         @Query("apikey")apikey:String=Constents.API_KEY,
         @Query("hash")hash:String=Constents.HASH_VALUE
-    ) : TradePaperBookData
+    ) : HardCoverData
 
     @GET("comics")
     suspend fun getDigest(
@@ -58,7 +62,7 @@ interface MarvelAPI {
         @Query("ts")ts:String="1",
         @Query("apikey")apikey:String=Constents.API_KEY,
         @Query("hash")hash:String=Constents.HASH_VALUE
-    ) : TradePaperBookData
+    ) : DigestData
 
     @GET("comics")
     suspend fun getGraphicNovel(
@@ -68,7 +72,7 @@ interface MarvelAPI {
         @Query("ts")ts:String="1",
         @Query("apikey")apikey:String=Constents.API_KEY,
         @Query("hash")hash:String=Constents.HASH_VALUE
-    ) : TradePaperBookData
+    ) : GraphicNovelData
 
     @GET("comics")
     suspend fun getInfiniteComic(
@@ -78,6 +82,6 @@ interface MarvelAPI {
         @Query("ts")ts:String="1",
         @Query("apikey")apikey:String=Constents.API_KEY,
         @Query("hash")hash:String=Constents.HASH_VALUE
-    ) : TradePaperBookData
+    ) : InfiniteNovelData
 
 }
