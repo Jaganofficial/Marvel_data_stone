@@ -17,7 +17,7 @@ fun GradelScreen(){
     Surface(modifier = Modifier.fillMaxSize()) {
         Box(modifier = Modifier.fillMaxSize().background(
             brush = Brush.verticalGradient(listOf(
-                Color(0, 0, 0),Color.LightGray,Color.Transparent
+                Color(139,0,0),Color.LightGray,Color.Transparent
             ), startY = 0.5f)
         ))
     }

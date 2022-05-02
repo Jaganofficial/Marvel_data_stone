@@ -2,17 +2,14 @@ package com.example.marveldatastone.screens.BooksScreen
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -46,6 +43,7 @@ import com.example.marveldatastone.model.CharacterModels.GraphicNovel.GraphicNov
 import com.example.marveldatastone.model.CharacterModels.HardCover.HardCoverData
 import com.example.marveldatastone.model.CharacterModels.InfiniteNovel.InfiniteNovelData
 import com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.TradePaperBookData
+import com.example.marveldatastone.navigation.MarvelDataScreens
 import com.example.marveldatastone.screens.Main.MainViewModel
 import com.example.marveldatastone.widgets.BookCard
 import com.example.marveldatastone.widgets.ImageCard
@@ -104,8 +102,6 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
             Column(modifier = Modifier) {
                 Spacer(modifier = Modifier.height(18.dp))
 
-
-
                 Spacer(modifier = Modifier.height(18.dp))
                 Row(
                     modifier = Modifier
@@ -120,7 +116,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colors.onSecondary
-                        )
+                        ),modifier= Modifier.clickable {
+                            //navController.navigate(MarvelDataScreens.HardCoverInfoScreen.name)
+                        }
                     )
                     Text(
                         text = "See All",
@@ -191,7 +189,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                                     false,
                                     price = price,
                                     title = title,
-                                    writter = writter
+                                    writter = writter,
                                 )
                             }
                         }

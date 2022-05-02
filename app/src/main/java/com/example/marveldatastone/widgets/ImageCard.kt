@@ -35,7 +35,7 @@ fun ImageCard(modifier: Modifier, title:String, painter: Painter,desc:String,fon
                 .background(
                     brush = Brush.verticalGradient(
                         listOf(
-                            Color.Transparent, Color.Black
+                            Color.Transparent,Color.Transparent, Color.Black
                         )
                     )
                 ))

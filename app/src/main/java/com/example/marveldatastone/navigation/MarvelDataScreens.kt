@@ -7,5 +7,7 @@ enum class MarvelDataScreens {
     MainScreen,
     BooksScreen,
     FavoriteScreen,
-    ComicsSearchScreen
+    ComicsSearchScreen,
+    HardCoverInfoScreen,
+    ShowAllComics
 }

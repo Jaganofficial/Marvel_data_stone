@@ -21,31 +21,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Preview
 @Composable
 fun SearchBar(modifier: Modifier=Modifier) {
     Card(modifier = Modifier
         .fillMaxWidth()
-        .height(110.dp)
-        .padding(25.dp)
-        .background(Color.Transparent), shape = RoundedCornerShape(35.dp), elevation = 15.dp) {
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .background(
-                Brush.horizontalGradient(
-                    listOf(
-                        Color.Black,
-                        Color.Gray,
-                        //Color(155, 19, 6)
+        .height(90.dp)
+        .padding(15.dp)
+        .background(Color.Transparent), shape = RoundedCornerShape(35.dp), elevation = 15.dp, contentColor = Color.White) {
+            Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
+                Spacer(modifier = Modifier.width(10.dp))
+                Image(imageVector = Icons.Default.Search, contentDescription = "Search", modifier = Modifier
+                    .size(45.dp)
                     )
-                )
-            ), contentAlignment = Alignment.CenterStart){
-
-            Row(modifier = Modifier.fillMaxSize()) {
-                Image(imageVector = Icons.Default.Search, contentDescription = "Search", modifier = Modifier.padding(vertical = 25.dp).size(35.dp))
-                //Text(text = "Search Comics...", style = TextStyle(color = Color.White))
+                Spacer(modifier = Modifier.width(15.dp))
+                Text(text = "Search Comics...", style = TextStyle(color = Color.Gray, fontSize = 21.sp))
             }
-        }
     }
 }

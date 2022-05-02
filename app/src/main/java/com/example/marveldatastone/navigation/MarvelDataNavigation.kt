@@ -2,12 +2,9 @@ package com.example.marveldatastone.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.marveldatastone.screens.BooksScreen.BooksScreen
 import com.example.marveldatastone.screens.BooksScreen.BooksViewModel
 import com.example.marveldatastone.screens.ComicsSearch
@@ -15,6 +12,9 @@ import com.example.marveldatastone.screens.FavoriteScreen.FavoriteScreen
 import com.example.marveldatastone.screens.Main.MainViewModel
 import com.example.marveldatastone.screens.MarvelMainScreen
 import com.example.marveldatastone.screens.MarvelSplashScreen
+import com.example.marveldatastone.screens.ShowAllComics.ShowAllComicsViewModel
+import com.example.marveldatastone.widgets.HardCoverInfoCard
+import com.example.marveldatastone.widgets.ShowAllComics
 
 @Composable
 fun MarvelDataNavigation(navController: NavHostController) {
@@ -51,6 +51,18 @@ fun MarvelDataNavigation(navController: NavHostController) {
         composable(MarvelDataScreens.ComicsSearchScreen.name)
         {
             ComicsSearch()
+        }
+
+        //HardCoverInfoScreen
+        composable(MarvelDataScreens.HardCoverInfoScreen.name)
+        {
+            //HardCoverInfoCard()
+        }
+
+        composable(MarvelDataScreens.ShowAllComics.name)
+        {
+            val showAllComicsViewModel= hiltViewModel<ShowAllComicsViewModel>()
+            ShowAllComics(showAllComicsViewModel)
         }
     }
 }
