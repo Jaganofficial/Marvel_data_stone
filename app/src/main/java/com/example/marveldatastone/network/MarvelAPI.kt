@@ -47,7 +47,7 @@ interface MarvelAPI {
     @GET("comics")
     suspend fun getHardCover(
         @Query("format")formate:String="hardcover",
-        @Query("orderBy")orderBy:String="-modified",
+        //@Query("orderBy")orderBy:String="-modified",
         @Query("limit") limit:String="100",
         @Query("ts")ts:String="1",
         @Query("apikey")apikey:String=Constents.API_KEY,

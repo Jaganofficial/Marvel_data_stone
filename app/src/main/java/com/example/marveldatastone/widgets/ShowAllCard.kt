@@ -6,6 +6,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,15 +20,21 @@ import androidx.compose.ui.unit.sp
 import kotlin.random.Random
 
 @Composable
-fun ShowAllCard(painter: Painter,title:String,writer:String,price:String) {
+fun ShowAllCard(painter: Painter,title:String,writer:String,price:String,modifier: Modifier=Modifier) {
 
-    val x=Random.nextInt(170, 255)
-    val y=Random.nextInt(170, 255)
-    val z=Random.nextInt(175, 255)
-    Card(modifier = Modifier
+    val x = remember {
+        mutableStateOf(Random.nextInt(170, 255))
+    }
+    val y=remember {
+        mutableStateOf(Random.nextInt(170, 255))
+    }
+    val z=remember {
+        mutableStateOf(Random.nextInt(170, 255))
+    }
+    Card(modifier = modifier
         .fillMaxWidth()
         .padding(vertical = 16.dp, horizontal = 10.dp), elevation = 10.dp, shape = RoundedCornerShape(25.dp), backgroundColor  =  Color(
-        x,y,z
+        x.value,y.value,z.value
     )
     ) {
         Column() {
@@ -54,7 +62,7 @@ fun ShowAllCard(painter: Painter,title:String,writer:String,price:String) {
             Box(contentAlignment = Alignment.BottomStart) {
                 Card(modifier = Modifier
                     .align(Alignment.Center), elevation = 15.dp, shape = RoundedCornerShape(bottomStart = 25.dp, topEnd = 25.dp), backgroundColor =  Color(
-                    x-34,y-34,z-34
+                    x.value-34,y.value-34,z.value-34
                 )) {
                     Row() {
                         Spacer(modifier = Modifier.height(15.dp))

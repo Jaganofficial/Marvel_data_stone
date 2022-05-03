@@ -1,5 +1,6 @@
 package com.example.marveldatastone.widgets
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
@@ -10,7 +11,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,11 +33,44 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.scaleMatrix
 import com.example.marveldatastone.R
+import com.example.marveldatastone.model.CharacterModels.HardCover.Result
+import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
 
 
 @Composable
-fun HardCoverInfoCard(title:String, painter: Painter,writer:String,price:String, originalPrice:String, formate:String , description:String,pageCount:String,language:String,detailUrl:String){
+fun HardCoverInfoCard(sharedViewModel: SharedViewModel){
     var scrollState= rememberScrollState()
+
+    val list=sharedViewModel.hardCoverResult
+
+    //val infiniteNavellist=sharedViewModel.infiniteNovelResult
+
+    var title by remember {
+        mutableStateOf("")
+    }
+
+    var slist by remember {
+        mutableStateOf<Result?>(null)
+    }
+
+    LaunchedEffect(key1 = list)
+    {
+        if(list!=null)
+        {
+            slist=list
+        }
+    }
+
+//    LaunchedEffect(key1 = infiniteNavellist)
+//    {
+//        if(infiniteNavellist!=null)
+//        {
+//            title=infiniteNavellist.title
+//        }
+//    }
+    if(slist!=null)
+    Text(text = "Title : ${slist!!.title}")
+    /*
     Column(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(scrollState)) {
@@ -72,5 +107,5 @@ fun HardCoverInfoCard(title:String, painter: Painter,writer:String,price:String,
 
         Divider(modifier = Modifier.padding(10.dp))
 
-    }
+    }*/
 }

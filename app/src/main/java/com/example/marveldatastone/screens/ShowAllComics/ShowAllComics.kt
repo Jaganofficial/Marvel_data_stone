@@ -3,6 +3,7 @@ package com.example.marveldatastone.widgets
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -24,14 +25,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.marveldatastone.model.CharacterModels.ComicsModels.ComicsData
 import com.example.marveldatastone.model.CharacterModels.ComicsModels.Result
+import com.example.marveldatastone.navigation.MarvelDataScreens
+import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
 import com.example.marveldatastone.screens.ShowAllComics.ShowAllComicsViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun ShowAllComics(showAllComicsViewModel: ShowAllComicsViewModel) {
+fun ShowAllComics(showAllComicsViewModel: ShowAllComicsViewModel,sharedViewModel:SharedViewModel,navController:NavController) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = buildAnnotatedString {
@@ -74,7 +78,10 @@ fun ShowAllComics(showAllComicsViewModel: ShowAllComicsViewModel) {
                             painter = painter,
                             title = title,
                             writer = writter,
-                            price = price
+                            price = price, modifier = Modifier.clickable {
+                                sharedViewModel.addComicsResult(it)
+                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                            }
                         )
                     }
                 }

@@ -45,7 +45,9 @@ import com.example.marveldatastone.model.CharacterModels.InfiniteNovel.InfiniteN
 import com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.TradePaperBookData
 import com.example.marveldatastone.navigation.MarvelDataScreens
 import com.example.marveldatastone.screens.Main.MainViewModel
+import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
 import com.example.marveldatastone.widgets.BookCard
+import com.example.marveldatastone.widgets.HardCoverInfoCard
 import com.example.marveldatastone.widgets.ImageCard
 import okhttp3.internal.wait
 import kotlin.random.Random
@@ -53,7 +55,7 @@ import kotlin.random.Random
 
 @SuppressLint("StateFlowValueCalledInComposition", "ProduceStateDoesNotAssignValue")
 @Composable
-fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
+fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sharedViewModel: SharedViewModel){
     Surface(modifier = Modifier.fillMaxSize()) {
         var scrollableState= rememberScrollState()
         Column(modifier = Modifier
@@ -189,7 +191,10 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                                     false,
                                     price = price,
                                     title = title,
-                                    writter = writter,
+                                    writter = writter, modifier = Modifier.clickable {
+                                        sharedViewModel.addInfiniteNovelResult(it)
+                                        navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                    }
                                 )
                             }
                         }
@@ -224,7 +229,10 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                                 Random.nextInt(170,255),
                                 Random.nextInt(170,255),
                                 Random.nextInt(175,255)
-                            ), painter,false,price=price, title = title, writter = writter)
+                            ), painter,false,price=price, title = title, writter = writter,modifier = Modifier.clickable {
+                                sharedViewModel.addInfiniteNovelResult(it)
+                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                            })
                         }
                     }
                 }
@@ -355,7 +363,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                                     Random.nextInt(170,255),
                                     Random.nextInt(170,255),
                                     Random.nextInt(175,255)
-                                ), painter,false,price=price, title = title, writter = writter)
+                                ), painter,false,price=price, title = title, writter = writter,modifier = Modifier.clickable { sharedViewModel.addHardCoverResult(it)
+                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                })
                             }
                         }
                     }
@@ -387,7 +397,10 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                                 Random.nextInt(170,255),
                                 Random.nextInt(170,255),
                                 Random.nextInt(175,255)
-                            ), painter,false,price=price, title = title, writter = writter)
+                            ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
+                                sharedViewModel.addHardCoverResult(it)
+                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                            })
                         }
                     }
                 }
@@ -513,7 +526,10 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                                 Random.nextInt(170,255),
                                 Random.nextInt(170,255),
                                 Random.nextInt(175,255)
-                            ), painter,false,price=price, title = title, writter = writter)
+                            ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
+                                sharedViewModel.addTradepaperbackResult(it)
+                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                            })
                         }
                     }
                 }
@@ -548,7 +564,10 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                                     Random.nextInt(170, 255),
                                     Random.nextInt(170, 255),
                                     Random.nextInt(175, 255)
-                                ), painter, false, price = price, title = title, writter = writter
+                                ), painter, false, price = price, title = title, writter = writter, modifier = Modifier.clickable {
+                                    sharedViewModel.addTradepaperbackResult(it)
+                                    navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                }
                             )
                         }
                     }
@@ -760,7 +779,10 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                                     Random.nextInt(170,255),
                                     Random.nextInt(170,255),
                                     Random.nextInt(175,255)
-                                ), painter,false,price=price, title = title, writter = writter)
+                                ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
+                                    sharedViewModel.addDigestResult(it)
+                                    navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                })
                             }
                         }
                     }
@@ -792,7 +814,10 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                                 Random.nextInt(170,255),
                                 Random.nextInt(170,255),
                                 Random.nextInt(175,255)
-                            ), painter,false,price=price, title = title, writter = writter)
+                            ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
+                                sharedViewModel.addDigestResult(it)
+                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                            })
                         }
                     }
                 }
@@ -913,7 +938,10 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                                     Random.nextInt(170,255),
                                     Random.nextInt(170,255),
                                     Random.nextInt(175,255)
-                                ), painter,false,price=price, title = title, writter = writter)
+                                ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
+                                    sharedViewModel.addGraphicNovelResult(it)
+                                    navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                })
                             }
                         }
                     }
@@ -945,7 +973,10 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel){
                                 Random.nextInt(170,255),
                                 Random.nextInt(170,255),
                                 Random.nextInt(175,255)
-                            ), painter,false,price=price, title = title, writter = writter)
+                            ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
+                                sharedViewModel.addGraphicNovelResult(it)
+                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                            })
                         }
                     }
                 }

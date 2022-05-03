@@ -27,8 +27,8 @@ import com.example.marveldatastone.R
 import kotlin.reflect.KClass
 
 @Composable
-fun BookCard(color: Color,painter: AsyncImagePainter,showLoader: Boolean=true,title:String="",price:String="",writter:String="") {
-    Surface() {
+fun BookCard(color: Color,painter: AsyncImagePainter,showLoader: Boolean=true,title:String="",price:String="",writter:String="",modifier: Modifier=Modifier) {
+    Surface(modifier = modifier) {
         Column(Modifier.width(260.dp)) {
             Surface(
                 modifier = Modifier

@@ -39,19 +39,20 @@ import com.example.marveldatastone.model.CharacterModels.CharacteresModel.Marvel
 import com.example.marveldatastone.model.CharacterModels.ComicsModels.ComicsData
 import com.example.marveldatastone.navigation.MarvelDataScreens
 import com.example.marveldatastone.screens.Main.MainViewModel
+import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
 import com.example.marveldatastone.widgets.GradelScreen
 import com.example.marveldatastone.widgets.ImageCard
 import com.example.marveldatastone.widgets.SearchBar
 
 @Composable
-fun MarvelMainScreen(navController: NavController, mainViewModel: MainViewModel) {
-    ShowData(navController,mainViewModel)
+fun MarvelMainScreen(navController: NavController, mainViewModel: MainViewModel,sharedViewModel: SharedViewModel) {
+    ShowData(navController,mainViewModel, sharedViewModel =sharedViewModel )
 }
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun ShowData(navController: NavController,mainViewModel: MainViewModel) {
+fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedViewModel: SharedViewModel) {
     //GradelScreen()
 //    Text(
 //        text = "Comics",
@@ -160,8 +161,6 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel) {
 
         if(mainViewModel.comicsList.value.isNotEmpty())
         {
-
-            Log.d("MAIN1", "ShowData: From DB")
             val list = mainViewModel.comicsList.value[0].data.results
             LazyRow(modifier = Modifier.fillMaxWidth())
             {
@@ -171,7 +170,10 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel) {
                     val painter = rememberAsyncImagePainter(model = url)
                     ImageCard(modifier = Modifier
                         .height(440.dp)
-                        .width(280.dp), title = it.title , painter = painter , desc ="Image" , fontsize = 22)
+                        .width(280.dp).clickable {
+                                                 sharedViewModel.addComicsResult(it)
+                            navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                        }, title = it.title , painter = painter , desc ="Image" , fontsize = 22)
                 }
             }
         }
@@ -210,7 +212,10 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel) {
                         val painter = rememberAsyncImagePainter(model = url)
                         ImageCard(modifier = Modifier
                             .height(440.dp)
-                            .width(280.dp), title = it.title , painter = painter , desc ="Image" , fontsize = 22)
+                            .width(280.dp).clickable {
+                                sharedViewModel.addComicsResult(it)
+                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                            }, title = it.title , painter = painter , desc ="Image" , fontsize = 22)
                     }
                 }
             }

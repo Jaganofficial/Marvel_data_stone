@@ -1,5 +1,8 @@
 package com.example.marveldatastone.model.CharacterModels.HardCover
 
+import android.os.Parcelable
+
+
 data class Result(
     val characters: Characters,
     val collectedIssues: List<CollectedIssue>,
