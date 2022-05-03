@@ -2,6 +2,10 @@ package com.example.marveldatastone.widgets
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -13,20 +17,21 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role.Companion.Image
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.marveldatastone.R
+import java.util.*
 
 
 @Composable
-fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,price:String,actualPrice:String,description:String,modifier: Modifier =Modifier) {
+fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,price:String,actualPrice:String,description:String,date:String,language:String,painters:List<Painter>,creators:List<String>,characters:List<String>,modifier: Modifier =Modifier) {
     Surface(modifier = modifier) {
         val scrollState= rememberScrollState()
         Column(modifier = Modifier
@@ -59,7 +64,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                     Row(modifier = Modifier.padding(25.dp), verticalAlignment = Alignment.CenterVertically) {
                         Card(modifier = Modifier
                             .height(260.dp)
-                            .width(180.dp), shape = RoundedCornerShape(15.dp)) {
+                            .width(180.dp), shape = RoundedCornerShape(15.dp), elevation = 45.dp) {
                             Image(painter = painter, contentDescription = "Image", contentScale = ContentScale.Crop)
                         }
                         Card(modifier = Modifier.offset(x=25.dp), shape = RoundedCornerShape(100.dp), contentColor = Color.Red, backgroundColor = Color(
@@ -140,6 +145,101 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                 {
                     Text(text = description, style = TextStyle(color = Color.Gray, fontSize = 18.sp))
                 }
+
+                //Release Date
+
+                Divider(modifier = Modifier.padding(vertical = 15.dp))
+
+                Text(text = "Release date", style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 19.sp))
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(text = date, style = TextStyle(color = Color.Gray, fontSize = 17.sp))
+
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(text = "Language", style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 19.sp))
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(text = language.uppercase(Locale.getDefault()), style = TextStyle(color = Color.Gray, fontSize = 17.sp))
+
+
+                Divider(modifier = Modifier.padding(vertical = 15.dp))
+
+                Text(text = "Related Images", style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 19.sp, fontWeight = FontWeight.SemiBold))
+                if(painters.isEmpty())
+                {
+                    Text(text = "No preview Available", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(15.dp))
+                }
+                else
+                {
+                    LazyRow(modifier = Modifier.padding(vertical = 15.dp))
+                    {
+                        items(painters)
+                        {
+                            Card(modifier = Modifier
+                                .height(320.dp)
+                                .width(250.dp), shape = RoundedCornerShape(15.dp), elevation = 15.dp) {
+                                Image(painter = it, contentDescription = "Image", contentScale = ContentScale.Crop)
+                            }
+                            Spacer(modifier = Modifier.width(24.dp))
+                        }
+                    }
+                }
+
+
+                Text(text = "Creators ", style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 19.sp, fontWeight = FontWeight.SemiBold))
+                if(creators.isNullOrEmpty())
+                {
+                    Text(text = "Marvel", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(15.dp))
+                }
+                else
+                {
+                    LazyRow(modifier = Modifier.padding(vertical = 15.dp))
+                    {
+                        items(creators)
+                        {
+                            var cid:Int
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                Card(modifier = Modifier
+                                    .height(100.dp)
+                                    .width(100.dp), shape = CircleShape, elevation = 15.dp) {
+                                    if(it.contains("colorist"))
+                                        cid=R.drawable.colorist
+                                    else if(it.contains("inker"))
+                                        cid=R.drawable.writer
+                                    else
+                                        cid=R.drawable.writers
+
+                                   Image(painter = painterResource(id = cid), contentDescription = "Creators", contentScale = ContentScale.Crop)
+                                }
+                                Text(text = it, style = TextStyle(color = Color.Gray, fontSize = 17.sp, textAlign = TextAlign.Center))
+                            }
+                            Spacer(modifier = Modifier.width(14.dp))
+                        }
+                    }
+                }
+
+
+
+                //Characters
+
+                Text(text = "Characters ", style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 19.sp, fontWeight = FontWeight.SemiBold))
+                if(characters.isNullOrEmpty())
+                {
+                    Text(text = "No details available", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(15.dp))
+                }
+                else
+                {
+                    LazyRow(modifier = Modifier.padding(vertical = 25.dp).fillMaxWidth())
+                    {
+                        items(characters)
+                        {
+                            Surface( modifier = Modifier.padding(horizontal = 14.dp)) {
+                                Card(shape = RoundedCornerShape(15.dp), elevation = 15.dp, contentColor = Color.Gray, backgroundColor = Color.Gray) {
+                                    Text(text = it, style = TextStyle(color = Color.White, fontSize = 21.sp, textAlign = TextAlign.Center, fontWeight = FontWeight.SemiBold), modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp))
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
             Spacer(modifier = Modifier.height(150.dp))
         }
