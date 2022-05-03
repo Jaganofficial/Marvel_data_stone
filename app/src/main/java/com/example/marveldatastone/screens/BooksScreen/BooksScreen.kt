@@ -118,9 +118,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colors.onSecondary
-                        ),modifier= Modifier.clickable {
-                            //navController.navigate(MarvelDataScreens.HardCoverInfoScreen.name)
-                        }
+                        )
                     )
                     Text(
                         text = "See All",
@@ -128,7 +126,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                             fontSize = 21.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color(23, 212, 252)
-                        )
+                        ), modifier = Modifier.clickable {
+                            navController.navigate(MarvelDataScreens.ShowAllInfiniteComics.name)
+                        }
                     )
                 }
                 if(booksViewModel.infiniteNavelList.collectAsState().value.isEmpty()) {
@@ -309,7 +309,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     Text(text = "HardCover", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onSecondary))
-                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)))
+                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)),modifier = Modifier.clickable {
+                        navController.navigate(MarvelDataScreens.ShowAllHardCover.name)
+                    })
                 }
 
 
@@ -473,7 +475,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     Text(text = "Trade PaperBack", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onSecondary))
-                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)))
+                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)),modifier = Modifier.clickable {
+                        navController.navigate(MarvelDataScreens.ShowAllTradePaperBook.name)
+                    })
                 }
 
                 if(booksViewModel.tradePaperBookDataList.collectAsState().value.isEmpty())
@@ -727,7 +731,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     Text(text = "Digest", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onSecondary))
-                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)))
+                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)),modifier = Modifier.clickable {
+                        navController.navigate(MarvelDataScreens.ShowAllDigest.name)
+                    })
                 }
 
                 if(booksViewModel.digestList.collectAsState().value.isEmpty())
@@ -886,7 +892,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     Text(text = "Graphic Novel", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.onSecondary))
-                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)))
+                    Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)),modifier = Modifier.clickable {
+                        navController.navigate(MarvelDataScreens.ShowAllGraphicNovel.name)
+                    })
                 }
 
                 if(booksViewModel.graphicNovelList.collectAsState().value.isEmpty())

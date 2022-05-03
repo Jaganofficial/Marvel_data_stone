@@ -10,5 +10,10 @@ enum class MarvelDataScreens {
     ComicsSearchScreen,
     HardCoverInfoScreen,
     ShowAllComics,
-    BooksInfoScreen
+    BooksInfoScreen,
+    ShowAllInfiniteComics,
+    ShowAllHardCover,
+    ShowAllTradePaperBook,
+    ShowAllDigest,
+    ShowAllGraphicNovel
 }
