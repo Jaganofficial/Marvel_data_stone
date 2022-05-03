@@ -1,4 +1,4 @@
-package com.example.marveldatastone.screens.ShowAllComics
+package com.example.marveldatastone.screens.ShowAll.ShowAllComics
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

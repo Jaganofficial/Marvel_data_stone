@@ -15,7 +15,7 @@ import com.example.marveldatastone.screens.MarvelMainScreen
 import com.example.marveldatastone.screens.MarvelSplashScreen
 import com.example.marveldatastone.screens.SharedViewModel.BooksInfoScreen
 import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
-import com.example.marveldatastone.screens.ShowAllComics.ShowAllComicsViewModel
+import com.example.marveldatastone.screens.ShowAll.ShowAllComics.ShowAllComicsViewModel
 import com.example.marveldatastone.widgets.HardCoverInfoCard
 import com.example.marveldatastone.widgets.ShowAllComics
 

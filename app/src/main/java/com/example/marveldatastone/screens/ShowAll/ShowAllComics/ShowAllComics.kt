@@ -31,11 +31,11 @@ import com.example.marveldatastone.model.CharacterModels.ComicsModels.ComicsData
 import com.example.marveldatastone.model.CharacterModels.ComicsModels.Result
 import com.example.marveldatastone.navigation.MarvelDataScreens
 import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
-import com.example.marveldatastone.screens.ShowAllComics.ShowAllComicsViewModel
+import com.example.marveldatastone.screens.ShowAll.ShowAllComics.ShowAllComicsViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun ShowAllComics(showAllComicsViewModel: ShowAllComicsViewModel,sharedViewModel:SharedViewModel,navController:NavController) {
+fun ShowAllComics(showAllComicsViewModel: ShowAllComicsViewModel, sharedViewModel:SharedViewModel, navController:NavController) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = buildAnnotatedString {
