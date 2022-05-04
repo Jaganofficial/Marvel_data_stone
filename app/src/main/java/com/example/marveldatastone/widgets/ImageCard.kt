@@ -27,20 +27,42 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun ImageCard(modifier: Modifier, title:String, painter: Painter,desc:String,fontsize:Int) {
-    Card(modifier = modifier.padding(15.dp), elevation = 25.dp, shape = RoundedCornerShape(12.dp)) {
-        Box(modifier = Modifier.fillMaxSize())
-        {
-            Image(painter = painter, contentDescription = desc, contentScale = ContentScale.Crop)
-            Box(modifier = modifier
-                .background(
-                    brush = Brush.verticalGradient(
-                        listOf(
-                            Color.Transparent,Color.Transparent, Color.Black
+    Surface(modifier = Modifier.padding(15.dp)) {
+        Card(modifier = modifier, elevation = 25.dp, shape = RoundedCornerShape(12.dp)) {
+            Box(modifier = Modifier.fillMaxSize())
+            {
+                Card(modifier = Modifier.fillMaxSize()) {
+                    Image(
+                        painter = painter,
+                        contentDescription = desc,
+                        contentScale = ContentScale.Crop
+                    )
+                }
+
+                Box(
+                    modifier = modifier
+                        .background(
+                            brush = Brush.verticalGradient(
+                                listOf(
+                                    Color.Transparent, Color.Transparent, Color.Black
+                                )
+                            )
+                        )
+                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp), contentAlignment = Alignment.BottomCenter
+                ) {
+                    Text(
+                        text = title,
+                        style = TextStyle(
+                            color = Color.LightGray,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = fontsize.sp
                         )
                     )
-                ))
-            Box(modifier = Modifier.fillMaxSize().padding(10.dp), contentAlignment = Alignment.BottomCenter) {
-                Text(text = title, style = TextStyle(color = Color.LightGray, fontWeight = FontWeight.Bold, fontSize = fontsize.sp))
+                }
             }
         }
     }

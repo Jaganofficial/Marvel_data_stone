@@ -82,7 +82,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
             Column(modifier = Modifier.padding(horizontal = 25.dp)) {
 
                 //Title
-                Text(text = title, style = TextStyle(color = MaterialTheme.colors.onSecondary, fontWeight = FontWeight.Bold, fontSize = 21.sp,))
+                Text(text = title, style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 21.sp,))
 
                 //PageCount
                 Row(modifier = Modifier.padding(vertical = 10.dp)) {
@@ -124,7 +124,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                     mutableStateOf(false)
                 }
                 //Description
-                Text(text = "Description", style = TextStyle(color = MaterialTheme.colors.onSecondary, fontWeight = FontWeight.Bold, fontSize = 19.sp,))
+                Text(text = "Description", style = TextStyle( fontWeight = FontWeight.Bold, fontSize = 19.sp,))
                 Spacer(modifier = Modifier.height(5.dp))
 
                 if(description.length>100 && !readMoreDescription.value)
@@ -150,97 +150,99 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
 
                 Divider(modifier = Modifier.padding(vertical = 15.dp))
 
-                Text(text = "Release date", style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 19.sp))
+                Text(text = "Release date", style = TextStyle( fontSize = 19.sp))
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(text = date, style = TextStyle(color = Color.Gray, fontSize = 17.sp))
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text(text = "Language", style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 19.sp))
+                Text(text = "Language", style = TextStyle( fontSize = 19.sp))
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(text = language.uppercase(Locale.getDefault()), style = TextStyle(color = Color.Gray, fontSize = 17.sp))
 
 
                 Divider(modifier = Modifier.padding(vertical = 15.dp))
 
-                Text(text = "Related Images", style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 19.sp, fontWeight = FontWeight.SemiBold))
-                if(painters.isEmpty())
-                {
-                    Text(text = "No preview Available", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(15.dp))
-                }
-                else
-                {
-                    LazyRow(modifier = Modifier.padding(vertical = 15.dp))
-                    {
-                        items(painters)
-                        {
-                            Card(modifier = Modifier
-                                .height(320.dp)
-                                .width(250.dp), shape = RoundedCornerShape(15.dp), elevation = 15.dp) {
-                                Image(painter = it, contentDescription = "Image", contentScale = ContentScale.Crop)
-                            }
-                            Spacer(modifier = Modifier.width(24.dp))
-                        }
-                    }
-                }
 
-
-                Text(text = "Creators ", style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 19.sp, fontWeight = FontWeight.SemiBold))
-                if(creators.isNullOrEmpty())
-                {
-                    Text(text = "Marvel", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(15.dp))
-                }
-                else
-                {
-                    LazyRow(modifier = Modifier.padding(vertical = 15.dp))
-                    {
-                        items(creators)
-                        {
-                            var cid:Int
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Card(modifier = Modifier
-                                    .height(100.dp)
-                                    .width(100.dp), shape = CircleShape, elevation = 15.dp) {
-                                    if(it.contains("colorist"))
-                                        cid=R.drawable.colorist
-                                    else if(it.contains("inker"))
-                                        cid=R.drawable.writer
-                                    else
-                                        cid=R.drawable.writers
-
-                                   Image(painter = painterResource(id = cid), contentDescription = "Creators", contentScale = ContentScale.Crop)
-                                }
-                                Text(text = it, style = TextStyle(color = Color.Gray, fontSize = 17.sp, textAlign = TextAlign.Center))
-                            }
-                            Spacer(modifier = Modifier.width(14.dp))
-                        }
-                    }
-                }
-
-
-
-                //Characters
-
-                Text(text = "Characters ", style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 19.sp, fontWeight = FontWeight.SemiBold))
-                if(characters.isNullOrEmpty())
-                {
-                    Text(text = "No details available", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(15.dp))
-                }
-                else
-                {
-                    LazyRow(modifier = Modifier.padding(vertical = 25.dp).fillMaxWidth())
-                    {
-                        items(characters)
-                        {
-                            Surface( modifier = Modifier.padding(horizontal = 14.dp)) {
-                                Card(shape = RoundedCornerShape(15.dp), elevation = 15.dp, contentColor = Color.Gray, backgroundColor = Color.Gray) {
-                                    Text(text = it, style = TextStyle(color = Color.White, fontSize = 21.sp, textAlign = TextAlign.Center, fontWeight = FontWeight.SemiBold), modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp))
-                                }
-                            }
-                        }
-                    }
-                }
 
             }
+
+            Text(text = "Related Images", style = TextStyle( fontSize = 19.sp, fontWeight = FontWeight.SemiBold), modifier = Modifier.padding(15.dp))
+            if(painters.isEmpty())
+            {
+                Text(text = "No preview Available", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(25.dp))
+            }
+            else
+            {
+                LazyRow()
+                {
+                    items(painters)
+                    {
+                        Card(modifier = Modifier
+                            .height(320.dp)
+                            .width(230.dp).padding(15.dp), shape = RoundedCornerShape(15.dp), elevation = 15.dp) {
+                            Image(painter = it, contentDescription = "Image", contentScale = ContentScale.Crop)
+                        }
+                    }
+                }
+            }
+
+
+            Text(text = "Creators ", style = TextStyle( fontSize = 19.sp, fontWeight = FontWeight.SemiBold), modifier = Modifier.padding(15.dp))
+            if(creators.isNullOrEmpty())
+            {
+                Text(text = "Marvel", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(25.dp))
+            }
+            else
+            {
+                LazyRow()
+                {
+                    items(creators)
+                    {
+                        var cid:Int
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Card(modifier = Modifier
+                                .height(100.dp)
+                                .width(100.dp).padding(15.dp), shape = CircleShape, elevation = 15.dp) {
+                                if(it.contains("colorist"))
+                                    cid=R.drawable.colorist
+                                else if(it.contains("inker"))
+                                    cid=R.drawable.writer
+                                else
+                                    cid=R.drawable.writers
+
+                                Image(painter = painterResource(id = cid), contentDescription = "Creators", contentScale = ContentScale.Crop)
+                            }
+                            Text(text = it, style = TextStyle(color = Color.Gray, fontSize = 17.sp, textAlign = TextAlign.Center), modifier = Modifier.padding(15.dp))
+                        }
+                    }
+                }
+            }
+
+
+
+            //Characters
+
+            Text(text = "Characters ", style = TextStyle( fontSize = 19.sp, fontWeight = FontWeight.SemiBold), modifier = Modifier.padding(15.dp))
+            if(characters.isNullOrEmpty())
+            {
+                Text(text = "No details available", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(25.dp))
+            }
+            else
+            {
+                LazyRow(modifier = Modifier.fillMaxWidth())
+                {
+                    items(characters)
+                    {
+                        Surface( modifier = Modifier.padding(14.dp)) {
+                            Card(shape = RoundedCornerShape(15.dp), elevation = 15.dp, contentColor = Color.Gray, backgroundColor = Color.Gray) {
+                                Text(text = it, style = TextStyle(color = Color.White, fontSize = 21.sp, textAlign = TextAlign.Center, fontWeight = FontWeight.SemiBold), modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp))
+                            }
+                        }
+                    }
+                }
+            }
+
+
             Spacer(modifier = Modifier.height(150.dp))
         }
     }

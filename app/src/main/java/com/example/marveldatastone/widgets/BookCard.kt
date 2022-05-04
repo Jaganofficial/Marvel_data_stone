@@ -60,7 +60,9 @@ fun BookCard(color: Color,painter: AsyncImagePainter,showLoader: Boolean=true,ti
                                 .width(165.dp), elevation = 15.dp, shape = RoundedCornerShape(12.dp)
                         ) {
                             if (showLoader)
-                                CircularProgressIndicator(modifier = Modifier.size(35.dp))
+                                Box(contentAlignment = Alignment.Center, modifier = Modifier.size(25.dp)) {
+                                    CircularProgressIndicator()
+                                }
                             else {
                                 Image(
                                     painter = painter,

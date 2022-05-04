@@ -13,9 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.produceState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -51,6 +49,7 @@ import com.example.marveldatastone.widgets.HardCoverInfoCard
 import com.example.marveldatastone.widgets.ImageCard
 import okhttp3.internal.wait
 import kotlin.random.Random
+import androidx.compose.runtime.remember as remember1
 
 
 @SuppressLint("StateFlowValueCalledInComposition", "ProduceStateDoesNotAssignValue")
@@ -144,15 +143,22 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
 
 
                         val painter = rememberAsyncImagePainter(model = R.color.white)
+                        val x by remember1{
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
+                        val y by androidx.compose.runtime.remember {
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
+                        val z by androidx.compose.runtime.remember {
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
                         LazyRow()
                         {
                             items(100)
                             {
                                 BookCard(
                                     Color(
-                                        Random.nextInt(170, 255),
-                                        Random.nextInt(170, 255),
-                                        Random.nextInt(175, 255)
+                                        x,y,z
                                     ), painter = painter, true
                                 )
                             }
@@ -178,14 +184,20 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                 if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
 
-
+                                val x by remember1{
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val y by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val z by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
                                 var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
                                 val painter = rememberAsyncImagePainter(model = url)
                                 BookCard(
                                     Color(
-                                        Random.nextInt(170, 255),
-                                        Random.nextInt(170, 255),
-                                        Random.nextInt(175, 255)
+                                        x,y,z
                                     ),
                                     painter,
                                     false,
@@ -203,38 +215,51 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                 else
                 {
 
-                    val list = booksViewModel.infiniteNavelList.collectAsState().value[0].data.results
-                    LazyRow()
+                    if(!booksViewModel.infiniteNavelList.collectAsState().value.isNullOrEmpty())
                     {
-                        items(list)
+                        val list = booksViewModel.infiniteNavelList.collectAsState().value[0].data.results
+                        LazyRow()
                         {
-                            //Text Formatting
-                            var title=it.title
-                            var writter="Marvel"
-                            var price="Free"
-                            if(title.length>26)
-                                title=title.subSequence(0,24).toString()+"..."
-                            if(it.creators.items.isNotEmpty())
-                                writter=it.creators.items[0].name
-                            if(writter.length>26)
-                                writter=writter.substring(0,25).toString()+"..."
+                            items(list)
+                            {
+                                //Text Formatting
+                                var title=it.title
+                                var writter="Marvel"
+                                var price="Free"
+                                if(title.length>26)
+                                    title=title.subSequence(0,24).toString()+"..."
+                                if(it.creators.items.isNotEmpty())
+                                    writter=it.creators.items[0].name
+                                if(writter.length>26)
+                                    writter=writter.substring(0,25).toString()+"..."
 
-                            if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
-                                price= "$ "+it.prices[0].price
+                                if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
+                                    price= "$ "+it.prices[0].price
 
+                                val x by remember1{
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val y by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val z by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
 
-                            var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                            val painter = rememberAsyncImagePainter(model = url)
-                            BookCard(Color(
-                                Random.nextInt(170,255),
-                                Random.nextInt(170,255),
-                                Random.nextInt(175,255)
-                            ), painter,false,price=price, title = title, writter = writter,modifier = Modifier.clickable {
-                                sharedViewModel.addInfiniteNovelResult(it)
-                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
-                            })
+                                var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                                val painter = rememberAsyncImagePainter(model = url)
+                                BookCard(Color(
+                                    x,y,z
+                                ), painter,false,price=price, title = title, writter = writter,modifier = Modifier.clickable {
+                                    sharedViewModel.addInfiniteNovelResult(it)
+                                    navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                })
+                            }
                         }
                     }
+                    else
+                        CircularProgressIndicator()
+
                 }
 
    /*
@@ -315,6 +340,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                 }
 
 
+                
                 if(booksViewModel.hardCoverList.collectAsState().value.isEmpty())
                 {
 
@@ -325,15 +351,22 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }.value
                     if (hardCoverData.loading == true)
                     {
+                        val x by remember1{
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
+                        val y by androidx.compose.runtime.remember {
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
+                        val z by androidx.compose.runtime.remember {
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
                         val painter= rememberAsyncImagePainter(model = R.color.white)
                         LazyRow()
                         {
                             items(100)
                             {
                                 BookCard(Color(
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(175,255)
+                                    x,y,z
                                 ), painter = painter,true)
                             }
                         }
@@ -358,13 +391,19 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                 if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
                                     price= "$ "+it.prices[0].price
 
-
+                                val x by remember1{
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val y by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val z by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
                                 var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
                                 val painter = rememberAsyncImagePainter(model = url)
                                 BookCard(Color(
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(175,255)
+                                    x,y,z
                                 ), painter,false,price=price, title = title, writter = writter,modifier = Modifier.clickable { sharedViewModel.addHardCoverResult(it)
                                 navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
                                 })
@@ -373,38 +412,52 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }
                 }
                 else{
-                    val list = booksViewModel.hardCoverList.value[0].data.results
-                    LazyRow()
+                    if(!booksViewModel.hardCoverList.value.isNullOrEmpty())
                     {
-                        items(list)
+                        val list = booksViewModel.hardCoverList.collectAsState().value[0].data.results
+                        LazyRow()
                         {
-                            //Text Formatting
-                            var title=it.title
-                            var writter="Marvel"
-                            var price="Free"
-                            if(title.length>26)
-                                title=title.subSequence(0,24).toString()+"..."
-                            if(it.creators.items.isNotEmpty())
-                                writter=it.creators.items[0].name
-                            if(writter.length>26)
-                                writter=writter.substring(0,25).toString()+"..."
+                            items(list)
+                            {
+                                //Text Formatting
+                                var title=it.title
+                                var writter="Marvel"
+                                var price="Free"
+                                if(title.length>26)
+                                    title=title.subSequence(0,24).toString()+"..."
+                                if(it.creators.items.isNotEmpty())
+                                    writter=it.creators.items[0].name
+                                if(writter.length>26)
+                                    writter=writter.substring(0,25).toString()+"..."
 
-                            if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
-                                price= "$ "+it.prices[0].price
+                                if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
+                                    price= "$ "+it.prices[0].price
 
-
-                            var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                            val painter = rememberAsyncImagePainter(model = url)
-                            BookCard(Color(
-                                Random.nextInt(170,255),
-                                Random.nextInt(170,255),
-                                Random.nextInt(175,255)
-                            ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
-                                sharedViewModel.addHardCoverResult(it)
-                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
-                            })
+                                val x by remember1{
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val y by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val z by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                                val painter = rememberAsyncImagePainter(model = url)
+                                BookCard(Color(
+                                    x,y,z
+                                ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
+                                    sharedViewModel.addHardCoverResult(it)
+                                    navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                })
+                            }
                         }
                     }
+                    else
+                    {
+                        CircularProgressIndicator()
+                    }
+
                 }
 
 
@@ -490,91 +543,121 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                 if (tradePaperBookData.loading == true)
                 {
                     val painter= rememberAsyncImagePainter(model = R.color.white)
+                    val x by remember1{
+                        mutableStateOf(Random.nextInt(170, 255))
+                    }
+                    val y by androidx.compose.runtime.remember {
+                        mutableStateOf(Random.nextInt(170, 255))
+                    }
+                    val z by androidx.compose.runtime.remember {
+                        mutableStateOf(Random.nextInt(170, 255))
+                    }
                     LazyRow()
                     {
                         items(100)
                         {
                             BookCard(Color(
-                                Random.nextInt(170,255),
-                                Random.nextInt(170,255),
-                                Random.nextInt(175,255)
+                                x,y,z
                             ), painter = painter,true)
                         }
                     }
                 }
                 else {
                     //val list = tradePaperBookData.data!!.data.results
-                        val list=booksViewModel.tradePaperBookDataList.collectAsState().value[0].data.results
-                    LazyRow()
-                    {
-                        items(list)
+                        if(!booksViewModel.tradePaperBookDataList.collectAsState().value.isNullOrEmpty())
                         {
-                            //Text Formatting
-                            var title=it.title
-                            var writter="Marvel"
-                            var price="Free"
-                            if(title.length>26)
-                                title=title.subSequence(0,24).toString()+"..."
-                            if(it.creators.items.isNotEmpty())
-                                writter=it.creators.items[0].name
-                            if(writter.length>26)
-                                writter=writter.substring(0,25).toString()+"..."
+                            val list=booksViewModel.tradePaperBookDataList.collectAsState().value[0].data.results
+                            LazyRow()
+                            {
+                                items(list)
+                                {
+                                    //Text Formatting
+                                    var title=it.title
+                                    var writter="Marvel"
+                                    var price="Free"
+                                    if(title.length>26)
+                                        title=title.subSequence(0,24).toString()+"..."
+                                    if(it.creators.items.isNotEmpty())
+                                        writter=it.creators.items[0].name
+                                    if(writter.length>26)
+                                        writter=writter.substring(0,25).toString()+"..."
 
-                            if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
-                                price= "$ "+it.prices[0].price
+                                    if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
+                                        price= "$ "+it.prices[0].price
 
-
-                            var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                            val painter = rememberAsyncImagePainter(model = url)
-                            BookCard(Color(
-                                Random.nextInt(170,255),
-                                Random.nextInt(170,255),
-                                Random.nextInt(175,255)
-                            ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
-                                sharedViewModel.addTradepaperbackResult(it)
-                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
-                            })
+                                    val x by remember1{
+                                        mutableStateOf(Random.nextInt(170, 255))
+                                    }
+                                    val y by androidx.compose.runtime.remember {
+                                        mutableStateOf(Random.nextInt(170, 255))
+                                    }
+                                    val z by androidx.compose.runtime.remember {
+                                        mutableStateOf(Random.nextInt(170, 255))
+                                    }
+                                    var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                                    val painter = rememberAsyncImagePainter(model = url)
+                                    BookCard(Color(
+                                        x,y,z
+                                    ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
+                                        sharedViewModel.addTradepaperbackResult(it)
+                                        navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                    })
+                                }
+                            }
                         }
-                    }
+                    else{
+                        CircularProgressIndicator()
+                        }
+
                 }
                 }
                 else {
 
-                    val list =
-                        booksViewModel.tradePaperBookDataList.collectAsState().value[0].data.results
-                    LazyRow()
+                    if(!booksViewModel.tradePaperBookDataList.collectAsState().value.isNullOrEmpty())
                     {
-                        items(list)
+                        val list =
+                            booksViewModel.tradePaperBookDataList.collectAsState().value[0].data.results
+                        LazyRow()
                         {
-                            //Text Formatting
-                            var title = it.title
-                            var writter = "Marvel"
-                            var price = "Free"
-                            if (title.length > 26)
-                                title = title.subSequence(0, 24).toString() + "..."
-                            if (it.creators.items.isNotEmpty())
-                                writter = it.creators.items[0].name
-                            if (writter.length > 26)
-                                writter = writter.substring(0, 25).toString() + "..."
+                            items(list)
+                            {
+                                //Text Formatting
+                                var title = it.title
+                                var writter = "Marvel"
+                                var price = "Free"
+                                if (title.length > 26)
+                                    title = title.subSequence(0, 24).toString() + "..."
+                                if (it.creators.items.isNotEmpty())
+                                    writter = it.creators.items[0].name
+                                if (writter.length > 26)
+                                    writter = writter.substring(0, 25).toString() + "..."
 
-                            if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
-                                price = "$ " + it.prices[0].price
+                                if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
+                                    price = "$ " + it.prices[0].price
 
-
-                            var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                            val painter = rememberAsyncImagePainter(model = url)
-                            BookCard(
-                                Color(
-                                    Random.nextInt(170, 255),
-                                    Random.nextInt(170, 255),
-                                    Random.nextInt(175, 255)
-                                ), painter, false, price = price, title = title, writter = writter, modifier = Modifier.clickable {
-                                    sharedViewModel.addTradepaperbackResult(it)
-                                    navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                val x by remember1{
+                                    mutableStateOf(Random.nextInt(170, 255))
                                 }
-                            )
+                                val y by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val z by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                                val painter = rememberAsyncImagePainter(model = url)
+                                BookCard(
+                                    Color(
+                                        x,y,z
+                                    ), painter, false, price = price, title = title, writter = writter, modifier = Modifier.clickable {
+                                        sharedViewModel.addTradepaperbackResult(it)
+                                        navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                    }
+                                )
+                            }
                         }
                     }
+
                 }
                 Spacer(modifier = Modifier.height(18.dp))
 
@@ -746,14 +829,21 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     if (digestData.loading == true)
                     {
                         val painter= rememberAsyncImagePainter(model = R.color.white)
+                        val x by remember1{
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
+                        val y by androidx.compose.runtime.remember {
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
+                        val z by androidx.compose.runtime.remember {
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
                         LazyRow()
                         {
                             items(100)
                             {
                                 BookCard(Color(
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(175,255)
+                                    x,y,z
                                 ), painter = painter,true)
                             }
                         }
@@ -778,13 +868,19 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                 if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
                                     price= "$ "+it.prices[0].price
 
-
+                                val x by remember1{
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val y by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val z by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
                                 var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
                                 val painter = rememberAsyncImagePainter(model = url)
                                 BookCard(Color(
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(175,255)
+                                    x,y,z
                                 ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
                                     sharedViewModel.addDigestResult(it)
                                     navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
@@ -794,37 +890,54 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }
                 }
                 else{
-                    val list = booksViewModel.digestList.collectAsState().value[0].data.results
-                    LazyRow()
-                    {
-                        items(list)
+                    if(!booksViewModel.digestList.collectAsState().value.isNullOrEmpty()) {
+                        val list = booksViewModel.digestList.collectAsState().value[0].data.results
+                        LazyRow()
                         {
-                            //Text Formatting
-                            var title=it.title
-                            var writter="Marvel"
-                            var price="Free"
-                            if(title.length>26)
-                                title=title.subSequence(0,24).toString()+"..."
-                            if(it.creators.items.isNotEmpty())
-                                writter=it.creators.items[0].name
-                            if(writter.length>26)
-                                writter=writter.substring(0,25).toString()+"..."
+                            items(list)
+                            {
+                                //Text Formatting
+                                var title = it.title
+                                var writter = "Marvel"
+                                var price = "Free"
+                                if (title.length > 26)
+                                    title = title.subSequence(0, 24).toString() + "..."
+                                if (it.creators.items.isNotEmpty())
+                                    writter = it.creators.items[0].name
+                                if (writter.length > 26)
+                                    writter = writter.substring(0, 25).toString() + "..."
 
-                            if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
-                                price= "$ "+it.prices[0].price
+                                if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
+                                    price = "$ " + it.prices[0].price
 
-
-                            var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                            val painter = rememberAsyncImagePainter(model = url)
-                            BookCard(Color(
-                                Random.nextInt(170,255),
-                                Random.nextInt(170,255),
-                                Random.nextInt(175,255)
-                            ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
-                                sharedViewModel.addDigestResult(it)
-                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
-                            })
+                                val x by remember1 {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val y by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val z by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                                val painter = rememberAsyncImagePainter(model = url)
+                                BookCard(Color(
+                                    x, y, z
+                                ),
+                                    painter,
+                                    false,
+                                    price = price,
+                                    title = title,
+                                    writter = writter,
+                                    modifier = Modifier.clickable {
+                                        sharedViewModel.addDigestResult(it)
+                                        navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                    })
+                            }
                         }
+                    }
+                    else{
+                        CircularProgressIndicator()
                     }
                 }
 
@@ -897,6 +1010,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     })
                 }
 
+
                 if(booksViewModel.graphicNovelList.collectAsState().value.isEmpty())
                 {
                     val graphicNovelData = produceState<DataOrException<GraphicNovelData, Boolean, Exception>>(
@@ -907,14 +1021,21 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     if (graphicNovelData.loading == true)
                     {
                         val painter= rememberAsyncImagePainter(model = R.color.white)
+                        val x by remember1{
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
+                        val y by androidx.compose.runtime.remember {
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
+                        val z by androidx.compose.runtime.remember {
+                            mutableStateOf(Random.nextInt(170, 255))
+                        }
                         LazyRow()
                         {
                             items(100)
                             {
                                 BookCard(Color(
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(175,255)
+                                    x,y,z
                                 ), painter = painter,true)
                             }
                         }
@@ -939,13 +1060,19 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                 if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
                                     price= "$ "+it.prices[0].price
 
-
+                                val x by remember1{
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val y by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val z by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
                                 var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
                                 val painter = rememberAsyncImagePainter(model = url)
                                 BookCard(Color(
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(170,255),
-                                    Random.nextInt(175,255)
+                                    x,y,z
                                 ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
                                     sharedViewModel.addGraphicNovelResult(it)
                                     navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
@@ -955,37 +1082,56 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }
                 }
                 else{
-                    val list = booksViewModel.graphicNovelList.collectAsState().value[0].data.results
-                    LazyRow()
-                    {
-                        items(list)
+                    if(!booksViewModel.graphicNovelList.collectAsState().value.isNullOrEmpty()) {
+                        val list =
+                            booksViewModel.graphicNovelList.collectAsState().value[0].data.results
+                        LazyRow()
                         {
-                            //Text Formatting
-                            var title=it.title
-                            var writter="Marvel"
-                            var price="Free"
-                            if(title.length>26)
-                                title=title.subSequence(0,24).toString()+"..."
-                            if(it.creators.items.isNotEmpty())
-                                writter=it.creators.items[0].name
-                            if(writter.length>26)
-                                writter=writter.substring(0,25).toString()+"..."
+                            items(list)
+                            {
+                                //Text Formatting
+                                var title = it.title
+                                var writter = "Marvel"
+                                var price = "Free"
+                                if (title.length > 26)
+                                    title = title.subSequence(0, 24).toString() + "..."
+                                if (it.creators.items.isNotEmpty())
+                                    writter = it.creators.items[0].name
+                                if (writter.length > 26)
+                                    writter = writter.substring(0, 25).toString() + "..."
 
-                            if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
-                                price= "$ "+it.prices[0].price
+                                if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
+                                    price = "$ " + it.prices[0].price
 
-
-                            var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                            val painter = rememberAsyncImagePainter(model = url)
-                            BookCard(Color(
-                                Random.nextInt(170,255),
-                                Random.nextInt(170,255),
-                                Random.nextInt(175,255)
-                            ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
-                                sharedViewModel.addGraphicNovelResult(it)
-                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
-                            })
+                                val x by remember1 {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val y by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                val z by androidx.compose.runtime.remember {
+                                    mutableStateOf(Random.nextInt(170, 255))
+                                }
+                                var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                                val painter = rememberAsyncImagePainter(model = url)
+                                BookCard(Color(
+                                    x, y, z
+                                ),
+                                    painter,
+                                    false,
+                                    price = price,
+                                    title = title,
+                                    writter = writter,
+                                    modifier = Modifier.clickable {
+                                        sharedViewModel.addGraphicNovelResult(it)
+                                        navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                    })
+                            }
                         }
+                    }
+                    else
+                    {
+                        CircularProgressIndicator()
                     }
                 }
 

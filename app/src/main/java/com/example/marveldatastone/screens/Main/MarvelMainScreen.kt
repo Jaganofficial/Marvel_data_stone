@@ -64,7 +64,7 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
     var scrollableState= rememberScrollState()
     Column(modifier = Modifier
         .fillMaxSize()
-        .verticalScroll(state = scrollableState), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+        .verticalScroll(state = scrollableState), horizontalAlignment = Alignment.CenterHorizontally) {
 
 
 //        SearchBar(modifier = Modifier.clickable {
@@ -158,6 +158,10 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
                 }
             )
         }
+
+
+
+
 
         if(mainViewModel.comicsList.value.isNotEmpty())
         {
