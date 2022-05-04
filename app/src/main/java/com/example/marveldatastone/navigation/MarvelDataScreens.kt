@@ -15,5 +15,6 @@ enum class MarvelDataScreens {
     ShowAllHardCover,
     ShowAllTradePaperBook,
     ShowAllDigest,
-    ShowAllGraphicNovel
+    ShowAllGraphicNovel,
+    SearchScreen
 }

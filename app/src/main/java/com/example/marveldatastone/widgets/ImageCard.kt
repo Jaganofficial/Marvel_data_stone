@@ -2,9 +2,7 @@ package com.example.marveldatastone.widgets
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Surface
@@ -26,44 +24,60 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun ImageCard(modifier: Modifier, title:String, painter: Painter,desc:String,fontsize:Int) {
-    Surface(modifier = Modifier.padding(15.dp)) {
-        Card(modifier = modifier, elevation = 25.dp, shape = RoundedCornerShape(12.dp)) {
-            Box(modifier = Modifier.fillMaxSize())
-            {
-                Card(modifier = Modifier.fillMaxSize()) {
-                    Image(
-                        painter = painter,
-                        contentDescription = desc,
-                        contentScale = ContentScale.Crop
-                    )
-                }
+fun ImageCard(modifier: Modifier, title:String, painter: Painter,desc:String,fontsize:Int,writer:String) {
+    Column() {
+        Surface(modifier = Modifier.padding(horizontal = 15.dp)) {
+            Card(modifier = modifier, elevation = 25.dp, shape = RoundedCornerShape(12.dp)) {
+                Box(modifier = Modifier.fillMaxSize())
+                {
+                    Card(modifier = Modifier.fillMaxSize()) {
+                        Image(
+                            painter = painter,
+                            contentDescription = desc,
+                            contentScale = ContentScale.Crop
+                        )
+                    }
 
-                Box(
-                    modifier = modifier
-                        .background(
-                            brush = Brush.verticalGradient(
-                                listOf(
-                                    Color.Transparent, Color.Transparent, Color.Black
+                    Box(
+                        modifier = modifier
+                            .background(
+                                brush = Brush.verticalGradient(
+                                    listOf(
+                                        Color.Transparent, Color.Transparent, Color.Black
+                                    )
                                 )
                             )
-                        )
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(10.dp), contentAlignment = Alignment.BottomCenter
-                ) {
-                    Text(
-                        text = title,
-                        style = TextStyle(
-                            color = Color.LightGray,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = fontsize.sp
-                        )
                     )
                 }
             }
         }
+        Box(modifier = Modifier.width(270.dp).padding(horizontal = 10.dp), contentAlignment = Alignment.CenterStart)
+        {
+
+            Column() {
+                Text(
+                    text = title,
+                    style = TextStyle(
+                        color = Color.Gray,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = fontsize.sp
+                    ), modifier = Modifier
+                        .padding(5.dp)
+                        .offset(10.dp)
+                )
+
+                Text(
+                    text = writer,
+                    style = TextStyle(
+                        color = Color.LightGray,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = (fontsize-2).sp
+                    ), modifier = Modifier
+                        .padding(5.dp)
+                        .offset(10.dp)
+                )
+            }
+            }
+
     }
 }

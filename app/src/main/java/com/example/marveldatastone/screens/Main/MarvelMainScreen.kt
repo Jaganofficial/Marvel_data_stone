@@ -120,7 +120,7 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
                     Card(modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp)
-                        .padding(horizontal = 24.dp, vertical = 5.dp), shape = RoundedCornerShape(25.dp), backgroundColor = Color.White) {
+                        .padding(horizontal = 24.dp, vertical = 5.dp).clickable { navController.navigate(MarvelDataScreens.SearchScreen.name) }, shape = RoundedCornerShape(25.dp), backgroundColor = Color.White) {
                         Row(horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
                             Spacer(modifier = Modifier.width(15.dp))
                             Image(imageVector = Icons.Default.Search, contentDescription ="Books Search Image", modifier = Modifier.size(40.dp))
@@ -158,8 +158,8 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
                 }
             )
         }
-
-
+        
+        Spacer(modifier = Modifier.height(25.dp))
 
 
 
@@ -171,13 +171,25 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
                 items(list)
                 {
                     var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                    val writers :String
+                    if(it!!.creators.items.isNullOrEmpty())
+                    {
+                        writers="Marvel"
+                    }
+                    else
+                    {
+                        writers=it.creators.items[0].name
+                    }
                     val painter = rememberAsyncImagePainter(model = url)
                     ImageCard(modifier = Modifier
-                        .height(440.dp)
-                        .width(280.dp).clickable {
-                                                 sharedViewModel.addComicsResult(it)
+                        .height(410.dp)
+                        .width(250.dp)
+                        .clickable {
+                            sharedViewModel.addComicsResult(it)
                             navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
-                        }, title = it.title , painter = painter , desc ="Image" , fontsize = 22)
+                        }, title = it.title , painter = painter , desc ="Image" , fontsize = 19, writer = writers
+
+                    )
                 }
             }
         }
@@ -206,23 +218,47 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
 
             else {
 
-                val list = comicsData.data!!.data.results
+                if (comicsData.e == null) {
+                    val list = comicsData.data!!.data.results
 
-                LazyRow(modifier = Modifier.fillMaxWidth())
-                {
-                    items(list)
+                    LazyRow(modifier = Modifier.fillMaxWidth())
                     {
-                        var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                        val painter = rememberAsyncImagePainter(model = url)
-                        ImageCard(modifier = Modifier
-                            .height(440.dp)
-                            .width(280.dp).clickable {
-                                sharedViewModel.addComicsResult(it)
-                                navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
-                            }, title = it.title , painter = painter , desc ="Image" , fontsize = 22)
+                        items(list)
+                        {
+                            val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                            val painter = rememberAsyncImagePainter(model = url)
+                            //Creators
+                            val writers :String
+                            if(it!!.creators.items.isNullOrEmpty())
+                            {
+                                writers="Marvel"
+                            }
+                            else
+                            {
+                                writers=it.creators.items[0].name
+                            }
+                            ImageCard(modifier = Modifier
+                                .height(440.dp)
+                                .width(280.dp)
+                                .clickable {
+                                    sharedViewModel.addComicsResult(it)
+                                    navController.navigate(MarvelDataScreens.BooksInfoScreen.name)
+                                },
+                                title = it.title,
+                                painter = painter,
+                                desc = "Image",
+                                fontsize = 19,
+                                 writer = writers
+                            )
+                        }
                     }
                 }
+                else
+                {
+                    Text(text = "Oops! Something went wrong! Please check your internet connectivity")
+                }
             }
+            
         }
 
 
@@ -252,6 +288,6 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
 
          */
         
-        Spacer(modifier = Modifier.height(65.dp))
+        Spacer(modifier = Modifier.height(105.dp))
     }
 }

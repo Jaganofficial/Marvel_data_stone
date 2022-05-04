@@ -1,6 +1,11 @@
 package com.example.marveldatastone.repository
 
+import android.content.Context
 import android.util.Log
+import androidx.compose.ui.unit.Constraints
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import com.example.marveldatastone.data.Characters.CharacterDao
 import com.example.marveldatastone.data.ComicsDao.*
 import com.example.marveldatastone.data.DataOrException
@@ -182,4 +187,14 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
     {
         return infiniteNovelDao.getInfiniteNovelDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
+
+    fun saveFavorite()
+    {
+
+    }
+    fun getFavorites()
+    {
+
+    }
+
 }

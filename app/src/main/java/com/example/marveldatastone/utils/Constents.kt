@@ -5,4 +5,5 @@ object Constents {
     const val API_KEY ="f91e217cd0c841e4fed2d84829a2407d"
     const val HASH_VALUE="80c5de0fafec6f0641b0b8d168d4d8b0"
     const val TIME_STAMP="1"
+    const val FAVORITE="Favorites"
 }

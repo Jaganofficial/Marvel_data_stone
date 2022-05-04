@@ -15,6 +15,8 @@ import com.example.marveldatastone.screens.FavoriteScreen.FavoriteScreen
 import com.example.marveldatastone.screens.Main.MainViewModel
 import com.example.marveldatastone.screens.MarvelMainScreen
 import com.example.marveldatastone.screens.MarvelSplashScreen
+import com.example.marveldatastone.screens.SearchScreen.SearchScreen
+import com.example.marveldatastone.screens.SearchScreen.SearchScreenViewModel
 import com.example.marveldatastone.screens.SharedViewModel.BooksInfoScreen
 import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
 import com.example.marveldatastone.screens.ShowAll.ShowAllComics.GraphicNovel.ShowAllGraphicNovel
@@ -118,6 +120,12 @@ fun MarvelDataNavigation(navController: NavHostController) {
         {
             val showAllGraphicNovelViewModel= hiltViewModel<ShowAllGraphicNovelViewModel>()
             ShowAllGraphicNovel(showAllGraphicNovelViewModel,sharedViewModel, navController = navController)
+        }
+
+        composable(MarvelDataScreens.SearchScreen.name)
+        {
+            val searchAllComicsViewModel= hiltViewModel<SearchScreenViewModel>()
+            SearchScreen(searchAllComicsViewModel,sharedViewModel, navController = navController)
         }
 
     }

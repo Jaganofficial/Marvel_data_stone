@@ -74,9 +74,12 @@ fun MarvelSplashScreen(navController: NavController) {
         scale5.animateTo(targetValue = 1f, animationSpec = tween(500, easing = {
             OvershootInterpolator(2f).getInterpolation(it)
         }))
+       */
+
+
         delay(1500)
 
-        */
+
 
         navController.popBackStack()
         navController.navigate(MarvelDataScreens.MainScreen.name)

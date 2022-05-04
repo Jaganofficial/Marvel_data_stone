@@ -1,5 +1,7 @@
 package com.example.marveldatastone.widgets
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,6 +19,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.*
@@ -31,7 +34,7 @@ import java.util.*
 
 
 @Composable
-fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,price:String,actualPrice:String,description:String,date:String,language:String,painters:List<Painter>,creators:List<String>,characters:List<String>,modifier: Modifier =Modifier) {
+fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,price:String,actualPrice:String,description:String,date:String,language:String,painters:List<Painter>,creators:List<String>,characters:List<String>,dataUrl:String,modifier: Modifier =Modifier) {
     Surface(modifier = modifier) {
         val scrollState= rememberScrollState()
         Column(modifier = Modifier
@@ -67,7 +70,14 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                             .width(180.dp), shape = RoundedCornerShape(15.dp), elevation = 45.dp) {
                             Image(painter = painter, contentDescription = "Image", contentScale = ContentScale.Crop)
                         }
-                        Card(modifier = Modifier.offset(x=25.dp), shape = RoundedCornerShape(100.dp), contentColor = Color.Red, backgroundColor = Color(
+
+                        val url=dataUrl
+                        val context = LocalContext.current
+                        val intent = remember { Intent(Intent.ACTION_VIEW, Uri.parse(url)) }
+
+                        Card(modifier = Modifier.offset(x=25.dp).clickable {
+                            context.startActivity(intent)
+                        }, shape = RoundedCornerShape(100.dp), contentColor = Color.Red, backgroundColor = Color(
                             231,
                             63,
                             63,

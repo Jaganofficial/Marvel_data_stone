@@ -76,10 +76,14 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                         Card(modifier = Modifier
                             .fillMaxWidth()
                             .height(60.dp)
-                            .padding(horizontal = 24.dp, vertical = 5.dp), shape = RoundedCornerShape(25.dp), backgroundColor = Color.White) {
-                            Row(horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically) {
-                                Text(text = "Search all 27,000 Marvel comics", textAlign = TextAlign.Center, style = TextStyle(color = Color.Gray, fontSize = 14.sp))
+                            .padding(horizontal = 24.dp, vertical = 5.dp).clickable {
+                                                                                    navController.navigate(MarvelDataScreens.SearchScreen.name)
+                            }, shape = RoundedCornerShape(25.dp), backgroundColor = Color.White) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Spacer(modifier = Modifier.width(15.dp))
                                 Image(imageVector = Icons.Default.Search, contentDescription ="Books Search Image", modifier = Modifier.size(40.dp))
+                                Spacer(modifier = Modifier.width(5.dp))
+                                Text(text = "Search all 27,000 Marvel comics", textAlign = TextAlign.Center, style = TextStyle(color = Color.Gray, fontSize = 16.sp))
                             }
                         }
                         Spacer(modifier = Modifier.height(25.dp))
@@ -178,8 +182,8 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     title = title.subSequence(0, 24).toString() + "..."
                                 if (it.creators.items.isNotEmpty())
                                     writter = it.creators.items[0].name
-                                if (writter.length > 26)
-                                    writter = writter.substring(0, 25).toString() + "..."
+                                if (writter.length > 16)
+                                    writter = writter.substring(0, 15).toString() + "..."
 
                                 if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
@@ -230,8 +234,8 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     title=title.subSequence(0,24).toString()+"..."
                                 if(it.creators.items.isNotEmpty())
                                     writter=it.creators.items[0].name
-                                if(writter.length>26)
-                                    writter=writter.substring(0,25).toString()+"..."
+                                if(writter.length>16)
+                                    writter=writter.substring(0,15).toString()+"..."
 
                                 if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
                                     price= "$ "+it.prices[0].price
@@ -385,8 +389,8 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     title=title.subSequence(0,24).toString()+"..."
                                 if(it.creators.items.isNotEmpty())
                                     writter=it.creators.items[0].name
-                                if(writter.length>26)
-                                    writter=writter.substring(0,25).toString()+"..."
+                                if(writter.length>16)
+                                    writter=writter.substring(0,15).toString()+"..."
 
                                 if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
                                     price= "$ "+it.prices[0].price
@@ -427,8 +431,8 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     title=title.subSequence(0,24).toString()+"..."
                                 if(it.creators.items.isNotEmpty())
                                     writter=it.creators.items[0].name
-                                if(writter.length>26)
-                                    writter=writter.substring(0,25).toString()+"..."
+                                if(writter.length>16)
+                                    writter=writter.substring(0,15).toString()+"..."
 
                                 if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
                                     price= "$ "+it.prices[0].price
@@ -579,8 +583,8 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                         title=title.subSequence(0,24).toString()+"..."
                                     if(it.creators.items.isNotEmpty())
                                         writter=it.creators.items[0].name
-                                    if(writter.length>26)
-                                        writter=writter.substring(0,25).toString()+"..."
+                                    if(writter.length>16)
+                                        writter=writter.substring(0,15).toString()+"..."
 
                                     if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
                                         price= "$ "+it.prices[0].price
@@ -629,8 +633,8 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     title = title.subSequence(0, 24).toString() + "..."
                                 if (it.creators.items.isNotEmpty())
                                     writter = it.creators.items[0].name
-                                if (writter.length > 26)
-                                    writter = writter.substring(0, 25).toString() + "..."
+                                if (writter.length > 16)
+                                    writter = writter.substring(0, 15).toString() + "..."
 
                                 if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
@@ -862,8 +866,8 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     title=title.subSequence(0,24).toString()+"..."
                                 if(it.creators.items.isNotEmpty())
                                     writter=it.creators.items[0].name
-                                if(writter.length>26)
-                                    writter=writter.substring(0,25).toString()+"..."
+                                if(writter.length>16)
+                                    writter=writter.substring(0,15).toString()+"..."
 
                                 if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
                                     price= "$ "+it.prices[0].price
@@ -904,8 +908,8 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     title = title.subSequence(0, 24).toString() + "..."
                                 if (it.creators.items.isNotEmpty())
                                     writter = it.creators.items[0].name
-                                if (writter.length > 26)
-                                    writter = writter.substring(0, 25).toString() + "..."
+                                if (writter.length > 16)
+                                    writter = writter.substring(0, 15).toString() + "..."
 
                                 if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
@@ -1054,8 +1058,8 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     title=title.subSequence(0,24).toString()+"..."
                                 if(it.creators.items.isNotEmpty())
                                     writter=it.creators.items[0].name
-                                if(writter.length>26)
-                                    writter=writter.substring(0,25).toString()+"..."
+                                if(writter.length>16)
+                                    writter=writter.substring(0,15).toString()+"..."
 
                                 if(it.prices.isNotEmpty() &&""+it.prices[0].price!="0.0")
                                     price= "$ "+it.prices[0].price
@@ -1097,8 +1101,8 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     title = title.subSequence(0, 24).toString() + "..."
                                 if (it.creators.items.isNotEmpty())
                                     writter = it.creators.items[0].name
-                                if (writter.length > 26)
-                                    writter = writter.substring(0, 25).toString() + "..."
+                                if (writter.length > 16)
+                                    writter = writter.substring(0, 15).toString() + "..."
 
                                 if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price

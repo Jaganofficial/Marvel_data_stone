@@ -235,7 +235,18 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
             }
         }
 
-        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters)
+        val dataurl:String
+        if(clist!!.urls.isNullOrEmpty())
+        {
+            dataurl="https://www.marvel.com/comics"
+        }
+        else
+        {
+            dataurl=clist!!.urls[0].url
+        }
+
+
+        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters, dataUrl = dataurl)
     }
     else if(hclist!=null)
     {
@@ -367,7 +378,17 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
             }
         }
 
-        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters)
+        val dataurl:String
+        if(hclist!!.urls.isNullOrEmpty())
+        {
+            dataurl="https://www.marvel.com/comics"
+        }
+        else
+        {
+            dataurl=hclist!!.urls[0].url
+        }
+
+        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters, dataUrl = dataurl)
     }
     else if(inlist!=null)
     {
@@ -412,7 +433,7 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
             price= "$$priceD"
         }
 
-        var description=if(inlist!!.description.isNullOrEmpty())
+        var description=if(inlist!!.description.isEmpty())
         {
             "The latest entry in Marvel's $title OF series is no small matter! It's filled with full of Surprises. Click the Buy Now Button to Read More"
         }
@@ -430,9 +451,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
         }
 
         date=givendate.split("T")[0]
-        var fdate = LocalDate.parse(date)
-        var formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy")
-        var formattedDate = fdate.format(formatter)
+        val fdate = LocalDate.parse(date)
+        val formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy")
+        val formattedDate = fdate.format(formatter)
 
         // language
         val language=if(inlist!!.textObjects.isNullOrEmpty())
@@ -466,7 +487,7 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
 
 
         //Creators
-        var creators = mutableListOf<String>()
+        val creators = mutableListOf<String>()
         if(inlist!!.creators.items.isNullOrEmpty())
         {
             creators.add("")
@@ -474,7 +495,7 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
         }
         else
         {
-            var cl=inlist!!.creators.items
+            val cl=inlist!!.creators.items
             for(i in cl)
             {
                 creators.add("${i.name}\nRole: ${i.role}")
@@ -483,7 +504,7 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
 
 
         //Characters
-        var characters = mutableListOf<String>()
+        val characters = mutableListOf<String>()
         if(inlist!!.characters.items.isNullOrEmpty())
         {
             characters.add("")
@@ -491,14 +512,24 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
         }
         else
         {
-            var crl=inlist!!.characters.items
+            val crl=inlist!!.characters.items
             for(i in crl)
             {
                 characters.add(i.name)
             }
         }
 
-        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters)
+        val dataurl:String
+        if(inlist!!.urls.isNullOrEmpty())
+        {
+            dataurl="https://www.marvel.com/comics"
+        }
+        else
+        {
+            dataurl=inlist!!.urls[0].url
+        }
+
+        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters, dataUrl = dataurl)
     }
     else if(tpblist!=null)
     {
@@ -629,7 +660,17 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
             }
         }
 
-        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters)
+        val dataurl:String
+        if(tpblist!!.urls.isNullOrEmpty())
+        {
+            dataurl="https://www.marvel.com/comics"
+        }
+        else
+        {
+            dataurl=tpblist!!.urls[0].url
+        }
+
+        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters, dataUrl = dataurl)
     }
     else if(dlist!=null)
     {
@@ -759,8 +800,20 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
                 characters.add(i.name)
             }
         }
+//url
+        val dataurl:String
+        if(dlist!!.urls.isNullOrEmpty())
+        {
+            dataurl="https://www.marvel.com/comics"
+        }
+        else
+        {
+            dataurl=dlist!!.urls[0].url
+        }
 
-        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters)
+
+
+        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters, dataUrl = dataurl)
     }
     else if(gnlist!=null)
     {
@@ -859,7 +912,7 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
 
 
         //Creators
-        var creators = mutableListOf<String>()
+        val creators = mutableListOf<String>()
         if(gnlist!!.creators.items.isNullOrEmpty())
         {
             creators.add("")
@@ -867,7 +920,7 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
         }
         else
         {
-            var cl=gnlist!!.creators.items
+            val cl=gnlist!!.creators.items
             for(i in cl)
             {
                 creators.add("${i.name}\nRole: ${i.role}")
@@ -876,7 +929,7 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
 
 
         //Characters
-        var characters = mutableListOf<String>()
+        val characters = mutableListOf<String>()
         if(gnlist!!.characters.items.isNullOrEmpty())
         {
             characters.add("")
@@ -884,13 +937,26 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel) {
         }
         else
         {
-            var crl=gnlist!!.characters.items
+            val crl=gnlist!!.characters.items
             for(i in crl)
             {
                 characters.add(i.name)
             }
         }
-        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters)
+
+
+        //url
+        var dataurl:String
+        if(gnlist!!.urls.isNullOrEmpty())
+        {
+            dataurl="https://www.marvel.com/comics"
+        }
+        else
+        {
+            dataurl=gnlist!!.urls[0].url
+        }
+
+        BooksInfoCard(painter = painter, title = title, pageCount = ""+pageCount,formate=format, price = price,actualPrice=actualPrice, description = description, date = formattedDate, language = language, painters = painters, creators = creators, characters = characters, dataUrl = dataurl)
     }
     else{
         Surface(modifier = Modifier.fillMaxSize()) {
