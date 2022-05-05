@@ -120,7 +120,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                         style = TextStyle(
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colors.secondary
+                            color = MaterialTheme.colors.primaryVariant
                         )
                     )
                     Text(
@@ -231,6 +231,13 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                 {
                     if(!booksViewModel.infiniteNavelList.collectAsState().value.isNullOrEmpty())
                     {
+                        val infiniteNovelData =
+                            produceState<DataOrException<InfiniteNovelData, Boolean, Exception>>(
+                                initialValue = DataOrException(loading = true)
+                            ) {
+                                value = booksViewModel.getInfiniteComic()
+                            }.value
+
                         val list = booksViewModel.infiniteNavelList.collectAsState().value[0].data.results
                         LazyRow()
                         {
@@ -283,7 +290,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                 Row(modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "HardCover", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.secondary))
+                    Text(text = "HardCover", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.primaryVariant))
                     Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)),modifier = Modifier.clickable {
                         navController.navigate(MarvelDataScreens.ShowAllHardCover.name)
                     })
@@ -437,7 +444,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                 Row(modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Trade PaperBack", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.secondary))
+                    Text(text = "Trade PaperBack", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.primaryVariant))
                     Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)),modifier = Modifier.clickable {
                         navController.navigate(MarvelDataScreens.ShowAllTradePaperBook.name)
                     })
@@ -590,7 +597,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                 Row(modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Digest", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.secondary))
+                    Text(text = "Digest", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.primaryVariant))
                     Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)),modifier = Modifier.clickable {
                         navController.navigate(MarvelDataScreens.ShowAllDigest.name)
                     })
@@ -745,7 +752,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                 Row(modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Graphic Novel", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.secondary))
+                    Text(text = "Graphic Novel", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colors.primaryVariant))
                     Text(text = "See All", style = TextStyle(fontSize = 21.sp, fontWeight = FontWeight.Bold, color = Color(23, 212, 252)),modifier = Modifier.clickable {
                         navController.navigate(MarvelDataScreens.ShowAllGraphicNovel.name)
                     })

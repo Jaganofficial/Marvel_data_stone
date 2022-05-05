@@ -1,4 +1,4 @@
-package com.example.marveldatastone
+package com.example.marveldatastone.repository.DataStore
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

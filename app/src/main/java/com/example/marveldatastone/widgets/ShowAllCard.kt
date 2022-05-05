@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -46,7 +47,7 @@ fun ShowAllCard(painter: Painter,title:String,writer:String,price:String,modifie
                     Image(painter = painter, contentDescription = "$title Image", contentScale = ContentScale.Crop)
                 }
                 Column() {
-                    Text(text = title, style = TextStyle(Color.Black, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold), modifier = Modifier.padding(vertical = 10.dp, horizontal = 5.dp))
+                    Text(text = title, style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold), modifier = Modifier.padding(vertical = 10.dp, horizontal = 5.dp))
                     Text(text = writer,style = TextStyle(Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(vertical = 10.dp, horizontal = 5.dp))
                     Text(
                         text = "Price: $price",

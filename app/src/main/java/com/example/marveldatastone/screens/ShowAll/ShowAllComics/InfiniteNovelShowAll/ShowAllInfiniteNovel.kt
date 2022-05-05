@@ -48,7 +48,7 @@ fun ShowAllInfiniteNovel(showAllInfiniteNovelViewModel: ShowAllInfiniteNovelView
                     append("Infinite")
                 }
                 append(" Comics")
-            }, color = MaterialTheme.colors.onSecondary, fontSize=35.sp, fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.ExtraBold)
+            }, color = MaterialTheme.colors.primaryVariant, fontSize=35.sp, fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.ExtraBold)
 
             Spacer(modifier = Modifier.height(15.dp))
             var list= emptyList<Result>()

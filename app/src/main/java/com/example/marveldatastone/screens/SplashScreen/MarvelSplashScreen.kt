@@ -43,7 +43,7 @@ fun MarvelSplashScreen(navController: NavController) {
 
 
     Surface(modifier = Modifier.fillMaxSize(), color = Color.Black) {
-        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
             Surface() {
                 Image(painter = painterResource(id = R.drawable.splashscreen6), contentDescription ="Logo", contentScale = ContentScale.Fit)
             }

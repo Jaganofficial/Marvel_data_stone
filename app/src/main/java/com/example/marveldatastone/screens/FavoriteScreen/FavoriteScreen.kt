@@ -50,11 +50,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
 )),showAllComicsViewModel: ShowAllComicsViewModel,sharedViewModel: SharedViewModel,showAllHardCoverViewModel: ShowAllHardCoverViewModel,showAllInfiniteNovelViewModel: ShowAllInfiniteNovelViewModel,showAllTradePaperBackViewModel: ShowAllTradePaperBackViewModel,showAllDigestViewModel: ShowAllDigestViewModel,showAllGraphicNovelViewModel: ShowAllGraphicNovelViewModel) {
 
     //DataStore
-    val context = LocalContext.current
-    val dataStoreRepository: DataStoreRepository =
-        DataStoreRepository.getDataStoreInstence(context = context)
     val getId = dataStoreRepositoryViewModel.favorites.observeAsState().value
-    val scope = rememberCoroutineScope()
 
 
     val scrollState = rememberScrollState()
@@ -77,7 +73,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                             append("Favorites")
                         }
                     },
-                    color = MaterialTheme.colors.onSecondary,
+                    color = MaterialTheme.colors.primaryVariant,
                     fontSize = 35.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.ExtraBold
@@ -106,7 +102,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                             style = TextStyle(
                                 fontSize = 24.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colors.onSecondary
+                                color = MaterialTheme.colors.primaryVariant
                             )
                         )
                     }
@@ -180,7 +176,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                             style = TextStyle(
                                 fontSize = 24.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colors.onSecondary
+                                color = MaterialTheme.colors.primaryVariant
                             )
                         )
                     }
@@ -254,7 +250,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                             style = TextStyle(
                                 fontSize = 24.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colors.onSecondary
+                                color = MaterialTheme.colors.primaryVariant
                             )
                         )
                     }
@@ -325,7 +321,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                             style = TextStyle(
                                 fontSize = 24.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colors.onSecondary
+                                color = MaterialTheme.colors.primaryVariant
                             )
                         )
                     }
@@ -397,7 +393,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                             style = TextStyle(
                                 fontSize = 24.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colors.onSecondary
+                                color = MaterialTheme.colors.primaryVariant
                             )
                         )
                     }
@@ -468,7 +464,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                             style = TextStyle(
                                 fontSize = 24.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colors.onSecondary
+                                color = MaterialTheme.colors.primaryVariant
                             )
                         )
                     }

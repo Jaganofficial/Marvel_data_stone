@@ -178,9 +178,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
 
             //Related Images
             val painters:List<Painter>
-            var imagelist = mutableListOf<Painter>()
+            val imagelist = mutableListOf<Painter>()
             if(clist!!.images.isNullOrEmpty()) {
-                imagelist= emptyList<Painter>() as MutableList<Painter>
+                //imagelist= emptyList<Painter>() as MutableList<Painter>
             } else {
                 val l=clist!!.images
                 for(i: com.example.marveldatastone.model.CharacterModels.ComicsModels.Image in l) {
@@ -290,9 +290,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
 
             //Related Images
             val painters:List<Painter>
-            var imagelist = mutableListOf<Painter>()
+            val imagelist = mutableListOf<Painter>()
             if(hclist!!.images.isNullOrEmpty()) {
-                imagelist= emptyList<Painter>() as MutableList<Painter>
+                //imagelist= emptyList<Painter>() as MutableList<Painter>
             } else {
                 val l=hclist!!.images
                 for(i: Image in l) {
@@ -400,9 +400,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
 
             //Related Images
             val painters:List<Painter>
-            var imagelist = mutableListOf<Painter>()
+            val imagelist = mutableListOf<Painter>()
             if(inlist!!.images.isNullOrEmpty()) {
-                imagelist= emptyList<Painter>() as MutableList<Painter>
+                //imagelist= emptyList<Painter>() as MutableList<Painter>
             } else {
                 val l=inlist!!.images
                 for(i: com.example.marveldatastone.model.CharacterModels.InfiniteNovel.Image in l) {
@@ -511,9 +511,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
 
             //Related Images
             val painters:List<Painter>
-            var imagelist = mutableListOf<Painter>()
+            val imagelist = mutableListOf<Painter>()
             if(tpblist!!.images.isNullOrEmpty()) {
-                imagelist= emptyList<Painter>() as MutableList<Painter>
+                //imagelist= emptyList<Painter>() as MutableList<Painter>
             } else {
                 val l=tpblist!!.images
                 for(i: com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.Image in l) {
@@ -622,7 +622,7 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
             val painters:List<Painter>
             var imagelist = mutableListOf<Painter>()
             if(dlist!!.images.isNullOrEmpty()) {
-                imagelist= emptyList<Painter>() as MutableList<Painter>
+                //imagelist=MutableList<Painter>
             } else {
                 val l=dlist!!.images
                 for(i: com.example.marveldatastone.model.CharacterModels.Digest.Image in l) {
@@ -732,9 +732,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
 
             //Related Images
             val painters:List<Painter>
-            var imagelist = mutableListOf<Painter>()
+            val imagelist = mutableListOf<Painter>()
             if(gnlist!!.images.isNullOrEmpty()) {
-                imagelist= emptyList<Painter>() as MutableList<Painter>
+                //imagelist= emptyList<Painter>() as MutableList<Painter>
             } else {
                 val l=gnlist!!.images
                 for(i: com.example.marveldatastone.model.CharacterModels.GraphicNovel.Image in l) {

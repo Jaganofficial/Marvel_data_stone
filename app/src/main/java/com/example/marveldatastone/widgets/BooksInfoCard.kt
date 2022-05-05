@@ -208,47 +208,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                                             })
                                 }
                             }
-
-
-
-
-//                            if(!ID.isNullOrEmpty() && ID.contains(bookId))
-//                                favoriteCheck.value=true
-//
-//                            if (favoriteCheck.value) {
-//                                Icon(
-//                                    imageVector = Icons.Default.Favorite,
-//                                    contentDescription = "Favorites",
-//                                    tint = Color.Red,
-//                                    modifier = Modifier
-//                                        .size(34.dp)
-//                                        .clickable {
-//                                            if (ID != null && ID.contains(bookId)) {
-//                                            scope.launch {
-//                                                    dataStoreRepository.deleteFavorites(
-//                                                        bookid = bookId,
-//                                                        ID = ID
-//                                                    )
-//                                                }
-//                                            }
-//                                            favoriteCheck.value= false
-//                                        })
-//                            } else {
-//                                Icon(
-//                                    imageVector = Icons.Default.FavoriteBorder,
-//                                    contentDescription = "Favorites",
-//                                    tint = Color.White,
-//                                    modifier = Modifier
-//                                        .size(35.dp)
-//                                        .clickable {
-//                                            scope.launch {
-//                                                dataStoreRepository.setFavorites(id = "$ID,$bookId")
-//                                                favoriteCheck.value=true
-//                                            }
-//                                        })
-//                            }
                         }
-
                     }
                 }
             }
@@ -256,7 +216,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
             Column(modifier = Modifier.padding(horizontal = 25.dp)) {
 
                 //Title
-                Text(text = title, style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 21.sp,))
+                Text(text = title, style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 21.sp, color = MaterialTheme.colors.primaryVariant))
 
                 //PageCount
                 Row(modifier = Modifier.padding(vertical = 10.dp)) {
@@ -298,7 +258,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                     mutableStateOf(false)
                 }
                 //Description
-                Text(text = "Description", style = TextStyle( fontWeight = FontWeight.Bold, fontSize = 19.sp,))
+                Text(text = "Description", style = TextStyle( fontWeight = FontWeight.Bold, fontSize = 19.sp, color = MaterialTheme.colors.primaryVariant))
                 Spacer(modifier = Modifier.height(5.dp))
 
                 if(description.length>100 && !readMoreDescription.value)
@@ -324,12 +284,12 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
 
                 Divider(modifier = Modifier.padding(vertical = 15.dp))
 
-                Text(text = "Release date", style = TextStyle( fontSize = 19.sp))
+                Text(text = "Release date", style = TextStyle( fontSize = 19.sp, color = MaterialTheme.colors.primaryVariant))
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(text = date, style = TextStyle(color = Color.Gray, fontSize = 17.sp))
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text(text = "Language", style = TextStyle( fontSize = 19.sp))
+                Text(text = "Language", style = TextStyle( fontSize = 19.sp, color = MaterialTheme.colors.primaryVariant))
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(text = language.uppercase(Locale.getDefault()), style = TextStyle(color = Color.Gray, fontSize = 17.sp))
 
@@ -340,7 +300,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
 
             }
 
-            Text(text = "Related Images", style = TextStyle( fontSize = 19.sp, fontWeight = FontWeight.SemiBold), modifier = Modifier.padding(15.dp))
+            Text(text = "Related Images", style = TextStyle( fontSize = 19.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colors.primaryVariant), modifier = Modifier.padding(15.dp))
             if(painters.isEmpty())
             {
                 Text(text = "No preview Available", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(25.dp))
@@ -362,7 +322,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
             }
 
 
-            Text(text = "Creators ", style = TextStyle( fontSize = 19.sp, fontWeight = FontWeight.SemiBold), modifier = Modifier.padding(15.dp))
+            Text(text = "Creators ", style = TextStyle( fontSize = 19.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colors.primaryVariant), modifier = Modifier.padding(15.dp))
             if(creators.isNullOrEmpty())
             {
                 Text(text = "Marvel", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(25.dp))
@@ -398,7 +358,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
 
             //Characters
 
-            Text(text = "Characters ", style = TextStyle( fontSize = 19.sp, fontWeight = FontWeight.SemiBold), modifier = Modifier.padding(15.dp))
+            Text(text = "Characters ", style = TextStyle( fontSize = 19.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colors.primaryVariant), modifier = Modifier.padding(15.dp))
             if(characters.isNullOrEmpty())
             {
                 Text(text = "No details available", style = TextStyle(color = Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(25.dp))

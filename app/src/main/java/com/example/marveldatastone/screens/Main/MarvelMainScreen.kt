@@ -134,7 +134,7 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
                 style = TextStyle(
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colors.onSecondary
+                    color = MaterialTheme.colors.primaryVariant
                 )
             )
             Text(
@@ -247,7 +247,7 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
                 {
                     Box(modifier = Modifier.fillMaxWidth().padding(15.dp))
                     {
-                        Text(text = "Oops! Something went wrong! Please check your internet connectivity", textAlign = TextAlign.Center)
+                        Text(text = "Oops! Something went wrong! Please check your internet connectivity", textAlign = TextAlign.Center, color = MaterialTheme.colors.primaryVariant)
                     }
                 }
             }
