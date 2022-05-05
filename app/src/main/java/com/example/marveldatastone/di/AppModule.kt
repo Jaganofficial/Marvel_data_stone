@@ -6,6 +6,8 @@ import com.example.marveldatastone.data.Characters.CharacterDao
 import com.example.marveldatastone.data.Characters.MarvelCharacterDataBase
 import com.example.marveldatastone.data.ComicsDao.*
 import com.example.marveldatastone.network.MarvelAPI
+import com.example.marveldatastone.repository.DataStore.DataStoreRepository
+import com.example.marveldatastone.utils.Character_TypeConverters.DataStoreTypeConverter
 import com.example.marveldatastone.utils.Constents
 import dagger.Module
 import dagger.Provides
@@ -21,6 +23,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
+
+    //MarvelAPI Provider
     @Provides
     @Singleton
     fun provideOpenMarvelAPI():MarvelAPI
@@ -68,6 +72,7 @@ class AppModule {
     @Provides
     fun createCharacterDatabase(@ApplicationContext context: Context): MarvelCharacterDataBase =
         Room.databaseBuilder(context, MarvelCharacterDataBase::class.java,"Character_Database").fallbackToDestructiveMigration().build()
+
 
 
 }

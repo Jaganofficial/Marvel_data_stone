@@ -25,10 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.marveldatastone.model.CharacterModels.InfiniteNovel.Result
 import com.example.marveldatastone.navigation.MarvelDataScreens
 import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
-import com.example.marveldatastone.screens.ShowAll.ShowAllComics.InfiniteNovelShowAll.ShowAllInfiniteNovelViewModel
 import com.example.marveldatastone.widgets.ShowAllCard
 
 
@@ -63,15 +61,15 @@ fun ShowAllGraphicNovel(showAllGraphicNovelViewModel: ShowAllGraphicNovelViewMod
                 {
                     items(list)
                     {
-                        var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                        val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
                         val painter = rememberAsyncImagePainter(model = url)
-                        var title = it.title
+                        val title = it.title
                         var writter = "Marvel"
                         var price = "Free"
                         if (it.creators.items.isNotEmpty())
                             writter = it.creators.items[0].name
                         if (writter.length > 26)
-                            writter = writter.substring(0, 25).toString() + "..."
+                            writter = writter.substring(0, 25)+ "..."
                         if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
                             price = "$" + it.prices[0].price
                         ShowAllCard(

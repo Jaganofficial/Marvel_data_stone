@@ -62,9 +62,9 @@ fun ShowAllHardCover(showAllHardCoverViewModel: ShowAllHardCoverViewModel, share
                 {
                     items(list)
                     {
-                        var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                        val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
                         val painter = rememberAsyncImagePainter(model = url)
-                        var title = it.title
+                        val title = it.title
                         var writter = "Marvel"
                         var price = "Free"
                         if (it.creators.items.isNotEmpty())

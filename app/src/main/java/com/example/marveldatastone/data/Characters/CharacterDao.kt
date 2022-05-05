@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CharacterDao {
 
+    // Get Character From DB
     @Query("SELECT * from Marvel_Character_Data")
     fun getCharacterDatafromDB(): Flow<List<MarvelCharacterData>>
 

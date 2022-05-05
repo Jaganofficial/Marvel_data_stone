@@ -14,7 +14,7 @@
         android:name=".MarvelDataApplication">
         <activity
 
-            android:name=".MainActivity"
+            android:name=".components.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MarvelDataStone">

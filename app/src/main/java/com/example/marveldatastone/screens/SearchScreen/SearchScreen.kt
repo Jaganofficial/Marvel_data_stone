@@ -39,16 +39,9 @@ fun SearchScreen(searchAllComicsViewModel: SearchScreenViewModel, sharedViewMode
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
 
-            var searchText = remember{
+            val searchText = remember{
                 mutableStateOf("")
             }
-            //Search Bar
-//           TextField(value = searchText.value, onValueChange = {
-//
-//           }, modifier = Modifier
-//               .fillMaxWidth()
-//               .height(145.dp)
-//               .padding(25.dp), textStyle = TextStyle(color=Color.Black))
             Spacer(modifier = Modifier.height(10.dp))
             Card(modifier = Modifier
                 .fillMaxWidth()
@@ -82,9 +75,9 @@ fun SearchScreen(searchAllComicsViewModel: SearchScreenViewModel, sharedViewMode
                         it.title.lowercase(Locale.getDefault()).contains(searchText.value.lowercase(Locale.getDefault()))
                     })
                     {
-                        var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                        val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
                         val painter = rememberAsyncImagePainter(model = url)
-                        var title = it.title
+                        val title = it.title
                         var writter = "Marvel"
                         var price = "Free"
                         if (it.creators.items.isNotEmpty())

@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ImageCard(modifier: Modifier, title:String, painter: Painter,desc:String,fontsize:Int,writer:String) {
     Column() {
-        Surface(modifier = Modifier.padding(horizontal = 15.dp)) {
+        Card(modifier = Modifier.padding(horizontal = 15.dp), elevation = 15.dp) {
             Card(modifier = modifier, elevation = 25.dp, shape = RoundedCornerShape(12.dp)) {
                 Box(modifier = Modifier.fillMaxSize())
                 {

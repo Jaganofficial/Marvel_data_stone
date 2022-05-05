@@ -40,6 +40,13 @@ fun MarvelDataNavigation(navController: NavHostController) {
 
     //Shared View Model
     val sharedViewModel: SharedViewModel= viewModel()
+    val showAllComicsViewModel= hiltViewModel<ShowAllComicsViewModel>()
+    val showAllInfiniteNovelViewModel= hiltViewModel<ShowAllInfiniteNovelViewModel>()
+    val showAllHardCoverViewModel= hiltViewModel<ShowAllHardCoverViewModel>()
+    val showAllTradePaperBackViewModel= hiltViewModel<ShowAllTradePaperBackViewModel>()
+    val showAllDigestViewModel= hiltViewModel<ShowAllDigestViewModel>()
+    val showAllGraphicNovelViewModel= hiltViewModel<ShowAllGraphicNovelViewModel>()
+
 
     NavHost(navController = navController, 
             startDestination = MarvelDataScreens.SplashScreen.name ){
@@ -66,10 +73,10 @@ fun MarvelDataNavigation(navController: NavHostController) {
         //FavoriteScreen
         composable(MarvelDataScreens.FavoriteScreen.name)
         {
-            FavoriteScreen(navController = navController)
+            FavoriteScreen(navController = navController, sharedViewModel = sharedViewModel, showAllComicsViewModel = showAllComicsViewModel, showAllInfiniteNovelViewModel = showAllInfiniteNovelViewModel, showAllHardCoverViewModel = showAllHardCoverViewModel, showAllTradePaperBackViewModel = showAllTradePaperBackViewModel, showAllDigestViewModel = showAllDigestViewModel, showAllGraphicNovelViewModel = showAllGraphicNovelViewModel)
         }
 
-        //
+        //ComicsSearch
         composable(MarvelDataScreens.ComicsSearchScreen.name)
         {
             ComicsSearch()
@@ -83,42 +90,36 @@ fun MarvelDataNavigation(navController: NavHostController) {
 
         composable(MarvelDataScreens.ShowAllComics.name)
         {
-            val showAllComicsViewModel= hiltViewModel<ShowAllComicsViewModel>()
             ShowAllComics(showAllComicsViewModel,sharedViewModel, navController = navController)
         }
 
         composable(MarvelDataScreens.BooksInfoScreen.name)
         {
-            BooksInfoScreen(sharedViewModel = sharedViewModel)
+            BooksInfoScreen(sharedViewModel = sharedViewModel, navController = navController)
         }
 
         composable(MarvelDataScreens.ShowAllInfiniteComics.name)
         {
-            val showAllInfiniteNovelViewModel= hiltViewModel<ShowAllInfiniteNovelViewModel>()
-            ShowAllInfiniteNovel(showAllInfiniteNovelViewModel,sharedViewModel, navController = navController)
+            ShowAllInfiniteNovel(showAllInfiniteNovelViewModel,sharedViewModel, navController = navController, showeAllHardCoverViewModel = showAllHardCoverViewModel)
         }
 
         composable(MarvelDataScreens.ShowAllHardCover.name)
         {
-            val showAllHardCoverViewModel= hiltViewModel<ShowAllHardCoverViewModel>()
             ShowAllHardCover(showAllHardCoverViewModel,sharedViewModel, navController = navController)
         }
 
         composable(MarvelDataScreens.ShowAllTradePaperBook.name)
         {
-            val showAllTradePaperBackViewModel= hiltViewModel<ShowAllTradePaperBackViewModel>()
             ShowAllTradePaperBack(showAllTradePaperBackViewModel,sharedViewModel, navController = navController)
         }
 
         composable(MarvelDataScreens.ShowAllDigest.name)
         {
-            val showAllDigestViewModel= hiltViewModel<ShowAllDigestViewModel>()
             ShowAllDigest(showAllDigestViewModel,sharedViewModel, navController = navController)
         }
 
         composable(MarvelDataScreens.ShowAllGraphicNovel.name)
         {
-            val showAllGraphicNovelViewModel= hiltViewModel<ShowAllGraphicNovelViewModel>()
             ShowAllGraphicNovel(showAllGraphicNovelViewModel,sharedViewModel, navController = navController)
         }
 

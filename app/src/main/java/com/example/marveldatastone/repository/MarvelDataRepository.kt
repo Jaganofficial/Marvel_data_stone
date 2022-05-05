@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.compose.ui.unit.Constraints
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import com.example.marveldatastone.data.Characters.CharacterDao
 import com.example.marveldatastone.data.ComicsDao.*
 import com.example.marveldatastone.data.DataOrException
@@ -27,19 +26,7 @@ import javax.inject.Inject
 import kotlin.Exception
 
 class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, private val characterDao: CharacterDao, private val comicsDao: Comics_Dao, private val digestDao: DigestDao,private val graphicNovelDao: GraphicNovelDao,private val hardCoverDao: HardCoverDao,private val infiniteNovelDao: InfiniteNovelDao,private val tradePaperBackDao: TradePaperBackDao){
-    //Get Character data from api
-    suspend fun getCharacter() : DataOrException<MarvelCharacterData,Boolean,Exception>
-    {
-        val response = try {
-            api.getCharacter()
-        }
-        catch (e:Exception)
-        {
-            return DataOrException(e=e)
-        }
-         //characterDao.insertCharacter(response)
-        return DataOrException(data = response)
-    }
+
 
     //get comic data from api
     suspend fun getComics(): DataOrException<ComicsData,Boolean,Exception>
@@ -134,7 +121,19 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
         return DataOrException(data = response)
     }
 
-
+    //Get Character data from api
+    suspend fun getCharacter() : DataOrException<MarvelCharacterData,Boolean,Exception>
+    {
+        val response = try {
+            api.getCharacter()
+        }
+        catch (e:Exception)
+        {
+            return DataOrException(e=e)
+        }
+        //characterDao.insertCharacter(response)
+        return DataOrException(data = response)
+    }
 
     //From DataBase
     fun getCharacterFromDB(): Flow<List<MarvelCharacterData>>
@@ -147,11 +146,6 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
         return comicsDao.getComicsDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
 
-    /*
-    fun getTradePaperBookFromDB(): Flow<List<TradePaperBookData>>
-    {
-        return tradePaperBackDao.getTradePaperBackDatafromDB().flowOn(Dispatchers.IO).conflate()
-    }*/
 
     fun getTradePaperBookFromDB(): Flow<List<TradePaperBookData>>
     {
@@ -186,15 +180,6 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
     fun getInfiniteComicfromDB(): Flow<List<InfiniteNovelData>>
     {
         return infiniteNovelDao.getInfiniteNovelDatafromDB().flowOn(Dispatchers.IO).conflate()
-    }
-
-    fun saveFavorite()
-    {
-
-    }
-    fun getFavorites()
-    {
-
     }
 
 }

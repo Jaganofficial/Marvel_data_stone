@@ -10,6 +10,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,12 +33,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.marveldatastone.R
+import com.example.marveldatastone.repository.DataStore.DataStoreRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 
 @Composable
-fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,price:String,actualPrice:String,description:String,date:String,language:String,painters:List<Painter>,creators:List<String>,characters:List<String>,dataUrl:String,modifier: Modifier =Modifier) {
+fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,price:String,actualPrice:String,description:String,date:String,language:String,painters:List<Painter>,creators:List<String>,characters:List<String>,dataUrl:String,modifier: Modifier =Modifier,navController: NavController,dataStoreRepository: DataStoreRepository,ID:String?,scope:CoroutineScope,bookId:String) {
     Surface(modifier = modifier) {
         val scrollState= rememberScrollState()
         Column(modifier = Modifier
@@ -43,6 +51,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
             Box(modifier = Modifier
                 .fillMaxWidth()
                 .height(400.dp)){
+
                 Box(modifier = Modifier
                     .fillMaxWidth()
                     .height(250.dp), contentAlignment = Alignment.TopStart)
@@ -56,9 +65,10 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                             .background(
                                 Brush.verticalGradient(
                                     listOf(
+                                        Color.Black,
                                         Color.Transparent,
                                         Color.Black
-                                    ), startY = 100f
+                                    )
                                 )
                             ))
                     }
@@ -75,9 +85,11 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                         val context = LocalContext.current
                         val intent = remember { Intent(Intent.ACTION_VIEW, Uri.parse(url)) }
 
-                        Card(modifier = Modifier.offset(x=25.dp).clickable {
-                            context.startActivity(intent)
-                        }, shape = RoundedCornerShape(100.dp), contentColor = Color.Red, backgroundColor = Color(
+                        Card(modifier = Modifier
+                            .offset(x = 25.dp)
+                            .clickable {
+                                context.startActivity(intent)
+                            }, shape = RoundedCornerShape(100.dp), contentColor = Color.Red, backgroundColor = Color(
                             231,
                             63,
                             63,
@@ -85,6 +97,158 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                         ), elevation = 15.dp) {
                             Text(text = "Buy Now", style = TextStyle(color = Color.White, fontWeight = FontWeight.Bold, fontSize = 21.sp), modifier = Modifier.padding(horizontal = 15.dp, vertical = 5.dp))
                         }
+                    }
+                }
+                Box(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp), contentAlignment = Alignment.TopStart)
+                {
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(15.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween)
+                    {
+
+
+                        Box(modifier = Modifier
+                            .background(
+                                Color.Transparent,
+                                CircleShape
+                            )) {
+                            Icon(imageVector = Icons.Default.ArrowBack, contentDescription ="Back Arrow", tint = Color.White, modifier = Modifier
+                                .size(35.dp)
+                                .clickable {
+                                    navController.popBackStack()
+                                    val id = navController.currentDestination?.id
+                                    navController.popBackStack(id!!,true)
+                                    navController.navigate(id)
+                                })
+                        }
+                        var favoriteCheck= remember {
+                            mutableStateOf(false)
+                        }
+
+                        Box(modifier = Modifier
+                            .size(40.dp)
+                            .background(
+                                Color.Transparent,
+                                CircleShape
+                            )) {
+
+                            if(ID?.contains(bookId) == true)
+                            {
+                                //Border
+                                if (favoriteCheck.value) {
+                                    Icon(
+                                        imageVector = Icons.Default.FavoriteBorder,
+                                        contentDescription = "Favorites",
+                                        tint = Color.White,
+                                        modifier = Modifier
+                                            .size(35.dp)
+                                            .clickable {
+                                                favoriteCheck.value = !favoriteCheck.value
+                                                scope.launch {
+                                                    dataStoreRepository.setFavorites(id = "$ID,$bookId")
+                                                }
+                                            })
+                                } else {
+                                    //Favorite
+                                    Icon(
+                                        imageVector = Icons.Default.Favorite,
+                                        contentDescription = "Favorites",
+                                        tint = Color.Red,
+                                        modifier = Modifier
+                                            .size(34.dp)
+                                            .clickable {
+                                                scope.launch {
+                                                    if (ID != null) {
+                                                        dataStoreRepository.deleteFavorites(
+                                                            bookid = bookId,
+                                                            ID = ID
+                                                        )
+                                                    }
+                                                }
+                                                favoriteCheck.value = !favoriteCheck.value
+                                            })
+                                }
+                            }
+                            else
+                            {
+                                //Border
+                                if (!favoriteCheck.value) {
+                                    Icon(
+                                        imageVector = Icons.Default.FavoriteBorder,
+                                        contentDescription = "Favorites",
+                                        tint = Color.White,
+                                        modifier = Modifier
+                                            .size(35.dp)
+                                            .clickable {
+                                                favoriteCheck.value = !favoriteCheck.value
+                                                scope.launch {
+                                                    dataStoreRepository.setFavorites(id = "$ID,$bookId")
+                                                }
+                                            })
+                                } else {
+                                    //Favorite
+                                    Icon(
+                                        imageVector = Icons.Default.Favorite,
+                                        contentDescription = "Favorites",
+                                        tint = Color.Red,
+                                        modifier = Modifier
+                                            .size(34.dp)
+                                            .clickable {
+                                                scope.launch {
+                                                    if (ID != null) {
+                                                        dataStoreRepository.deleteFavorites(
+                                                            bookid = bookId,
+                                                            ID = ID
+                                                        )
+                                                    }
+                                                }
+                                                favoriteCheck.value = !favoriteCheck.value
+                                            })
+                                }
+                            }
+
+
+
+
+//                            if(!ID.isNullOrEmpty() && ID.contains(bookId))
+//                                favoriteCheck.value=true
+//
+//                            if (favoriteCheck.value) {
+//                                Icon(
+//                                    imageVector = Icons.Default.Favorite,
+//                                    contentDescription = "Favorites",
+//                                    tint = Color.Red,
+//                                    modifier = Modifier
+//                                        .size(34.dp)
+//                                        .clickable {
+//                                            if (ID != null && ID.contains(bookId)) {
+//                                            scope.launch {
+//                                                    dataStoreRepository.deleteFavorites(
+//                                                        bookid = bookId,
+//                                                        ID = ID
+//                                                    )
+//                                                }
+//                                            }
+//                                            favoriteCheck.value= false
+//                                        })
+//                            } else {
+//                                Icon(
+//                                    imageVector = Icons.Default.FavoriteBorder,
+//                                    contentDescription = "Favorites",
+//                                    tint = Color.White,
+//                                    modifier = Modifier
+//                                        .size(35.dp)
+//                                        .clickable {
+//                                            scope.launch {
+//                                                dataStoreRepository.setFavorites(id = "$ID,$bookId")
+//                                                favoriteCheck.value=true
+//                                            }
+//                                        })
+//                            }
+                        }
+
                     }
                 }
             }
@@ -189,7 +353,8 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                     {
                         Card(modifier = Modifier
                             .height(320.dp)
-                            .width(230.dp).padding(15.dp), shape = RoundedCornerShape(15.dp), elevation = 15.dp) {
+                            .width(230.dp)
+                            .padding(15.dp), shape = RoundedCornerShape(15.dp), elevation = 15.dp) {
                             Image(painter = it, contentDescription = "Image", contentScale = ContentScale.Crop)
                         }
                     }
@@ -212,7 +377,8 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Card(modifier = Modifier
                                 .height(100.dp)
-                                .width(100.dp).padding(15.dp), shape = CircleShape, elevation = 15.dp) {
+                                .width(100.dp)
+                                .padding(15.dp), shape = CircleShape, elevation = 15.dp) {
                                 if(it.contains("colorist"))
                                     cid=R.drawable.colorist
                                 else if(it.contains("inker"))

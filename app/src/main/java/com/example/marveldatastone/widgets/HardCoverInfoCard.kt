@@ -39,15 +39,8 @@ import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
 
 @Composable
 fun HardCoverInfoCard(sharedViewModel: SharedViewModel){
-    var scrollState= rememberScrollState()
 
     val list=sharedViewModel.hardCoverResult
-
-    //val infiniteNavellist=sharedViewModel.infiniteNovelResult
-
-    var title by remember {
-        mutableStateOf("")
-    }
 
     var slist by remember {
         mutableStateOf<Result?>(null)
@@ -61,51 +54,6 @@ fun HardCoverInfoCard(sharedViewModel: SharedViewModel){
         }
     }
 
-//    LaunchedEffect(key1 = infiniteNavellist)
-//    {
-//        if(infiniteNavellist!=null)
-//        {
-//            title=infiniteNavellist.title
-//        }
-//    }
     if(slist!=null)
     Text(text = "Title : ${slist!!.title}")
-    /*
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .verticalScroll(scrollState)) {
-        Text(text = "Star Wars Legends: The Empire Omnibus Vol. 1", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.Black, textAlign = TextAlign.Center), modifier = Modifier.padding(10.dp))
-        Row(modifier=Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically)
-        {
-            Card(modifier = Modifier
-                .height(200.dp)
-                .width(150.dp)
-                .padding(10.dp), elevation = 15.dp, shape = RoundedCornerShape(15.dp)) {
-                Image(painter = painterResource(id = R.drawable.marvel_comics), contentDescription = "Image", contentScale = ContentScale.Crop)
-            }
-            Column( modifier = Modifier.fillMaxHeight(),verticalArrangement = Arrangement.SpaceEvenly) {
-                Text(text = "Jeff Youngquist",style= TextStyle(color=Color.Gray, fontSize = 16.sp), modifier = Modifier.padding(10.dp))
-                Row(verticalAlignment = Alignment.CenterVertically)
-                {
-                    Text(text = buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                Color(221, 104, 41, 255),
-                                fontSize = 26.sp,
-                            )
-                        )
-                        {
-                            append("$16.47 ")
-                        }
-                    }, color = Color.White, fontSize=16.sp, fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.ExtraBold, modifier = Modifier.padding(10.dp))
-                    Text(text = "$23.85", style = TextStyle(Color.Gray, fontSize = 16.sp), textDecoration = TextDecoration.LineThrough)
-                }
-                Text(text = "Format: HardCover", style = TextStyle(Color.Gray, fontSize = 16.sp), modifier = Modifier.padding(horizontal = 10.dp))
-            }
-            Spacer(modifier = Modifier.width(15.dp))
-        }
-
-        Divider(modifier = Modifier.padding(10.dp))
-
-    }*/
 }

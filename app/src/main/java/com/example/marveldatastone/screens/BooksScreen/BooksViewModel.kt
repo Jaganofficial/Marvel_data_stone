@@ -87,32 +87,6 @@ class BooksViewModel @Inject constructor(private val repository: MarvelDataRepos
                     _graphicNovelList.value=it
             }
         }
-
-
-
-/*
-        repository.getHardCoverfromDB().distinctUntilChanged().collect(){
-            if(it.isNullOrEmpty())
-                Log.d("BooksScreenViewModel", "Empty Trade paperbook DB")
-            else
-                _hardCoverList.value=it
-        }
-
-        repository.getDigestfromDB().distinctUntilChanged().collect(){
-            if(it.isNullOrEmpty())
-                Log.d("BooksScreenViewModel", "Empty Trade paperbook DB")
-            else
-                _digestList.value=it
-        }
-
-        repository.getGraphicNovelfromDB().distinctUntilChanged().collect(){
-            if(it.isNullOrEmpty())
-                Log.d("BooksScreenViewModel", "Empty Trade paperbook DB")
-            else
-                _graphicNovelList.value=it
-        }
-
-        */
     }
 
 

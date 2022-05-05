@@ -53,23 +53,12 @@ fun MarvelMainScreen(navController: NavController, mainViewModel: MainViewModel,
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedViewModel: SharedViewModel) {
-    //GradelScreen()
-//    Text(
-//        text = "Comics",
-//        modifier = Modifier.padding(vertical = 5.dp, horizontal = 15.dp),
-//        style = TextStyle(color = Color.LightGray, fontWeight = FontWeight.Bold, fontSize = 35.sp)
-//    )
 
 
-    var scrollableState= rememberScrollState()
+    val scrollableState= rememberScrollState()
     Column(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(state = scrollableState), horizontalAlignment = Alignment.CenterHorizontally) {
-
-
-//        SearchBar(modifier = Modifier.clickable {
-//            navController.navigate(MarvelDataScreens.ComicsSearchScreen.name)
-//        })
 
         Card(modifier = Modifier
             .fillMaxWidth()
@@ -120,7 +109,8 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
                     Card(modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp)
-                        .padding(horizontal = 24.dp, vertical = 5.dp).clickable { navController.navigate(MarvelDataScreens.SearchScreen.name) }, shape = RoundedCornerShape(25.dp), backgroundColor = Color.White) {
+                        .padding(horizontal = 24.dp, vertical = 5.dp)
+                        .clickable { navController.navigate(MarvelDataScreens.SearchScreen.name) }, shape = RoundedCornerShape(25.dp), backgroundColor = Color.White) {
                         Row(horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
                             Spacer(modifier = Modifier.width(15.dp))
                             Image(imageVector = Icons.Default.Search, contentDescription ="Books Search Image", modifier = Modifier.size(40.dp))
@@ -170,9 +160,9 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
             {
                 items(list)
                 {
-                    var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                    val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
                     val writers :String
-                    if(it!!.creators.items.isNullOrEmpty())
+                    if(it.creators.items.isNullOrEmpty())
                     {
                         writers="Marvel"
                     }
@@ -229,7 +219,7 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
                             val painter = rememberAsyncImagePainter(model = url)
                             //Creators
                             val writers :String
-                            if(it!!.creators.items.isNullOrEmpty())
+                            if(it.creators.items.isNullOrEmpty())
                             {
                                 writers="Marvel"
                             }
@@ -255,39 +245,14 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
                 }
                 else
                 {
-                    Text(text = "Oops! Something went wrong! Please check your internet connectivity")
+                    Box(modifier = Modifier.fillMaxWidth().padding(15.dp))
+                    {
+                        Text(text = "Oops! Something went wrong! Please check your internet connectivity", textAlign = TextAlign.Center)
+                    }
                 }
             }
             
         }
-
-
-        /*
-        if(mainViewModel.characterList.value.isNullOrEmpty())
-        {
-
-
-        }
-        else
-        {
-            Box() {
-                val list = mainViewModel.characterList.value.get(0).data!!.results
-                LazyRow(modifier = Modifier.fillMaxWidth())
-                {
-                    items(list)
-                    {
-                        var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                        val painter = rememberAsyncImagePainter(model = url)
-                        ImageCard(modifier = Modifier
-                            .height(420.dp)
-                            .width(270.dp), title = it.name+"from DB" , painter = painter , desc ="Image" , fontsize = 22)
-                    }
-                }
-            }
-        }
-
-         */
-        
         Spacer(modifier = Modifier.height(105.dp))
     }
 }
