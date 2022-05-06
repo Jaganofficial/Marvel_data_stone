@@ -38,15 +38,15 @@ import com.example.marveldatastone.widgets.ShowAllComics
 fun MarvelDataNavigation(navController: NavHostController) {
 
 
-    //Shared View Model
-    val sharedViewModel: SharedViewModel= viewModel()
+
     val showAllComicsViewModel= hiltViewModel<ShowAllComicsViewModel>()
     val showAllInfiniteNovelViewModel= hiltViewModel<ShowAllInfiniteNovelViewModel>()
     val showAllHardCoverViewModel= hiltViewModel<ShowAllHardCoverViewModel>()
     val showAllTradePaperBackViewModel= hiltViewModel<ShowAllTradePaperBackViewModel>()
     val showAllDigestViewModel= hiltViewModel<ShowAllDigestViewModel>()
     val showAllGraphicNovelViewModel= hiltViewModel<ShowAllGraphicNovelViewModel>()
-
+    //Shared View Model
+    val sharedViewModel: SharedViewModel= viewModel()
 
     NavHost(navController = navController, 
             startDestination = MarvelDataScreens.SplashScreen.name ){

@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIconDefaults.Text
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.marveldatastone.R
 import com.example.marveldatastone.model.CharacterModels.ComicsModels.ComicsData
 import com.example.marveldatastone.model.CharacterModels.ComicsModels.Result
 import com.example.marveldatastone.navigation.MarvelDataScreens
@@ -64,7 +66,10 @@ fun ShowAllComics(showAllComicsViewModel: ShowAllComicsViewModel, sharedViewMode
                     items(list)
                     {
                         val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                        val painter = rememberAsyncImagePainter(model = url)
+                        val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                            id = R.drawable.preloader
+                        )
+                        )
                         val title = it.title
                         var writter = "Marvel"
                         var price = "Free"

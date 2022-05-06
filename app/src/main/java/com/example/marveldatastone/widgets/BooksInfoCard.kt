@@ -147,7 +147,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                                             .clickable {
                                                 favoriteCheck.value = !favoriteCheck.value
                                                 scope.launch {
-                                                    dataStoreRepository.setFavorites(id = "$ID,$bookId")
+                                                    dataStoreRepository.setFavorites(id = "$ID$bookId,")
                                                 }
                                             })
                                 } else {
@@ -184,7 +184,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                                             .clickable {
                                                 favoriteCheck.value = !favoriteCheck.value
                                                 scope.launch {
-                                                    dataStoreRepository.setFavorites(id = "$ID,$bookId")
+                                                    dataStoreRepository.setFavorites(id = "$ID$bookId,")
                                                 }
                                             })
                                 } else {
@@ -339,12 +339,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                                 .height(100.dp)
                                 .width(100.dp)
                                 .padding(15.dp), shape = CircleShape, elevation = 15.dp) {
-                                if(it.contains("colorist"))
-                                    cid=R.drawable.colorist
-                                else if(it.contains("inker"))
-                                    cid=R.drawable.writer
-                                else
-                                    cid=R.drawable.writers
+                                cid=R.drawable.creators
 
                                 Image(painter = painterResource(id = cid), contentDescription = "Creators", contentScale = ContentScale.Crop)
                             }

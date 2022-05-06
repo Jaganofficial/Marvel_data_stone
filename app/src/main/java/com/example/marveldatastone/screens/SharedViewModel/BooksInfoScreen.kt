@@ -15,12 +15,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.marveldatastone.R
 import com.example.marveldatastone.model.CharacterModels.HardCover.Image
 import com.example.marveldatastone.model.CharacterModels.HardCover.Item
 import com.example.marveldatastone.model.CharacterModels.HardCover.ItemX
@@ -120,7 +122,10 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
     when {
         clist!=null -> {
             val url = "${clist!!.thumbnail.path}.${clist!!.thumbnail.extension}"
-            val painter = rememberAsyncImagePainter(model = url)
+            val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                id = R.drawable.preloader
+            )
+            )
             val title=if(clist!!.title.isEmpty()) {
                 "Marvel Comics"
             } else
@@ -185,7 +190,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
                 val l=clist!!.images
                 for(i: com.example.marveldatastone.model.CharacterModels.ComicsModels.Image in l) {
                     val u = "${i.path}.${i.extension}"
-                    val p = rememberAsyncImagePainter(model = u)
+                    val p = rememberAsyncImagePainter(model = u, placeholder = painterResource(
+                        id = R.drawable.preloader
+                    ))
                     imagelist.add(p)
                 }
                 imagelist.removeAt(0)
@@ -232,7 +239,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
         hclist!=null -> {
             //Text(text = "Title : ${hclist!!.title}"
             val url = "${hclist!!.thumbnail.path}.${hclist!!.thumbnail.extension}"
-            val painter = rememberAsyncImagePainter(model = url)
+            val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                id = R.drawable.preloader
+            ))
             val title=if(hclist!!.title.isEmpty()) {
                 "Marvel Comics"
             } else
@@ -297,7 +306,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
                 val l=hclist!!.images
                 for(i: Image in l) {
                     val u = "${i.path}.${i.extension}"
-                    val p = rememberAsyncImagePainter(model = u)
+                    val p = rememberAsyncImagePainter(model = u, placeholder = painterResource(
+                        id = R.drawable.preloader
+                    ))
                     imagelist.add(p)
                 }
                 imagelist.removeAt(0)
@@ -342,7 +353,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
         }
         inlist!=null -> {
             val url = "${inlist!!.thumbnail.path}.${inlist!!.thumbnail.extension}"
-            val painter = rememberAsyncImagePainter(model = url)
+            val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                id = R.drawable.preloader
+            ))
             val title=if(inlist!!.title.isEmpty()) {
                 "Marvel Comics"
             } else
@@ -407,7 +420,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
                 val l=inlist!!.images
                 for(i: com.example.marveldatastone.model.CharacterModels.InfiniteNovel.Image in l) {
                     val u = "${i.path}.${i.extension}"
-                    val p = rememberAsyncImagePainter(model = u)
+                    val p = rememberAsyncImagePainter(model = u, placeholder = painterResource(
+                        id = R.drawable.preloader
+                    ))
                     imagelist.add(p)
                 }
                 imagelist.removeAt(0)
@@ -453,7 +468,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
         }
         tpblist!=null -> {
             val url = "${tpblist!!.thumbnail.path}.${tpblist!!.thumbnail.extension}"
-            val painter = rememberAsyncImagePainter(model = url)
+            val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                id = R.drawable.preloader
+            ))
             val title=if(tpblist!!.title.isEmpty()) {
                 "Marvel Comics"
             } else
@@ -518,7 +535,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
                 val l=tpblist!!.images
                 for(i: com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.Image in l) {
                     val u = "${i.path}.${i.extension}"
-                    val p = rememberAsyncImagePainter(model = u)
+                    val p = rememberAsyncImagePainter(model = u, placeholder = painterResource(
+                        id = R.drawable.preloader
+                    ))
                     imagelist.add(p)
                 }
                 imagelist.removeAt(0)
@@ -562,7 +581,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
         }
         dlist!=null -> {
             val url = "${dlist!!.thumbnail.path}.${dlist!!.thumbnail.extension}"
-            val painter = rememberAsyncImagePainter(model = url)
+            val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                id = R.drawable.preloader
+            ))
             val title=if(dlist!!.title.isEmpty()) {
                 "Marvel Comics"
             } else
@@ -627,7 +648,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
                 val l=dlist!!.images
                 for(i: com.example.marveldatastone.model.CharacterModels.Digest.Image in l) {
                     val u = "${i.path}.${i.extension}"
-                    val p = rememberAsyncImagePainter(model = u)
+                    val p = rememberAsyncImagePainter(model = u, placeholder = painterResource(
+                        id = R.drawable.preloader
+                    ))
                     imagelist.add(p)
                 }
                 imagelist.removeAt(0)
@@ -674,7 +697,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
         }
         gnlist!=null -> {
             val url = "${gnlist!!.thumbnail.path}.${gnlist!!.thumbnail.extension}"
-            val painter = rememberAsyncImagePainter(model = url)
+            val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                id = R.drawable.preloader
+            ))
             val title=if(gnlist!!.title.isEmpty()) {
                 "Marvel Comics"
             } else
@@ -739,7 +764,9 @@ fun BooksInfoScreen(sharedViewModel: SharedViewModel,navController: NavControlle
                 val l=gnlist!!.images
                 for(i: com.example.marveldatastone.model.CharacterModels.GraphicNovel.Image in l) {
                     val u = "${i.path}.${i.extension}"
-                    val p = rememberAsyncImagePainter(model = u)
+                    val p = rememberAsyncImagePainter(model = u, placeholder = painterResource(
+                        id = R.drawable.preloader
+                    ))
                     imagelist.add(p)
                 }
                 imagelist.removeAt(0)

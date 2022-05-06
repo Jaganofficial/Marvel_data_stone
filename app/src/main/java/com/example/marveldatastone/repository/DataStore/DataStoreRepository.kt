@@ -50,7 +50,7 @@ class DataStoreRepository (context: Context){
         dataStore.edit {
             val index=ID.indexOf(bookid)
             if(index>=0)
-            it[PRF_FAVORITES]=ID.removeRange(index-1,index+bookid.length)
+            it[PRF_FAVORITES]=ID.removeRange(index,index+bookid.length+1)
         }
     }
 
@@ -59,16 +59,5 @@ class DataStoreRepository (context: Context){
         it[PRF_FAVORITES]?:favoritesDefault
     }
 
-//    private val gson = Gson()
-//    private val type: Type = object : TypeToken<List<String>?>() {}.type
-//
-//
-//    fun stringToList(json: String): List<String> {
-//        return gson.fromString(json, type)
-//    }
-//
-//    fun ListToString(data: List<String>): String {
-//        return gson.toJson(data, type)
-//    }
 
 }

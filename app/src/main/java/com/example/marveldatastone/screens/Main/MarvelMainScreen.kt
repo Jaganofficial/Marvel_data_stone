@@ -170,7 +170,9 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
                     {
                         writers=it.creators.items[0].name
                     }
-                    val painter = rememberAsyncImagePainter(model = url)
+                    val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                        id = R.drawable.preloader
+                    ))
                     ImageCard(modifier = Modifier
                         .height(410.dp)
                         .width(250.dp)
@@ -216,7 +218,9 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
                         items(list)
                         {
                             val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                            val painter = rememberAsyncImagePainter(model = url)
+                            val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                                id = R.drawable.preloader
+                            ))
                             //Creators
                             val writers :String
                             if(it.creators.items.isNullOrEmpty())

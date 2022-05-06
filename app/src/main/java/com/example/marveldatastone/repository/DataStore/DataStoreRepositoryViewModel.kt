@@ -26,4 +26,5 @@ class DataStoreRepositoryViewModel (private val dataStoreRepository: DataStoreRe
     {
         dataStoreRepository.setFavorites(id)
     }
+
 }

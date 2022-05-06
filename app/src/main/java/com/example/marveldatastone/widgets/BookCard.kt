@@ -9,11 +9,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImagePainter
+import com.example.marveldatastone.R
 
 @Composable
 fun BookCard(color: Color,painter: AsyncImagePainter,showLoader: Boolean=true,title:String="",price:String="",writter:String="",modifier: Modifier=Modifier) {
@@ -49,9 +51,13 @@ fun BookCard(color: Color,painter: AsyncImagePainter,showLoader: Boolean=true,ti
                                 .width(165.dp), elevation = 15.dp, shape = RoundedCornerShape(12.dp)
                         ) {
                             if (showLoader)
-                                Box(contentAlignment = Alignment.Center, modifier = Modifier.size(25.dp)) {
-                                    CircularProgressIndicator()
-                                }
+                            {
+                                Image(
+                                    painter = painterResource(id = R.drawable.loading),
+                                    contentDescription = "image",
+                                    contentScale = ContentScale.Crop
+                                )
+                            }
                             else {
                                 Image(
                                     painter = painter,

@@ -24,10 +24,10 @@ import kotlin.random.Random
 fun ShowAllCard(painter: Painter,title:String,writer:String,price:String,modifier: Modifier=Modifier) {
 
     val x = remember {
-        mutableStateOf(Random.nextInt(170, 255))
+        mutableStateOf(Random.nextInt(120, 205))
     }
     val y=remember {
-        mutableStateOf(Random.nextInt(170, 255))
+        mutableStateOf(Random.nextInt(120, 205))
     }
     val z=remember {
         mutableStateOf(Random.nextInt(170, 255))
@@ -47,12 +47,12 @@ fun ShowAllCard(painter: Painter,title:String,writer:String,price:String,modifie
                     Image(painter = painter, contentDescription = "$title Image", contentScale = ContentScale.Crop)
                 }
                 Column() {
-                    Text(text = title, style = TextStyle(color = MaterialTheme.colors.onSecondary, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold), modifier = Modifier.padding(vertical = 10.dp, horizontal = 5.dp))
-                    Text(text = writer,style = TextStyle(Color.Gray, fontSize = 17.sp), modifier = Modifier.padding(vertical = 10.dp, horizontal = 5.dp))
+                    Text(text = title, style = TextStyle(color = Color(51,0,26), fontSize = 18.sp, fontWeight = FontWeight.ExtraBold), modifier = Modifier.padding(vertical = 10.dp, horizontal = 5.dp))
+                    Text(text = writer,style = TextStyle(Color.White, fontSize = 17.sp), modifier = Modifier.padding(vertical = 10.dp, horizontal = 5.dp))
                     Text(
                         text = "Price: $price",
                         style = TextStyle(
-                            Color.Gray,
+                            Color.White,
                             fontSize = 17.sp,
                             fontWeight = FontWeight.ExtraBold,
                         ), modifier = Modifier.padding(vertical = 10.dp, horizontal = 5.dp)

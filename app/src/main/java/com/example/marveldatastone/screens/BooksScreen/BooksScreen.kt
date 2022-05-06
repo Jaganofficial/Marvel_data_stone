@@ -76,8 +76,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                         Card(modifier = Modifier
                             .fillMaxWidth()
                             .height(60.dp)
-                            .padding(horizontal = 24.dp, vertical = 5.dp).clickable {
-                                                                                    navController.navigate(MarvelDataScreens.SearchScreen.name)
+                            .padding(horizontal = 24.dp, vertical = 5.dp)
+                            .clickable {
+                                navController.navigate(MarvelDataScreens.SearchScreen.name)
                             }, shape = RoundedCornerShape(25.dp), backgroundColor = Color.White) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Spacer(modifier = Modifier.width(15.dp))
@@ -146,7 +147,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     if (infiniteNovelData.loading == true) {
 
 
-                        val painter = rememberAsyncImagePainter(model = R.color.white)
+                        val painter = rememberAsyncImagePainter(model = R.color.white, placeholder = painterResource(
+                            id = R.drawable.preloader
+                        ))
                         val x by remember1{
                             mutableStateOf(Random.nextInt(170, 255))
                         }
@@ -200,7 +203,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                             mutableStateOf(Random.nextInt(170, 255))
                                         }
                                         val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                                        val painter = rememberAsyncImagePainter(model = url)
+                                        val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                                            id = R.drawable.preloader
+                                        ))
                                         BookCard(
                                             Color(
                                                 x, y, z
@@ -220,9 +225,11 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                         }
                             else
                             {
-                                Box(modifier = Modifier.fillMaxWidth().padding(15.dp))
+                                Box(modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(15.dp))
                                 {
-                                    Text(text = "Oops! Something went wrong! Please check your internet connectivity and try again", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
+                                    Text(text = "Loading...", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
                                 }
                             }
                     }
@@ -268,7 +275,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                 }
 
                                 val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                                val painter = rememberAsyncImagePainter(model = url)
+                                val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                                    id = R.drawable.preloader
+                                ))
                                 BookCard(Color(
                                     x,y,z
                                 ), painter,false,price=price, title = title, writter = writter,modifier = Modifier.clickable {
@@ -279,7 +288,14 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                         }
                     }
                     else
-                        CircularProgressIndicator()
+                    {
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(15.dp))
+                        {
+                            Text(text = "Loading...", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
+                        }
+                    }
                 }
 
 
@@ -317,7 +333,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                         val z by androidx.compose.runtime.remember {
                             mutableStateOf(Random.nextInt(170, 255))
                         }
-                        val painter= rememberAsyncImagePainter(model = R.color.white)
+                        val painter= rememberAsyncImagePainter(model = R.color.white, placeholder = painterResource(
+                            id = R.drawable.preloader
+                        ))
                         LazyRow()
                         {
                             items(100)
@@ -360,7 +378,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                             mutableStateOf(Random.nextInt(170, 255))
                                         }
                                         val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                                        val painter = rememberAsyncImagePainter(model = url)
+                                        val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                                            id = R.drawable.preloader
+                                        ))
                                         BookCard(Color(
                                             x, y, z
                                         ),
@@ -379,9 +399,11 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                         }
                         else
                         {
-                            Box(modifier = Modifier.fillMaxWidth().padding(15.dp))
+                            Box(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(15.dp))
                             {
-                                Text(text = "Oops! Something went wrong! Please check your internet connectivity and try again", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
+                                Text(text = "Loading...", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
                             }
                         }
                     }
@@ -418,7 +440,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
                                 val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                                val painter = rememberAsyncImagePainter(model = url)
+                                val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                                    id = R.drawable.preloader
+                                ))
                                 BookCard(Color(
                                     x,y,z
                                 ), painter,false,price=price, title = title, writter = writter, modifier = Modifier.clickable {
@@ -430,7 +454,12 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }
                     else
                     {
-                        CircularProgressIndicator()
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(15.dp))
+                        {
+                            Text(text = "Loading...", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
+                        }
                     }
 
                 }
@@ -459,7 +488,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                 }.value
                 if (tradePaperBookData.loading == true)
                 {
-                    val painter= rememberAsyncImagePainter(model = R.color.white)
+                    val painter= rememberAsyncImagePainter(model = R.color.white, placeholder = painterResource(
+                        id = R.drawable.preloader
+                    ))
                     val x by remember1{
                         mutableStateOf(Random.nextInt(170, 255))
                     }
@@ -513,7 +544,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                         mutableStateOf(Random.nextInt(170, 255))
                                     }
                                     var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                                    val painter = rememberAsyncImagePainter(model = url)
+                                    val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                                        id = R.drawable.preloader
+                                    ))
                                     BookCard(Color(
                                         x, y, z
                                     ),
@@ -534,9 +567,11 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }
                     else
                     {
-                        Box(modifier = Modifier.fillMaxWidth().padding(vertical = 45.dp, horizontal = 25.dp))
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(15.dp))
                         {
-                            Text(text = "Oops! Something went wrong! Please check your internet connectivity and try again", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
+                            Text(text = "Loading...", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
                         }
                     }
                 }
@@ -575,7 +610,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
                                 val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                                val painter = rememberAsyncImagePainter(model = url)
+                                val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                                    id = R.drawable.preloader
+                                ))
                                 BookCard(
                                     Color(
                                         x,y,z
@@ -612,7 +649,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }.value
                     if (digestData.loading == true)
                     {
-                        val painter= rememberAsyncImagePainter(model = R.color.white)
+                        val painter= rememberAsyncImagePainter(model = R.color.white, placeholder = painterResource(
+                            id = R.drawable.preloader
+                        ))
                         val x by remember1{
                             mutableStateOf(Random.nextInt(170, 255))
                         }
@@ -666,7 +705,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                             mutableStateOf(Random.nextInt(170, 255))
                                         }
                                         val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                                        val painter = rememberAsyncImagePainter(model = url)
+                                        val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                                            id = R.drawable.preloader
+                                        ))
                                         BookCard(Color(
                                             x, y, z
                                         ),
@@ -685,9 +726,11 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }
                         else
                         {
-                            Box(modifier = Modifier.fillMaxWidth().padding(15.dp))
+                            Box(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(15.dp))
                             {
-                                Text(text = "Oops! Something went wrong! Please check your internet connectivity and try again", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
+                                Text(text = "Loading...", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
                             }
                         }
                     }
@@ -723,7 +766,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
                                 val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                                val painter = rememberAsyncImagePainter(model = url)
+                                val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                                    id = R.drawable.preloader
+                                ))
                                 BookCard(Color(
                                     x, y, z
                                 ),
@@ -740,7 +785,12 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                         }
                     }
                     else{
-                        CircularProgressIndicator()
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(15.dp))
+                        {
+                            Text(text = "Loading...", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
+                        }
                     }
                 }
 
@@ -768,7 +818,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }.value
                     if (graphicNovelData.loading == true)
                     {
-                        val painter= rememberAsyncImagePainter(model = R.color.white)
+                        val painter= rememberAsyncImagePainter(model = R.color.white, placeholder = painterResource(
+                            id = R.drawable.preloader
+                        ))
                         val x by remember1{
                             mutableStateOf(Random.nextInt(170, 255))
                         }
@@ -820,7 +872,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                             mutableStateOf(Random.nextInt(170, 255))
                                         }
                                         val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                                        val painter = rememberAsyncImagePainter(model = url)
+                                        val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                                            id = R.drawable.preloader
+                                        ))
                                         BookCard(Color(
                                             x, y, z
                                         ),
@@ -839,9 +893,11 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                         }
                         else
                         {
-                            Box(modifier = Modifier.fillMaxWidth().padding(15.dp))
+                            Box(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(15.dp))
                             {
-                                Text(text = "Oops! Something went wrong! Please check your internet connectivity and try again", textAlign = TextAlign.Center)
+                                Text(text = "Loading...", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
                             }
                         }
                     }
@@ -878,7 +934,9 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
                                 val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                                val painter = rememberAsyncImagePainter(model = url)
+                                val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
+                                    id = R.drawable.preloader
+                                ))
                                 BookCard(Color(
                                     x, y, z
                                 ),
@@ -896,7 +954,12 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }
                     else
                     {
-                        CircularProgressIndicator()
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(15.dp))
+                        {
+                            Text(text = "Loading...", style=TextStyle(color = Color.Gray,textAlign = TextAlign.Center))
+                        }
                     }
                 }
 

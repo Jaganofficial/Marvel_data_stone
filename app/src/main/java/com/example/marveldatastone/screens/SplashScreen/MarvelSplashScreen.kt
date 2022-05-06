@@ -8,6 +8,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -46,6 +47,9 @@ fun MarvelSplashScreen(navController: NavController) {
         Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
             Surface() {
                 Image(painter = painterResource(id = R.drawable.splashscreen6), contentDescription ="Logo", contentScale = ContentScale.Fit)
+            }
+            Surface(modifier = Modifier.height(250.dp), color = Color.Transparent) {
+
             }
         }
     }
