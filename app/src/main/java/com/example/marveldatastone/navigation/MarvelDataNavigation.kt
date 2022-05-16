@@ -45,11 +45,13 @@ fun MarvelDataNavigation(navController: NavHostController) {
     val showAllTradePaperBackViewModel= hiltViewModel<ShowAllTradePaperBackViewModel>()
     val showAllDigestViewModel= hiltViewModel<ShowAllDigestViewModel>()
     val showAllGraphicNovelViewModel= hiltViewModel<ShowAllGraphicNovelViewModel>()
+
     //Shared View Model
     val sharedViewModel: SharedViewModel= viewModel()
 
     NavHost(navController = navController, 
             startDestination = MarvelDataScreens.SplashScreen.name ){
+
         //SplashScreen
         composable(MarvelDataScreens.SplashScreen.name)
         {

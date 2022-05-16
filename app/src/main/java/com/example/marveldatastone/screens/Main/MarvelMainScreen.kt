@@ -156,6 +156,13 @@ fun ShowData(navController: NavController,mainViewModel: MainViewModel,sharedVie
         if(mainViewModel.comicsList.value.isNotEmpty())
         {
             val list = mainViewModel.comicsList.value[0].data.results
+
+            produceState<DataOrException<ComicsData, Boolean, Exception>>(
+                initialValue = DataOrException(loading = true)
+            ) {
+                value = mainViewModel.getComics()
+            }.value
+
             LazyRow(modifier = Modifier.fillMaxWidth())
             {
                 items(list)

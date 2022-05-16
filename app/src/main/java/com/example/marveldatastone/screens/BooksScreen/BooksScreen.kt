@@ -238,7 +238,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                 {
                     if(!booksViewModel.infiniteNavelList.collectAsState().value.isNullOrEmpty())
                     {
-                        val infiniteNovelData =
+
                             produceState<DataOrException<InfiniteNovelData, Boolean, Exception>>(
                                 initialValue = DataOrException(loading = true)
                             ) {
@@ -409,8 +409,16 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }
                 }
                 else{
+
+                    produceState<DataOrException<HardCoverData, Boolean, Exception>>(
+                        initialValue = DataOrException(loading = true)
+                    ) {
+                        value = booksViewModel.getHardCover()
+                    }.value
+
                     if(!booksViewModel.hardCoverList.value.isNullOrEmpty())
                     {
+
                         val list = booksViewModel.hardCoverList.collectAsState().value[0].data.results
                         LazyRow()
                         {
@@ -578,6 +586,12 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                 }
                 else {
 
+                    produceState<DataOrException<TradePaperBookData, Boolean, Exception>>(
+                        initialValue = DataOrException(loading = true)
+                    ) {
+                        value = booksViewModel.getTradePaperBook()
+                    }.value
+
                     if(!booksViewModel.tradePaperBookDataList.collectAsState().value.isNullOrEmpty())
                     {
                         val list =
@@ -736,6 +750,13 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }
                 }
                 else{
+
+                    produceState<DataOrException<DigestData, Boolean, Exception>>(
+                        initialValue = DataOrException(loading = true)
+                    ) {
+                        value = booksViewModel.getDigest()
+                    }.value
+
                     if(!booksViewModel.digestList.collectAsState().value.isNullOrEmpty()) {
                         val list = booksViewModel.digestList.collectAsState().value[0].data.results
                         LazyRow()
@@ -903,6 +924,11 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                     }
                 }
                 else{
+                    produceState<DataOrException<GraphicNovelData, Boolean, Exception>>(
+                        initialValue = DataOrException(loading = true)
+                    ) {
+                        value = booksViewModel.getGraphicNovel()
+                    }.value
                     if(!booksViewModel.graphicNovelList.collectAsState().value.isNullOrEmpty()) {
                         val list =
                             booksViewModel.graphicNovelList.collectAsState().value[0].data.results
