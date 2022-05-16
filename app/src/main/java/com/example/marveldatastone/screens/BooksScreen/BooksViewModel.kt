@@ -4,8 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marveldatastone.data.DataOrException
-import com.example.marveldatastone.model.CharacterModels.CharacteresModel.MarvelCharacterData
-import com.example.marveldatastone.model.CharacterModels.ComicsModels.ComicsData
 import com.example.marveldatastone.model.CharacterModels.Digest.DigestData
 import com.example.marveldatastone.model.CharacterModels.GraphicNovel.GraphicNovelData
 import com.example.marveldatastone.model.CharacterModels.HardCover.HardCoverData
@@ -16,7 +14,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -1,12 +1,8 @@
 package com.example.marveldatastone.screens.BooksScreen
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,31 +19,23 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.marveldatastone.R
 import com.example.marveldatastone.data.DataOrException
-import com.example.marveldatastone.model.CharacterModels.ComicsModels.ComicsData
 import com.example.marveldatastone.model.CharacterModels.Digest.DigestData
 import com.example.marveldatastone.model.CharacterModels.GraphicNovel.GraphicNovelData
 import com.example.marveldatastone.model.CharacterModels.HardCover.HardCoverData
 import com.example.marveldatastone.model.CharacterModels.InfiniteNovel.InfiniteNovelData
 import com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.TradePaperBookData
 import com.example.marveldatastone.navigation.MarvelDataScreens
-import com.example.marveldatastone.screens.Main.MainViewModel
 import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
 import com.example.marveldatastone.widgets.BookCard
-import com.example.marveldatastone.widgets.HardCoverInfoCard
-import com.example.marveldatastone.widgets.ImageCard
-import okhttp3.internal.wait
 import kotlin.random.Random
 import androidx.compose.runtime.remember as remember1
 
@@ -188,7 +176,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                         if (!it.creators.items.isNullOrEmpty())
                                             writter = it.creators.items[0].name
                                         if (writter.length > 16)
-                                            writter = writter.substring(0, 15).toString() + "..."
+                                            writter = writter.substring(0, 15) + "..."
 
                                         if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                             price = "$ " + it.prices[0].price
@@ -259,7 +247,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                 if(!it.creators.items.isNullOrEmpty())
                                     writter=it.creators.items[0].name
                                 if(writter.length>16)
-                                    writter=writter.substring(0,15).toString()+"..."
+                                    writter=writter.substring(0,15)+"..."
 
                                 if(!it.prices.isNullOrEmpty() &&""+it.prices[0].price!="0.0")
                                     price= "$ "+it.prices[0].price
@@ -363,7 +351,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                         if (!it.creators.items.isNullOrEmpty())
                                             writter = it.creators.items[0].name
                                         if (writter.length > 16)
-                                            writter = writter.substring(0, 15).toString() + "..."
+                                            writter = writter.substring(0, 15) + "..."
 
                                         if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                             price = "$ " + it.prices[0].price
@@ -433,7 +421,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                 if(!it.creators.items.isNullOrEmpty())
                                     writter=it.creators.items[0].name
                                 if(writter.length>16)
-                                    writter=writter.substring(0,15).toString()+"..."
+                                    writter=writter.substring(0,15)+"..."
 
                                 if(!it.prices.isNullOrEmpty() &&""+it.prices[0].price!="0.0")
                                     price= "$ "+it.prices[0].price
@@ -537,7 +525,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     if (!it.creators.items.isNullOrEmpty())
                                         writter = it.creators.items[0].name
                                     if (writter.length > 16)
-                                        writter = writter.substring(0, 15).toString() + "..."
+                                        writter = writter.substring(0, 15) + "..."
 
                                     if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                         price = "$ " + it.prices[0].price
@@ -551,7 +539,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                     val z by androidx.compose.runtime.remember {
                                         mutableStateOf(Random.nextInt(170, 255))
                                     }
-                                    var url = "${it.thumbnail.path}.${it.thumbnail.extension}"
+                                    val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
                                     val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
                                         id = R.drawable.preloader
                                     ))
@@ -609,7 +597,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                 if (!it.creators.items.isNullOrEmpty())
                                     writter = it.creators.items[0].name
                                 if (writter.length > 16)
-                                    writter = writter.substring(0, 15).toString() + "..."
+                                    writter = writter.substring(0, 15) + "..."
 
                                 if (it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
@@ -704,7 +692,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                         if (!it.creators.items.isNullOrEmpty())
                                             writter = it.creators.items[0].name
                                         if (writter.length > 16)
-                                            writter = writter.substring(0, 15).toString() + "..."
+                                            writter = writter.substring(0, 15) + "..."
 
                                         if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                             price = "$ " + it.prices[0].price
@@ -772,7 +760,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                 if (!it.creators.items.isNullOrEmpty())
                                     writter = it.creators.items[0].name
                                 if (writter.length > 16)
-                                    writter = writter.substring(0, 15).toString() + "..."
+                                    writter = writter.substring(0, 15) + "..."
 
                                 if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
@@ -878,7 +866,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                         if (!it.creators.items.isNullOrEmpty())
                                             writter = it.creators.items[0].name
                                         if (writter.length > 16)
-                                            writter = writter.substring(0, 15).toString() + "..."
+                                            writter = writter.substring(0, 15) + "..."
 
                                         if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                             price = "$ " + it.prices[0].price
@@ -945,7 +933,7 @@ fun BooksScreen (navController: NavController, booksViewModel: BooksViewModel,sh
                                 if (it.creators.items.isNotEmpty())
                                     writter = it.creators.items[0].name
                                 if (writter.length > 16)
-                                    writter = writter.substring(0, 15).toString() + "..."
+                                    writter = writter.substring(0, 15) + "..."
 
                                 if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price

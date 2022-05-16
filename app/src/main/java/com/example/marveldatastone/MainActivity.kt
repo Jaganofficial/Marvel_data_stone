@@ -1,4 +1,4 @@
-package com.example.marveldatastone.components
+package com.example.marveldatastone
 
 import android.os.Build
 import android.os.Bundle

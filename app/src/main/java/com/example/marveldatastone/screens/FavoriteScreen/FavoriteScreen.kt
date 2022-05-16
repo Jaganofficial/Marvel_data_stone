@@ -39,7 +39,6 @@ import com.example.marveldatastone.screens.ShowAll.ShowAllComics.ShowAllDigest.S
 import com.example.marveldatastone.screens.ShowAll.ShowAllComics.ShowAllHardCover.ShowAllHardCoverViewModel
 import com.example.marveldatastone.screens.ShowAll.ShowAllComics.ShowAlltradePaperback.ShowAllTradePaperBackViewModel
 import com.example.marveldatastone.widgets.BookCard
-import com.example.marveldatastone.widgets.ShowAllCard
 import kotlin.random.Random
 
 @Composable
@@ -119,7 +118,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                 if (!it.creators.items.isNullOrEmpty())
                                     writter = it.creators.items[0].name
                                 if (writter.length > 16)
-                                    writter = writter.substring(0, 15).toString() + "..."
+                                    writter = writter.substring(0, 15) + "..."
 
                                 if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
@@ -198,7 +197,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                     if (!it.creators.items.isNullOrEmpty())
                                         writter = it.creators.items[0].name
                                     if (writter.length > 16)
-                                        writter = writter.substring(0, 15).toString() + "..."
+                                        writter = writter.substring(0, 15) + "..."
 
                                     if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                         price = "$ " + it.prices[0].price
@@ -206,10 +205,10 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                     val x by remember {
                                         mutableStateOf(Random.nextInt(170, 255))
                                     }
-                                    val y by androidx.compose.runtime.remember {
+                                    val y by remember {
                                         mutableStateOf(Random.nextInt(170, 255))
                                     }
-                                    val z by androidx.compose.runtime.remember {
+                                    val z by remember {
                                         mutableStateOf(Random.nextInt(170, 255))
                                     }
                                     val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
@@ -278,7 +277,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                 if (!it.creators.items.isNullOrEmpty())
                                     writter = it.creators.items[0].name
                                 if (writter.length > 16)
-                                    writter = writter.substring(0, 15).toString() + "..."
+                                    writter = writter.substring(0, 15) + "..."
 
                                 if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
@@ -286,10 +285,10 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                 val x by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
-                                val y by androidx.compose.runtime.remember {
+                                val y by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
-                                val z by androidx.compose.runtime.remember {
+                                val z by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
                                 val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
@@ -354,7 +353,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                 if (!it.creators.items.isNullOrEmpty())
                                     writter = it.creators.items[0].name
                                 if (writter.length > 16)
-                                    writter = writter.substring(0, 15).toString() + "..."
+                                    writter = writter.substring(0, 15) + "..."
 
                                 if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
@@ -362,10 +361,10 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                 val x by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
-                                val y by androidx.compose.runtime.remember {
+                                val y by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
-                                val z by androidx.compose.runtime.remember {
+                                val z by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
                                 val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
@@ -430,7 +429,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                 if (!it.creators.items.isNullOrEmpty())
                                     writter = it.creators.items[0].name
                                 if (writter.length > 16)
-                                    writter = writter.substring(0, 15).toString() + "..."
+                                    writter = writter.substring(0, 15)+ "..."
 
                                 if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
@@ -438,10 +437,10 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                 val x by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
-                                val y by androidx.compose.runtime.remember {
+                                val y by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
-                                val z by androidx.compose.runtime.remember {
+                                val z by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
                                 val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
@@ -506,7 +505,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                 if (!it.creators.items.isNullOrEmpty())
                                     writter = it.creators.items[0].name
                                 if (writter.length > 16)
-                                    writter = writter.substring(0, 15).toString() + "..."
+                                    writter = writter.substring(0, 15) + "..."
 
                                 if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
@@ -514,10 +513,10 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                 val x by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
-                                val y by androidx.compose.runtime.remember {
+                                val y by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
-                                val z by androidx.compose.runtime.remember {
+                                val z by remember {
                                     mutableStateOf(Random.nextInt(170, 255))
                                 }
                                 val url = "${it.thumbnail.path}.${it.thumbnail.extension}"

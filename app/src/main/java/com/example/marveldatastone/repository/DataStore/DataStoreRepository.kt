@@ -1,23 +1,18 @@
 package com.example.marveldatastone.repository.DataStore
 
 import android.content.Context
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.lang.reflect.Type
 
 
 class DataStoreRepository (context: Context){
     private val dataStore: DataStore<Preferences> = context.createDataStore(name = "Favorites")
-    private val favoritesDefault="";
+    private val favoritesDefault=""
 
     companion object{
         val PRF_FAVORITES= preferencesKey<String>("id")
