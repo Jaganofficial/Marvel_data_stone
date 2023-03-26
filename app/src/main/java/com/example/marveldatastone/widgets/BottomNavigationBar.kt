@@ -19,7 +19,7 @@ import com.example.marveldatastone.model.CharacterModels.BottomNavigationBarMode
 
 @Composable
 fun BottomNavigationBar(items:List<BottomNavItem>,navController: NavController,onItemClick: (BottomNavItem)->Unit) {
-    var backStackEntry=navController.currentBackStackEntryAsState()
+    val backStackEntry=navController.currentBackStackEntryAsState()
     BottomNavigation(modifier = Modifier
         .fillMaxWidth()
         .padding(15.dp).clip(RoundedCornerShape(15.dp)), backgroundColor = Color.Black, elevation = 10.dp) {

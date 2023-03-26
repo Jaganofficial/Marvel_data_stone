@@ -18,10 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.*
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -30,57 +27,87 @@ import com.example.marveldatastone.R
 import com.example.marveldatastone.model.CharacterModels.ComicsModels.Result
 import com.example.marveldatastone.navigation.MarvelDataScreens
 import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
-import com.example.marveldatastone.screens.ShowAll.ShowAllComics.ShowAllComicsViewModel
 import com.example.marveldatastone.widgets.ShowAllCard
 import java.util.*
 
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun SearchScreen(searchAllComicsViewModel: SearchScreenViewModel, sharedViewModel: SharedViewModel, navController: NavController) {
+fun SearchScreen(
+    searchAllComicsViewModel: SearchScreenViewModel,
+    sharedViewModel: SharedViewModel,
+    navController: NavController
+) {
     Surface(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
-            val searchText = remember{
+            val searchText = remember {
                 mutableStateOf("")
             }
             Spacer(modifier = Modifier.height(10.dp))
-            Card(modifier = Modifier
-                .fillMaxWidth()
-                .height(55.dp)
-                .padding(horizontal = 24.dp), shape = RoundedCornerShape(25.dp), backgroundColor = Color.Gray, elevation = 15.dp) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(55.dp)
+                    .padding(horizontal = 24.dp),
+                shape = RoundedCornerShape(25.dp),
+                backgroundColor = Color.Gray,
+                elevation = 15.dp
+            ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Spacer(modifier = Modifier.width(15.dp))
-                    Image(imageVector = Icons.Default.Search, contentDescription ="Books Search Image", modifier = Modifier.size(40.dp))
+                    Image(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Books Search Image",
+                        modifier = Modifier.size(40.dp)
+                    )
                     Spacer(modifier = Modifier.width(5.dp))
-                    TextField(value = searchText.value, textStyle = TextStyle(fontSize = 16.sp), onValueChange = {
-                        searchText.value=it
-                    }, colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = Color.Transparent, cursorColor = Color.Black, focusedIndicatorColor = Color.Black, unfocusedIndicatorColor = Color.Gray
-                    , textColor = Color.Black), placeholder = {
-                        Text(text = "Search", style = TextStyle(Color.DarkGray, fontSize = 16.sp))
-                    }, singleLine = true)
+                    TextField(value = searchText.value,
+                        textStyle = TextStyle(fontSize = 16.sp),
+                        onValueChange = {
+                            searchText.value = it
+                        },
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.Transparent,
+                            cursorColor = Color.Black,
+                            focusedIndicatorColor = Color.Black,
+                            unfocusedIndicatorColor = Color.Gray,
+                            textColor = Color.Black
+                        ),
+                        placeholder = {
+                            Text(
+                                text = "Search",
+                                style = TextStyle(Color.DarkGray, fontSize = 16.sp)
+                            )
+                        },
+                        singleLine = true
+                    )
                 }
             }
 
             Spacer(modifier = Modifier.height(15.dp))
-            var list= emptyList<Result>()
+            var list = emptyList<Result>()
 
-            if(searchAllComicsViewModel.comicsListVMForSearch.collectAsState().value.isNotEmpty())
-            {
-                list=searchAllComicsViewModel.comicsListVMForSearch.collectAsState().value[0].data.results
+            if (searchAllComicsViewModel.comicsListVMForSearch.collectAsState().value.isNotEmpty()) {
+                list =
+                    searchAllComicsViewModel.comicsListVMForSearch.collectAsState().value[0].data.results
             }
             Column() {
                 LazyColumn()
                 {
                     items(list.filter {
-                        it.title.lowercase(Locale.getDefault()).contains(searchText.value.lowercase(Locale.getDefault()))
+                        it.title.lowercase(Locale.getDefault())
+                            .contains(searchText.value.lowercase(Locale.getDefault()))
                     })
                     {
                         val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                        val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
-                            id = R.drawable.preloader
-                        )
+                        val painter = rememberAsyncImagePainter(
+                            model = url, placeholder = painterResource(
+                                id = R.drawable.preloader
+                            )
                         )
                         val title = it.title
                         var writter = "Marvel"
@@ -88,7 +115,7 @@ fun SearchScreen(searchAllComicsViewModel: SearchScreenViewModel, sharedViewMode
                         if (it.creators.items.isNotEmpty())
                             writter = it.creators.items[0].name
                         if (writter.length > 26)
-                            writter = writter.substring(0, 25).toString() + "..."
+                            writter = writter.substring(0, 25) + "..."
                         if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
                             price = "$" + it.prices[0].price
                         ShowAllCard(

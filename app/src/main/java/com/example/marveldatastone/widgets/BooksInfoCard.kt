@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -25,7 +24,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -123,7 +121,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                                     navController.navigate(id)
                                 })
                         }
-                        var favoriteCheck= remember {
+                        val favoriteCheck= remember {
                             mutableStateOf(false)
                         }
 
@@ -160,12 +158,10 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                                             .size(34.dp)
                                             .clickable {
                                                 scope.launch {
-                                                    if (ID != null) {
-                                                        dataStoreRepository.deleteFavorites(
-                                                            bookid = bookId,
-                                                            ID = ID
-                                                        )
-                                                    }
+                                                    dataStoreRepository.deleteFavorites(
+                                                        bookid = bookId,
+                                                        ID = ID
+                                                    )
                                                 }
                                                 favoriteCheck.value = !favoriteCheck.value
                                             })
@@ -238,7 +234,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                                 )
                             )
                             {
-                                append("$price")
+                                append(price)
                             }
                         },
                         color = Color.White,
@@ -248,7 +244,7 @@ fun BooksInfoCard(painter: Painter,title:String,pageCount:String,formate:String,
                     )
                     Spacer(modifier = Modifier.width(24.dp))
                     Text(
-                        text = "$actualPrice" ,
+                        text = actualPrice,
                         style = TextStyle(Color.Gray, fontSize = 16.sp),
                         textDecoration = TextDecoration.LineThrough
                     )

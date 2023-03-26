@@ -75,7 +75,7 @@ fun ShowAllHardCover(showAllHardCoverViewModel: ShowAllHardCoverViewModel, share
                         if (it.creators.items.isNotEmpty())
                             writter = it.creators.items[0].name
                         if (writter.length > 26)
-                            writter = writter.substring(0, 25).toString() + "..."
+                            writter = writter.substring(0, 25) + "..."
                         if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
                             price = "$" + it.prices[0].price
                         ShowAllCard(

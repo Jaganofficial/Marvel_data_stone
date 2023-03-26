@@ -17,20 +17,25 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
-import kotlin.Exception
 
-class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, private val characterDao: CharacterDao, private val comicsDao: Comics_Dao, private val digestDao: DigestDao,private val graphicNovelDao: GraphicNovelDao,private val hardCoverDao: HardCoverDao,private val infiniteNovelDao: InfiniteNovelDao,private val tradePaperBackDao: TradePaperBackDao){
+class MarvelDataRepository @Inject constructor(
+    private val api: MarvelAPI,
+    private val characterDao: CharacterDao,
+    private val comicsDao: Comics_Dao,
+    private val digestDao: DigestDao,
+    private val graphicNovelDao: GraphicNovelDao,
+    private val hardCoverDao: HardCoverDao,
+    private val infiniteNovelDao: InfiniteNovelDao,
+    private val tradePaperBackDao: TradePaperBackDao
+) {
 
 
     //get comic data from api
-    suspend fun getComics(): DataOrException<ComicsData,Boolean,Exception>
-    {
+    suspend fun getComics(): DataOrException<ComicsData, Boolean, Exception> {
         val response = try {
             api.getComics()
-        }
-        catch (e:Exception)
-        {
-            return DataOrException(e=e)
+        } catch (e: Exception) {
+            return DataOrException(e = e)
         }
         comicsDao.deleteAllComicsData()
         comicsDao.insertComicsData(response)
@@ -39,14 +44,11 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
 
 
     //get Trade PaperBook from api
-    suspend fun getTradePaperBook(): DataOrException<TradePaperBookData,Boolean,Exception>
-    {
+    suspend fun getTradePaperBook(): DataOrException<TradePaperBookData, Boolean, Exception> {
         val response = try {
             api.getTradePaperBook()
-        }
-        catch (e:Exception)
-        {
-            return DataOrException(e=e)
+        } catch (e: Exception) {
+            return DataOrException(e = e)
         }
         tradePaperBackDao.deleteAllTradePaperBack()
         tradePaperBackDao.insertTradePaperBack(response)
@@ -54,14 +56,11 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
     }
 
     //get Infinite Comic from api
-    suspend fun getInfiniteComic(): DataOrException<InfiniteNovelData,Boolean,Exception>
-    {
+    suspend fun getInfiniteComic(): DataOrException<InfiniteNovelData, Boolean, Exception> {
         val response = try {
             api.getInfiniteComic()
-        }
-        catch (e:Exception)
-        {
-            return DataOrException(e=e)
+        } catch (e: Exception) {
+            return DataOrException(e = e)
         }
         infiniteNovelDao.deleteAllInfiniteNovel()
         infiniteNovelDao.insertInfiniteNovel(response)
@@ -70,14 +69,11 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
 
 
     //get HardCover from api
-    suspend fun getHardCover(): DataOrException<HardCoverData,Boolean,Exception>
-    {
+    suspend fun getHardCover(): DataOrException<HardCoverData, Boolean, Exception> {
         val response = try {
             api.getHardCover()
-        }
-        catch (e:Exception)
-        {
-            return DataOrException(e=e)
+        } catch (e: Exception) {
+            return DataOrException(e = e)
         }
         hardCoverDao.deleteAllHardCover()
         hardCoverDao.insertHardCover(response)
@@ -86,14 +82,11 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
     }
 
     // get Digest from api
-    suspend fun getDigest(): DataOrException<DigestData,Boolean,Exception>
-    {
+    suspend fun getDigest(): DataOrException<DigestData, Boolean, Exception> {
         val response = try {
             api.getDigest()
-        }
-        catch (e:Exception)
-        {
-            return DataOrException(e=e)
+        } catch (e: Exception) {
+            return DataOrException(e = e)
         }
         digestDao.deleteAllDigestData()
         digestDao.insertDigestData(response)
@@ -101,14 +94,11 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
     }
 
     //get GraphicNovel from api
-    suspend fun getGraphicNovel(): DataOrException<GraphicNovelData,Boolean,Exception>
-    {
+    suspend fun getGraphicNovel(): DataOrException<GraphicNovelData, Boolean, Exception> {
         val response = try {
             api.getGraphicNovel()
-        }
-        catch (e:Exception)
-        {
-            return DataOrException(e=e)
+        } catch (e: Exception) {
+            return DataOrException(e = e)
         }
         graphicNovelDao.deleteAllGraphicNovel()
         graphicNovelDao.insertGraphicNovel(response)
@@ -116,63 +106,51 @@ class MarvelDataRepository @Inject constructor(private val api: MarvelAPI, priva
     }
 
     //Get Character data from api
-    suspend fun getCharacter() : DataOrException<MarvelCharacterData,Boolean,Exception>
-    {
+    suspend fun getCharacter(): DataOrException<MarvelCharacterData, Boolean, Exception> {
         val response = try {
             api.getCharacter()
-        }
-        catch (e:Exception)
-        {
-            return DataOrException(e=e)
+        } catch (e: Exception) {
+            return DataOrException(e = e)
         }
         //characterDao.insertCharacter(response)
         return DataOrException(data = response)
     }
 
     //From DataBase
-    fun getCharacterFromDB(): Flow<List<MarvelCharacterData>>
-    {
+    fun getCharacterFromDB(): Flow<List<MarvelCharacterData>> {
         return characterDao.getCharacterDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
 
-    fun getComicsFromDB(): Flow<List<ComicsData>>
-    {
+    fun getComicsFromDB(): Flow<List<ComicsData>> {
         return comicsDao.getComicsDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
 
 
-    fun getTradePaperBookFromDB(): Flow<List<TradePaperBookData>>
-    {
+    fun getTradePaperBookFromDB(): Flow<List<TradePaperBookData>> {
         return tradePaperBackDao.getTradePaperBackDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
 
-    suspend fun deleteTradePaperBack()
-    {
+    suspend fun deleteTradePaperBack() {
         tradePaperBackDao.deleteAllTradePaperBack()
     }
 
-    fun getHardCoverfromDB(): Flow<List<HardCoverData>>
-    {
+    fun getHardCoverfromDB(): Flow<List<HardCoverData>> {
         return hardCoverDao.getHardCoverDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
 
-    suspend fun deleteHardCover()
-    {
+    suspend fun deleteHardCover() {
         hardCoverDao.deleteAllHardCover()
     }
 
-    fun getDigestfromDB(): Flow<List<DigestData>>
-    {
+    fun getDigestfromDB(): Flow<List<DigestData>> {
         return digestDao.getDigestDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
 
-    fun getGraphicNovelfromDB(): Flow<List<GraphicNovelData>>
-    {
+    fun getGraphicNovelfromDB(): Flow<List<GraphicNovelData>> {
         return graphicNovelDao.getGraphicNovelDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
 
-    fun getInfiniteComicfromDB(): Flow<List<InfiniteNovelData>>
-    {
+    fun getInfiniteComicfromDB(): Flow<List<InfiniteNovelData>> {
         return infiniteNovelDao.getInfiniteNovelDatafromDB().flowOn(Dispatchers.IO).conflate()
     }
 

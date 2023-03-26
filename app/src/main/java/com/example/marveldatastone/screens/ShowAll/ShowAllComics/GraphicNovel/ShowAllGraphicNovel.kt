@@ -32,31 +32,44 @@ import com.example.marveldatastone.screens.SharedViewModel.SharedViewModel
 import com.example.marveldatastone.widgets.ShowAllCard
 
 
-@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun ShowAllGraphicNovel(showAllGraphicNovelViewModel: ShowAllGraphicNovelViewModel, sharedViewModel: SharedViewModel, navController: NavController) {
+fun ShowAllGraphicNovel(
+    showAllGraphicNovelViewModel: ShowAllGraphicNovelViewModel,
+    sharedViewModel: SharedViewModel,
+    navController: NavController
+) {
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = buildAnnotatedString {
-                withStyle(
-                    style = SpanStyle(
-                        Color(47, 217, 183, 255),
-                        fontSize = 37.sp,
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = buildAnnotatedString {
+                    withStyle(
+                        style = SpanStyle(
+                            Color(47, 217, 183, 255),
+                            fontSize = 37.sp,
+                        )
                     )
-                )
-                {
-                    append("Graphic")
-                }
-                append(" Novel")
-            }, color = MaterialTheme.colors.primaryVariant, fontSize=35.sp, fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.ExtraBold)
+                    {
+                        append("Graphic")
+                    }
+                    append(" Novel")
+                },
+                color = MaterialTheme.colors.primaryVariant,
+                fontSize = 35.sp,
+                fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.ExtraBold
+            )
 
             Spacer(modifier = Modifier.height(15.dp))
-            var list= emptyList<com.example.marveldatastone.model.CharacterModels.GraphicNovel.Result>()
+            var list =
+                emptyList<com.example.marveldatastone.model.CharacterModels.GraphicNovel.Result>()
 
-            if(showAllGraphicNovelViewModel.graphicNovelListVM.collectAsState().value.isNotEmpty())
-            {
-                list=showAllGraphicNovelViewModel.graphicNovelListVM.collectAsState().value[0].data.results
+            if (showAllGraphicNovelViewModel.graphicNovelListVM.collectAsState().value.isNotEmpty()) {
+                list =
+                    showAllGraphicNovelViewModel.graphicNovelListVM.collectAsState().value[0].data.results
             }
             Column() {
                 LazyColumn()
@@ -64,9 +77,10 @@ fun ShowAllGraphicNovel(showAllGraphicNovelViewModel: ShowAllGraphicNovelViewMod
                     items(list)
                     {
                         val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-                        val painter = rememberAsyncImagePainter(model = url, placeholder = painterResource(
-                            id = R.drawable.preloader
-                        )
+                        val painter = rememberAsyncImagePainter(
+                            model = url, placeholder = painterResource(
+                                id = R.drawable.preloader
+                            )
                         )
                         val title = it.title
                         var writter = "Marvel"
@@ -74,7 +88,7 @@ fun ShowAllGraphicNovel(showAllGraphicNovelViewModel: ShowAllGraphicNovelViewMod
                         if (it.creators.items.isNotEmpty())
                             writter = it.creators.items[0].name
                         if (writter.length > 26)
-                            writter = writter.substring(0, 25)+ "..."
+                            writter = writter.substring(0, 25) + "..."
                         if (it.prices.isNotEmpty() && "" + it.prices[0].price != "0.0")
                             price = "$" + it.prices[0].price
                         ShowAllCard(

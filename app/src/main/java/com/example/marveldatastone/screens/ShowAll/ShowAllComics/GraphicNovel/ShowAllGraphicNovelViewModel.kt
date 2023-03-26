@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marveldatastone.model.CharacterModels.GraphicNovel.GraphicNovelData
-import com.example.marveldatastone.model.CharacterModels.InfiniteNovel.InfiniteNovelData
 import com.example.marveldatastone.repository.MarvelDataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

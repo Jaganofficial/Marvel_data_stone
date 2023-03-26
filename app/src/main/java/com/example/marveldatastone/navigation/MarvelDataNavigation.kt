@@ -37,8 +37,6 @@ import com.example.marveldatastone.widgets.ShowAllComics
 @Composable
 fun MarvelDataNavigation(navController: NavHostController) {
 
-
-
     val showAllComicsViewModel= hiltViewModel<ShowAllComicsViewModel>()
     val showAllInfiniteNovelViewModel= hiltViewModel<ShowAllInfiniteNovelViewModel>()
     val showAllHardCoverViewModel= hiltViewModel<ShowAllHardCoverViewModel>()

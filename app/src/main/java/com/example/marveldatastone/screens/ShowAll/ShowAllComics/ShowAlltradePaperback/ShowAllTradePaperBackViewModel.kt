@@ -3,7 +3,6 @@ package com.example.marveldatastone.screens.ShowAll.ShowAllComics.ShowAlltradePa
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.marveldatastone.model.CharacterModels.HardCover.HardCoverData
 import com.example.marveldatastone.model.CharacterModels.TradePaperBackModel.TradePaperBookData
 import com.example.marveldatastone.repository.MarvelDataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

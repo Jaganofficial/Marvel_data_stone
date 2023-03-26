@@ -16,10 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.*
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -42,9 +45,21 @@ import com.example.marveldatastone.widgets.BookCard
 import kotlin.random.Random
 
 @Composable
-fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: DataStoreRepositoryViewModel = viewModel(factory = DataStoreViewModelFactory(
-    DataStoreRepository(LocalContext.current)
-)),showAllComicsViewModel: ShowAllComicsViewModel,sharedViewModel: SharedViewModel,showAllHardCoverViewModel: ShowAllHardCoverViewModel,showAllInfiniteNovelViewModel: ShowAllInfiniteNovelViewModel,showAllTradePaperBackViewModel: ShowAllTradePaperBackViewModel,showAllDigestViewModel: ShowAllDigestViewModel,showAllGraphicNovelViewModel: ShowAllGraphicNovelViewModel) {
+fun FavoriteScreen(
+    navController: NavController,
+    dataStoreRepositoryViewModel: DataStoreRepositoryViewModel = viewModel(
+        factory = DataStoreViewModelFactory(
+            DataStoreRepository(LocalContext.current)
+        )
+    ),
+    showAllComicsViewModel: ShowAllComicsViewModel,
+    sharedViewModel: SharedViewModel,
+    showAllHardCoverViewModel: ShowAllHardCoverViewModel,
+    showAllInfiniteNovelViewModel: ShowAllInfiniteNovelViewModel,
+    showAllTradePaperBackViewModel: ShowAllTradePaperBackViewModel,
+    showAllDigestViewModel: ShowAllDigestViewModel,
+    showAllGraphicNovelViewModel: ShowAllGraphicNovelViewModel
+) {
 
     //DataStore
     val getId = dataStoreRepositoryViewModel.favorites.observeAsState().value
@@ -80,7 +95,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
 
 
 
-                if (getId!="") {
+                if (getId != "") {
                     var list = emptyList<Result>()
 
                     if (showAllComicsViewModel.comicsListVM.collectAsState().value.isNotEmpty()) {
@@ -88,7 +103,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                             showAllComicsViewModel.comicsListVM.collectAsState().value[0].data.results
                     }
 
-                    if (list.filter { getId!!.contains(it.id.toString() + ",") }.isNotEmpty()) {
+                    if (list.any { getId!!.contains(it.id.toString() + ",") }) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -429,7 +444,7 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                                 if (!it.creators.items.isNullOrEmpty())
                                     writter = it.creators.items[0].name
                                 if (writter.length > 16)
-                                    writter = writter.substring(0, 15)+ "..."
+                                    writter = writter.substring(0, 15) + "..."
 
                                 if (!it.prices.isNullOrEmpty() && "" + it.prices[0].price != "0.0")
                                     price = "$ " + it.prices[0].price
@@ -541,13 +556,19 @@ fun FavoriteScreen(navController: NavController,dataStoreRepositoryViewModel: Da
                         }
                     }
                     Spacer(modifier = Modifier.height(85.dp))
-                }
-                else
-                {
-                    Box(modifier = Modifier.fillMaxSize().padding(25.dp), contentAlignment = Alignment.Center)
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(25.dp),
+                        contentAlignment = Alignment.Center
+                    )
                     {
-                        Text(text = ("\"Hello!, Find all your favorite comics here. \n Click ♡ to add favorites :) \"")
-                            , textAlign = TextAlign.Center, color = Color.Gray)
+                        Text(
+                            text = ("\"Hello!, Find all your favorite comics here. \n Click ♡ to add favorites :) \""),
+                            textAlign = TextAlign.Center,
+                            color = Color.Gray
+                        )
                     }
                 }
             }

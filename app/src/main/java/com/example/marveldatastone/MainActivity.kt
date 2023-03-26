@@ -14,7 +14,6 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.Navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.marveldatastone.model.CharacterModels.BottomNavigationBarModel.BottomNavItem
 import com.example.marveldatastone.navigation.MarvelDataNavigation
